@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('tag_publication', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
+            $table->foreignId('publication_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-         
-            $table->enum('statut', ['confirmée', 'en attente'])->default('en attente');
-
-            $table->foreignId('client_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('seance_id')->constrained()->onDelete('cascade');
-
-
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('tag_publication');
     }
 };

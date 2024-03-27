@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Bliss</title>
+    <title>Document</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -127,10 +127,8 @@
                                     <div id="ho_shad" class="services_box text_align_left">
                                         <h3>Coach1</h3>
                                         <figure><img src="images/service1.jpg" alt="#" /></figure>
-                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                            enim ad minim
-                                            veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
+                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                                        </p>
                                         <a class="read_more" href="service.html">Read More</a>
                                     </div>
                                 </div>
@@ -139,9 +137,7 @@
                                         <h3>Coach2</h3>
                                         <figure><img src="images/service2.jpg" alt="#" /></figure>
                                         <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                            enim ad minim
-                                            veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
+                                        </p>
                                         <a class="read_more" href="service.html">Read More</a>
                                     </div>
                                 </div>
@@ -150,9 +146,7 @@
                                         <h3>Coach3</h3>
                                         <figure><img src="images/service3.jpg" alt="#" /></figure>
                                         <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                            enim ad minim
-                                            veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
+                                        </p>
                                         <a class="read_more" href="service.html">Read More</a>
                                     </div>
                                 </div>

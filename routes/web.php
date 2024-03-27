@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,15 @@ Route::get('/actuality', function () {
     return view('actuality');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard',[dashboardController::class,'index']);
+Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
+Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
+
+
+
+Route::get('/library', function () {
+    return view('library');
+});
+Route::get('/register', function () {
+    return view('register');
 });
