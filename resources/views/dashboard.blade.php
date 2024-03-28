@@ -104,17 +104,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="p-3">publication 1</td>
-                                                <td class="p-3">coach1</td>
-                                                <td class="p-3">
-                                                    <button
-                                                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                                                        Approuver
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            @foreach ($publications as $publication)
+                                                <tr>
+                                                    <td class="p-3">{{ $publication->Contenu }}</td>
+                                                    <td class="p-3">{{ $publication->coach->name }}</td>
+                                                    <td class="p-3">
+                                                        <form method="POST" action="{{ route('update.pub', $publication->id) }}">
+                                                            @csrf
+                                                            <input type="hidden" name="statut" value="publié">
+                                                            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                                                Approuver
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                         </tbody>
+                                        @endforeach
                                     </table>
                                 </div>
                             </div>
@@ -149,14 +154,16 @@
 
                                                     </td>
                                                     <td class="p-3 text-black text-sm">
-                                                        <p>   {{ $user->email }}</p>
+                                                        <p> {{ $user->email }}</p>
                                                     </td>
                                                     <td class="p-3 text-sm">
-                                                        <form method="POST" action="{{ route('users.update', $user) }}">
+                                                        <form method="POST"
+                                                            action="{{ route('users.update', $user) }}">
                                                             @csrf
                                                             @method('PATCH')
-                    
-                                                            <input type="hidden" name="status" value="{{ $user->status ? '0' : '1' }}">
+
+                                                            <input type="hidden" name="status"
+                                                                value="{{ $user->status ? '0' : '1' }}">
                                                             <button type="submit"
                                                                 class="bg-{{ $user->status ? 'green' : 'red' }}-500 text-white text-sm px-3 py-1 rounded">
                                                                 {{ $user->status ? 'Unban' : 'Ban' }}

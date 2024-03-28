@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->string('Contenu');
-            $table->enum('statut', ['brouillon', 'publié', 'en attente'])->default('en attente');
+            $table->enum('statut', [ 'publié', 'en attente'])->default('en attente');
             $table->foreignId('coach_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();

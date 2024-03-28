@@ -23,6 +23,17 @@ class PublicationController extends Controller
         //
     }
 
+    public function publication(Request $request, $id)
+    {
+        // dd($request);
+        $publication = Publication::findOrFail($id);
+        $publication->update([
+            'statut' => $request->statut,
+        ]);
+
+        return redirect()->back();
+    }
+
     /**
      * Store a newly created resource in storage.
      */

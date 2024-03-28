@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.st
 Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
 Route::put('/tags/edit/{tag}', [TagController::class, 'update'])->name('tags.update');
 Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
+Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
+
 
 
 
