@@ -55,9 +55,13 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $requestTag, Tag $tag)
     {
-        //
+        $tag->update([
+            'name' => $requestTag->name,
+        ]);
+    
+        return redirect()->back()->with('success', 'Tag updated successfully.');
     }
 
     /**

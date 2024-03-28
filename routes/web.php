@@ -25,6 +25,10 @@ Route::get('/actuality', function () {
 Route::get('/dashboard',[dashboardController::class,'index']);
 Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
 Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
+Route::put('/tags/edit/{tag}', [TagController::class, 'update'])->name('tags.update');
+Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
+
+
 
 
 

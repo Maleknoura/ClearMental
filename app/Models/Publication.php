@@ -10,6 +10,12 @@ class Publication extends Model
     use HasFactory;
 
 
+    protected $fillable = [
+        'Contenu',
+        'statut',
+        'coach_id',
+    ];
+
     public function coach()
     {
         return $this->belongsTo(Coach::class);
