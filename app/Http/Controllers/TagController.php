@@ -57,12 +57,15 @@ class TagController extends Controller
      */
     public function update(TagRequest $requestTag, Tag $tag)
     {
+        // dd($requestTag);
         $tag->update([
             'name' => $requestTag->name,
         ]);
-    
+
         return redirect()->back()->with('success', 'Tag updated successfully.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -70,7 +73,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-    
+
         return redirect()->back()->with('success', 'Tag deleted successfully.');
     }
 }

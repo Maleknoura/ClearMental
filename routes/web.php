@@ -29,6 +29,8 @@ Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.dest
 Route::put('/tags/edit/{tag}', [TagController::class, 'update'])->name('tags.update');
 Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
 Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
+Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
+
 
 
 
