@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\videocallController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,9 @@ Route::put('/tags/edit/{tag}', [TagController::class, 'update'])->name('tags.upd
 Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
 Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
 Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
+
+
+Route::get('/start-meeting', [videocallController::class, 'startMeeting']);
 
 
 
