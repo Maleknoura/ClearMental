@@ -33,7 +33,7 @@ Route::get('/actuality', function () {
 Route::get('/dashboard', [dashboardController::class, 'index']);
 Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
 Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
-Route::put('/tags/edit/{tag}', [TagController::class, 'update'])->name('tags.update');
+Route::put('/tags/edit/{tag}', [TagController::class, 'update']);
 Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
 Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
 Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
@@ -61,18 +61,18 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'login']);
     Route::post('/login', [LoginController::class, 'store']);
 });
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
-});
+// });
 
-Route::get('/sign-up', [RegisterController::class, 'register']);
-Route::post('/sign-up', [RegisterController::class, 'store']);
+// Route::get('/sign-up', [RegisterController::class, 'register']);
+// Route::post('/sign-up', [RegisterController::class, 'store']);
 
-Route::get('/sign-in', [LoginController::class, 'login']);
-Route::post('/sign-in', [LoginController::class, 'store']);
+// Route::get('/sign-in', [LoginController::class, 'login']);
+// Route::post('/sign-in', [LoginController::class, 'store']);
 
-Route::post('/logout', [LogoutController::class, 'destroy']);
+// Route::post('/logout', [LogoutController::class, 'destroy']);
 
 
 Route::get('/forgot-password', [ForgotPasswordLinkController::class, 'create'])->name('forgot-password');
