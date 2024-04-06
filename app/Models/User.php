@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
+        'role',
     ];
 
     /**
@@ -48,7 +49,10 @@ class User extends Authenticatable
 
 
 
-
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 
 
     public function admin()

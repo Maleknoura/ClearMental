@@ -63,8 +63,12 @@
                                                 aria-hidden="true"></i></a></li> --}}
                                 </ul>
                                 <ul>
-                                    <li><a href=""><a href="Javascript:void(0)"><i class="fa fa-user"
-                                                    aria-hidden="true"></i></a></li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
+                                        <button type="submit">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
                                     <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
                                                 aria-hidden="true"></i></a></li>
                                 </ul>
