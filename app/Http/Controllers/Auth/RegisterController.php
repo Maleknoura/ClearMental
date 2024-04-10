@@ -3,7 +3,9 @@ namespace App\Http\Controllers\Auth;
 
 
     use App\Http\Controllers\Controller;
-    use App\Models\User;
+use App\Models\Client;
+use App\Models\Coach;
+use App\Models\User;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Hash;
@@ -61,8 +63,16 @@ namespace App\Http\Controllers\Auth;
                 $user->assignRole('admin');
             } elseif ($request->role === 'coach') {
                 $user->assignRole('coach');
+                Coach::create([
+                    'user_id' => $user->id,
+                 
+                ]);
             } else {
                 $user->assignRole('client');
+                Client::create([
+                    'user_id' => $user->id,
+                 
+                ]);
             }
 
             // Redirection vers la page de connexion

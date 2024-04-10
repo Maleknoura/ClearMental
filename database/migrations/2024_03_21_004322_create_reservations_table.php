@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-         
+            $table->string('time_slot'); 
+            $table->date('appointment_date'); 
             $table->enum('statut', ['confirmée', 'en attente'])->default('en attente');
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('coach_id');
 
-            $table->foreignId('client_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('seance_id')->constrained()->onDelete('cascade');
-
-
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('coach_id')->references('id')->on('coaches')->onDelete('cascade');
         });
     }
 

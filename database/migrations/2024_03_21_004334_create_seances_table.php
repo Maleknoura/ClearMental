@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('coach_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('reservation_id'); 
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+
             $table->integer('duree');
             $table->enum('mode', ['en ligne', 'en présentiel']);
 

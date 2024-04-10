@@ -1,27 +1,25 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
-<body>
-<section class="min-h-screen flex items-stretch text-white ">
-    <div class="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
-         style="background-image: url(https://img.freepik.com/free-photo/glowing-stage-light-illuminates-cheering-rock-fans-generated-by-ai_188544-37983.jpg?t=st=1709674772~exp=1709678372~hmac=dc8f3f98f4d1cde77c44b0d68f66c68d46c29115bae47bad23b3b1ce4132bace&w=1060);">
+<body class=" m-24 overflow-hidden ">
+<section class="flex items-stretch text-white ">
+    <div class="lg:flex w-2/3 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
+         style="background-image: url(https://i.pinimg.com/564x/aa/9a/3d/aa9a3daf1fbc4a3db8e1c27744704d0e.jpg);">
         <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
         <div class="w-full px-24 z-10">
-            <h1 class="text-4xl font-bold text-left tracking-wide">Welcome back!</h1>
-            <p class="text-2xl my-4">Sign in to your Evento account and unlock a world of exciting events and unforgettable experiences.</p>
+            <h1 class="text-4xl font-bold text-left tracking-wide"> </h1>
+            <p class="text-2xl my-4">Connectez-vous à votre compte et débloquez un monde de croissance personnelle et d'épanouissement.</p>
         </div>
     </div>
-    <div class="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0" style="background-color: #161616;">
+    <div class="lg:w-2/3 w-full flex items-center justify-center text-center md:px-16 px-0 z-0" style="background-color: #161616;">
         <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
             <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
         </div>
         <div class="w-full py-6 z-20">
                         <h1 class="w-auto text-3xl">
-                            Evento
+                            ClearMental
                         </h1>
             <div class="py-6 space-x-2">
-                <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">f</span>
-                <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">G+</span>
-                <span class="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">in</span>
+   
             </div>
             <p class="text-gray-100">
                 or use your email account

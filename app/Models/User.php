@@ -49,24 +49,23 @@ class User extends Authenticatable
 
 
 
-    public function hasRole($role)
+    public function assignRole($role)
     {
         return $this->role === $role;
     }
 
 
-    public function admin()
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
+
+   public function coach()
     {
-        return $this->hasOne(Admin::class);
+        return $this->hasOne(Coach::class);
     }
 
     public function client()
     {
         return $this->hasOne(Client::class);
-    }
-
-    public function coach()
-    {
-        return $this->hasOne(Coach::class);
     }
 }

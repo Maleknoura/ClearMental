@@ -6,14 +6,16 @@ use App\Models\Coach;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CoachController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $coachs = User::where('role', 'coach')->with('coach')->get();
+
+        return view('index', compact('coachs'));
     }
 
     /**
@@ -35,12 +37,15 @@ class CoachController extends Controller
     /**
      * Display the specified resource.
      */
-  
+    public function show(string $id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Coach $coach)
+    public function edit(string $id)
     {
         //
     }
@@ -48,7 +53,7 @@ class CoachController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Coach $coach)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -56,7 +61,7 @@ class CoachController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Coach $coach)
+    public function destroy(string $id)
     {
         //
     }

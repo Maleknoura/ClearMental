@@ -4,10 +4,14 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CoachController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordLinkController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\videocallController;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +27,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class,'index']);
+
+// Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
+// Route::post('/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
+
+Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
+Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
+
+
+
+
+
 Route::get('/actuality', function () {
     return view('actuality');
 });
@@ -66,13 +79,9 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
 // });
 
-// Route::get('/sign-up', [RegisterController::class, 'register']);
-// Route::post('/sign-up', [RegisterController::class, 'store']);
+// Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
-// Route::get('/sign-in', [LoginController::class, 'login']);
-// Route::post('/sign-in', [LoginController::class, 'store']);
 
-// Route::post('/logout', [LogoutController::class, 'destroy']);
 
 
 Route::get('/forgot-password', [ForgotPasswordLinkController::class, 'create'])->name('forgot-password');

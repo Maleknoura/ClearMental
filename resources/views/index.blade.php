@@ -122,45 +122,27 @@
                                 <div class="col-md-12">
                                     <div class="titlepage text_align_center flex">
                                         <h2>Our Coachs</h2>
-
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
+                                @foreach($coachs as $coach)
                                 <div class="col-md-4">
                                     <div id="ho_shad" class="services_box text_align_left">
-                                        <h3>Coach1</h3>
+                                        <h3>{{ $coach->name }}</h3>
                                         <figure><img src="images/service1.jpg" alt="#" /></figure>
-                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                                        </p>
-                                        <a class="read_more" href="service.html">Read More</a>
+                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</p>
+                                        <a class="read_more" href="{{ route('profile', ['id' => $coach->id]) }}">Read More</a>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div id="ho_shad" class="services_box text_align_left">
-                                        <h3>Coach2</h3>
-                                        <figure><img src="images/service2.jpg" alt="#" /></figure>
-                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                        </p>
-                                        <a class="read_more" href="service.html">Read More</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div id="ho_shad" class="services_box text_align_left">
-                                        <h3>Coach3</h3>
-                                        <figure><img src="images/service3.jpg" alt="#" /></figure>
-                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                        </p>
-                                        <a class="read_more" href="service.html">Read More</a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     <!-- end services -->
-
-
-
+                    
+                 
+                    
 
 
                     <!-- customers -->

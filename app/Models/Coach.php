@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Coach extends User
+class Coach extends Model
 {
     use HasFactory;
-
+protected $name=['coaches'];
+ protected $fillable = [
+        'user_id'
+    ];
 
 
 
