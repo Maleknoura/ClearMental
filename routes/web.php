@@ -63,9 +63,10 @@ Route::post('/chat/send', [ChatController::class, 'sendMessage']);
 
 
 
-// Route::get('/DashboardCoach', function () {
-//     return view('dashboardCoach');
-// });
+Route::get('/pub', [PublicationController::class, 'show']);
+Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
+
+
 Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
 Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
 Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');

@@ -129,58 +129,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="grid lg:ml-36 w-[35rem] grid-cols-1 p-4">
-                        <div class="sm:-mx-6 lg:-mx-8">
-                            <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
-                                <div class="">
-                                    <table class="w-full">
-                                        <thead class="bg-[#4a044e]">
-                                            <tr class="text-white">
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
-                                                    User</th>
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                                    Email</th>
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                                    Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                                <tr class="bg-white text-black border-b border-dashed">
-                                                    <td
-                                                        class="p-3 text-sm text-black font-medium whitespace-nowrap dark:text-black">
-                                                        <p>
-                                                        
-                                                        </p>
-
-                                                    </td>
-                                                    <td class="p-3 text-black text-sm">
-                                                        <p> </p>
-                                                    </td>
-                                                    <td class="p-3 text-sm">
-                                                        <form method="POST"
-                                                            action="">
-                                                            @csrf
-                                                            @method('PATCH')
-
-                                                            <input type="hidden" name="status"
-                                                                value="">
-                                                            <button type="submit">
-                                                              
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                 </div>
                 <div class="ml-9">

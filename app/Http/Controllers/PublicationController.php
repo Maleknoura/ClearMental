@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publication;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PublicationController extends Controller
@@ -42,24 +43,25 @@ class PublicationController extends Controller
         // Validation des données du formulaire
         $request->validate([
             'Contenu' => 'required',
-            'statut' => 'required',
-            'coach_id' => 'required',
             'tags' => 'array', // Assurez-vous que le champ 'tags' est un tableau
         ]);
-
-     
+    
+        // Récupérer l'ID du coach à partir de l'utilisateur actuellement authentifié
+        $coach_id = auth()->user()->coach->id;
+    
+        // Créer la publication avec les données du formulaire et le coach_id récupéré
         $publication = Publication::create([
             'Contenu' => $request->Contenu,
-            'statut' => $request->statut,
-            'coach_id' => $request->coach_id,
+            'coach_id' => $coach_id,
         ]);
-
-       
+    
+        // Attacher les tags sélectionnés à la publication
         $publication->tags()->sync($request->tags);
-
+    
         return redirect()->back()
             ->with('success', 'Publication créée avec succès.');
     }
+    
 
     /**
      * Display the specified resource.
@@ -67,9 +69,10 @@ class PublicationController extends Controller
     public function show()
     {
         $publications = Publication::all();
-    
-   
-    return view('dashboardcoach', compact('publications'));
+        $tags = Tag::all();
+
+
+        return view('publication', compact('publications', 'tags'));
     }
 
     /**
