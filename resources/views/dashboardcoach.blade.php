@@ -93,10 +93,10 @@
                                             <tr class="text-white">
                                                 <th scope="col"
                                                     class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
-                                                    title</th>
+                                                    Client</th>
                                                 <th scope="col"
                                                     class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
-                                                    Coach</th>
+                                                    heure</th>
 
                                                 <th scope="col"
                                                     class="p-3 text-xs font-medium tracking-wider text-left uppercase">
@@ -104,22 +104,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+                                            @foreach ($reservations as $reservation)
                                                 <tr>
-                                                    <td class="p-3">contenu</td>
-                                                    <td class="p-3">auteur</td>
+                                                 
+                                                    <td>{{ $reservation->client->user->name }}</td>
+                                                    <td>{{ $reservation->time_slot }}</td>
                                                     <td class="p-3">
-                                                        <form method="POST"
-                                                            action="">
+                                                        <form action="{{ route('reservations.accept', $reservation->id) }}" method="POST">
                                                             @csrf
-                                                            <input type="hidden" name="statut" value="publié">
-                                                            <button type="submit"
-                                                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                                            @method('PATCH')
+                                                            <input type="hidden" name="statut" value="confirmée">
+                                                            <button type="submit" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-md text-xs">
                                                                 Approuver
                                                             </button>
+                                                            
                                                         </form>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                         </tbody>
                                        
                                     </table>
@@ -251,7 +253,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                    
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -314,7 +316,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                   
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"

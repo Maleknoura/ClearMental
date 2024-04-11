@@ -110,9 +110,15 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(Request $request,$id)
     {
-        //
+      
+        $reservation = Reservation::findOrFail($id);
+        $reservation->update([
+            'statut' => $request->statut,
+        ]);
+    
+        return redirect()->back()->with('success', 'La réservation a été acceptée avec succès.');
     }
 
     /**

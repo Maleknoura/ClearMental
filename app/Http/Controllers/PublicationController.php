@@ -39,15 +39,37 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données du formulaire
+        $request->validate([
+            'Contenu' => 'required',
+            'statut' => 'required',
+            'coach_id' => 'required',
+            'tags' => 'array', // Assurez-vous que le champ 'tags' est un tableau
+        ]);
+
+     
+        $publication = Publication::create([
+            'Contenu' => $request->Contenu,
+            'statut' => $request->statut,
+            'coach_id' => $request->coach_id,
+        ]);
+
+       
+        $publication->tags()->sync($request->tags);
+
+        return redirect()->back()
+            ->with('success', 'Publication créée avec succès.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Publication $publication)
+    public function show()
     {
-        //
+        $publications = Publication::all();
+    
+   
+    return view('dashboardcoach', compact('publications'));
     }
 
     /**

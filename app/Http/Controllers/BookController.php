@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -94,7 +95,7 @@ class BookController extends Controller
          
         ]);
     // dd($request);
-        // Créer un nouveau livre avec les données du formulaire
+       
         Book::create([
             'title' => $request->title,
             'content' => $request->content,
@@ -112,7 +113,8 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $books = Book::all();
-        return view('dashboardcoach', compact('books'));
+        $reservations = Reservation::with('client')->where('statut', 'en attente')->get();
+        return view('dashboardcoach', compact('books','reservations'));
     }
 
     /**

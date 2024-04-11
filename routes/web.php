@@ -70,6 +70,8 @@ Route::post('/books/create', [BookController::class, 'store'])->name('books.stor
 Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
 Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
+Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
+
 
 
 
