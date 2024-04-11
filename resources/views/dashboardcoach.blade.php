@@ -189,55 +189,55 @@
                                     <table class="w-full">
                                         <thead class="bg-[#4a044e]">
                                             <tr class="text-white">
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
-                                                    Id</th>
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                                    Name</th>
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                                    Action</th>
-                                                <th scope="col"
-                                                    class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                                    Action</th>
+                                                <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
+                                                    Id
+                                                </th>
+                                                <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left uppercase">
+                                                    Name
+                                                </th>
+                                                <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left uppercase">
+                                                    Number of Pages
+                                                </th>
+                                                <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left uppercase">
+                                                    Actions
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
-                                                <tr
-                                                    class="bg-white text-black border-b border-dashed dark:bg-gray-800 dark:border-gray-700">
-                                                    <td
-                                                        class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
-                                                        <img src="/src/assets/img/google.png" alt=""
-                                                            class="mr-2 h-8 rounded-full inline-block">
-                                                    </td>
-                                                    <td class="p-3 text-sm whitespace-nowrap"></td>
-                                                    <td class="p-3 text-sm whitespace-nowrap">
-                                                        <button data-modal-target="update-modal"
-                                                            data-modal-toggle="update-modal"
-                                                            data-tag-id=""
-                                                            class="block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                                            type="button">
-                                                            update
-                                                        </button>
-                                                    </td>
-                                                    <td class="p-3 text-sm whitespace-nowrap">
-                                                        <form action=""
-                                                            method="POST" class="inline">
-                                                         
-                                                            <button type="submit"
-                                                                onclick="return confirm('Are you sure you want to delete this tag?')">Delete</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            @foreach ($books as $book)
+                                            <tr class="bg-white text-black border-b border-dashed dark:bg-gray-800 dark:border-gray-700">
+                                                <td class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
+                                                    {{ $book->id }}
+                                                </td>
+                                                <td class="p-3 text-sm whitespace-nowrap">
+                                                    {{ $book->title }}
+                                                </td>
+                                                <td class="p-3 text-sm whitespace-nowrap">
+                                                    {{ $book->numbre_of_page }}
+                                                </td>
+                                                <td class="p-3 text-sm whitespace-nowrap">
+                                                    <button data-modal-target="update-modal" data-modal-toggle="update-modal" data-tag-id="" class="block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                                        Update
+                                                    </button>
+                                                </td>
+                                                   <td>
+                                                     <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this book?')" class="text-red-500">Delete</button>
+                                                    </form>
+                                                
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                
                     
                 </div>
             </div>
@@ -264,16 +264,25 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form method="post" action="" class="p-4 md:p-5">
-                    
-                    <input type="hidden" name="tag_id" value="">
+                <form method="post" action="{{ route('books.update', $book->id) }}" class="p-4 md:p-5">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="book_id" value="">
                 
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" id="name"
+                            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <input type="text" name="title" id="title"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Type product name" required="">
+                        </div>
+                        <div>
+                            <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                            <input type="text" name="content" id="content" class="form-input" placeholder="Enter book content" required>
+                        </div>
+                        <div>
+                            <label for="numbre_of_page" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of Pages</label>
+                            <input type="number" name="numbre_of_page" id="numbre_of_page" class="form-input" placeholder="Enter number of pages" required>
                         </div>
                     </div>
                     <button type="submit"

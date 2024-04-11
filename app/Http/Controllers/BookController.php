@@ -111,7 +111,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        $books = Book::all();
+        return view('dashboardcoach', compact('books'));
     }
 
     /**
@@ -125,16 +126,39 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        //
+     
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'numbre_of_page' => 'required|integer',
+        ]);
+    
+        $book = Book::findOrFail($id);
+    
+     
+        $book->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'numbre_of_page' => $request->numbre_of_page,
+        ]);
+    
+      
+        return redirect()->back()->with('success', 'Book updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        $book = Book::findOrFail($id);
+
+        
+        $book->delete();
+    
+
+        return redirect()->back()->with('success', 'Book deleted successfully');
     }
 }
