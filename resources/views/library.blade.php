@@ -48,7 +48,7 @@
             </div>
         </div>
     </header>
-    <div class="grid grid-cols-1 gap-6 justify-center mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
+    {{-- <div class="grid grid-cols-1 gap-6 justify-center mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
         <!-- Première carte -->
         <div class="relative group">
             <div class="overflow-hidden aspect-w-1 aspect-h-1">
@@ -150,9 +150,26 @@
                     </div>
                 </div>
             </div>
+        </div> --}}
+
+
+
+      <!-- resources/views/books/index.blade.php -->
+
+<div class="flex flex-wrap -mx-4">
+    @foreach ($bookData as $book)
+  
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <img src="{{ $book['thumbnail'] }}" alt="Couverture du livre" class="w-full mb-4 rounded">
+                <h2 class="text-lg font-semibold">{{ $book['title'] }}</h2>
+                <p class="text-sm text-gray-600">{{ $book['authors'] }}</p>
+                <p class="text-sm text-gray-700 mt-2">{{ substr($book['description'], 0, 100) }}</p>
+            </div>
         </div>
-
-
+     
+    @endforeach
+</div>
 
 </body>
 

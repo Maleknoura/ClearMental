@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CoachController;
@@ -36,6 +37,7 @@ Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile
 Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
 
 
+Route::get('/library', [BookController::class, 'index']);
 
 
 
@@ -61,8 +63,8 @@ Route::post('/chat/send', [ChatController::class, 'sendMessage']);
 
 
 
-Route::get('/library', function () {
-    return view('library');
+Route::get('/DashboardCoach', function () {
+    return view('dashboardCoach');
 });
 
 

@@ -13,7 +13,7 @@
     </div>
     <form action="{{ route('reservation.store') }}" method="POST">
         @csrf
-        <input type="text" name="coach_id" value="{{ $coach->coach->id }}">
+        <input type="hidden" name="coach_id" value="{{ $coach->coach->id }}">
         <input type="hidden" name="appointment_date" value="{{ $appointment_date }}">
         <label for="selected_hour">Choisissez l'heure de votre rendez-vous :</label>
         <select name="selected_hour" id="selected_hour">

@@ -74,29 +74,29 @@ class ReservationController extends Controller
             // Redirigez l'utilisateur vers la page de connexion s'il n'est pas authentifié
             return redirect()->route('login');
         }
-        $appointment_date = now()->toDateString();
-        $availableHours = [];
-        for ($hour = 9; $hour <= 17; $hour++) {
-            $availableHours[] = $hour;
-        }
-    
-        // Générez la liste des heures disponibles pour la réservation
-        $currentDate = now();
-        $reservedHours = Reservation::whereDate('appointment_date', $currentDate->format('Y-m-d'))
+        
+        // Date actuelle
+        $currentDate = now()->format('Y-m-d');
+        
+        // Heures réservées pour la journée actuelle
+        $reservedHours = Reservation::whereDate('appointment_date', $currentDate)
             ->where('coach_id', $id)
             ->pluck('time_slot');
         
-        $availableHours = [];
-        for ($hour = 9; $hour <= 17; $hour++) {
-            // Vérifiez si l'heure est déjà réservée pour ce jour
-            if (!$reservedHours->contains($hour)) {
-                $availableHours[] = $hour;
-            }
-        }
+        // Heures disponibles
+        $availableHours = range(9, 17);
+        
+        // Supprimez les heures réservées des heures disponibles
+        $availableHours = array_diff($availableHours, $reservedHours->toArray());
     
-        return view('profile', compact('coach', 'availableHours','appointment_date'));
+        // Date du rendez-vous
+        $appointment_date = $currentDate;
+        
+        return view('profile', compact('coach', 'availableHours', 'appointment_date'));
     }
-
+    
+    
+    
 
     
     /**
