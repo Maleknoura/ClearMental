@@ -86,7 +86,24 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Valider les données du formulaire
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'numbre_of_page' => 'required|numeric',
+         
+        ]);
+    // dd($request);
+        // Créer un nouveau livre avec les données du formulaire
+        Book::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'numbre_of_page' => $request->numbre_of_page,
+           
+        ]);
+    
+       
+        return redirect()->back()->with('success', 'Livre ajouté avec succès');
     }
 
     /**

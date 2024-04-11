@@ -27,7 +27,7 @@
                     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                         class="block text-white bg-gray-400 hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         type="button">
-                        New Tag
+                        New Book
                     </button>
                 </div>
                 <div class="relative"><span
@@ -319,35 +319,27 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form method="post" action="" class="p-4 md:p-5">
-
+                <form method="post" action="{{ route('books.store') }}" class="p-4 md:p-5">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
-                        <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" id="name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type product name" required="">
+                        <div>
+                            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                            <input type="text" name="title" id="title" class="form-input" placeholder="Enter book title" required>
                         </div>
-
-
-
+                        <div>
+                            <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                            <input type="text" name="content" id="content" class="form-input" placeholder="Enter book content" required>
+                        </div>
+                        <div>
+                            <label for="numbre_of_page" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of Pages</label>
+                            <input type="number" name="numbre_of_page" id="numbre_of_page" class="form-input" placeholder="Enter number of pages" required>
+                        </div>
                     </div>
-                    <button type="submit"
-                        class="text-white inline-flex items-center bg-gray-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        Add new Tag
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
+                        Add new Book
                     </button>
                 </form>
-            </div>
-        </div>
-    </div>
+                
 
 
 

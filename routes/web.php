@@ -66,6 +66,8 @@ Route::post('/chat/send', [ChatController::class, 'sendMessage']);
 Route::get('/DashboardCoach', function () {
     return view('dashboardCoach');
 });
+Route::post('/books', [BookController::class, 'store'])->name('books.store');
+
 
 
 Route::middleware(['guest'])->group(function () {
