@@ -111,11 +111,7 @@
                                     class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
                                     <a class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 "
                                         href="/blog-single">
-                                        <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"><img
-                                                src="https://images.pexels.com/photos/4009464/pexels-photo-4009464.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                                class="object-cover w-full h-full"
-                                                alt="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities">
-                                        </div><span>
+                                        <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"> <img   class="object-cover w-full h-full" src="{{ asset('storage/images/' . $publication->image) }}" class="object-cover w-full h-full" alt="Image de la publication">                            </div><span>
                                             <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
                                                 data-nc-id="PostTypeFeaturedIcon"></div>
                                         </span>

@@ -15,10 +15,10 @@ class PublicationController extends Controller
     {
         {
             $tags = Tag::all();
-            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->get();
+            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(2);
             if ($request->has('tag')) {
                 $tag = Tag::findOrFail($request->tag);
-                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(10);
+                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(2);
             }
            
             return view('actuality', compact('publications','tags'));
