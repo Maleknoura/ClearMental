@@ -41,9 +41,8 @@ Route::get('/library', [BookController::class, 'index']);
 
 
 
-Route::get('/actuality', function () {
-    return view('actuality');
-});
+
+Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
 
 Route::get('/dashboard', [dashboardController::class, 'index']);
 Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
@@ -65,6 +64,10 @@ Route::post('/chat/send', [ChatController::class, 'sendMessage']);
 
 Route::get('/pub', [PublicationController::class, 'show']);
 Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
+Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
+Route::put('/pub/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
+
+
 
 
 Route::post('/books/create', [BookController::class, 'store'])->name('books.store');

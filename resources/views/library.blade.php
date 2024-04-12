@@ -157,6 +157,7 @@
       <!-- resources/views/books/index.blade.php -->
 
 <div class="flex flex-wrap -mx-4">
+    
     @foreach ($bookData as $book)
   
         <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">

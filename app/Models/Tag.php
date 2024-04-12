@@ -16,4 +16,8 @@ class Tag extends Model
     {
         return $this->belongsToMany(Publication::class,'tag_publication');
     }
+    public function getPublicationsCountAttribute()
+{
+    return $this->publications()->count();
+}
 }

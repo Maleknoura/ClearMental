@@ -12,6 +12,7 @@ class Publication extends Model
 
     protected $fillable = [
         'Contenu',
+        'image',
         'statut',
         'coach_id',
     ];

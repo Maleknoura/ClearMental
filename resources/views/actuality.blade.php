@@ -64,191 +64,81 @@
 
                         </div>
                     </div>
-                    <div class="grid gap-6 md:gap-8 grid-cols-1">
-                        <div class="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
-                            data-nc-id="Card3">
-                            <div class="flex flex-col flex-grow">
-                                <div class="space-y-5 mb-4">
-                                    <div class="nc-CategoryBadgeList flex flex-wrap space-x-2"
-                                        data-nc-id="CategoryBadgeList"><a
-                                            class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-red-800 bg-red-100 hover:bg-red-800"
-                                            href="/">Tag1</a></div>
-                                    <div>
-                                        <h2
-                                            class="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
-                                            <a class="line-clamp-2"
-                                                title="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities"
-                                                href="/blog-single">Microsoft announces a five-year commitment to create
-                                                bigger opportunities for people with disabilities</a>
-                                        </h2>
-                                        <div class="hidden sm:block sm:mt-2"><span
-                                                class="text-neutral-500 dark:text-neutral-400 text-base line-clamp-1">Duis
-                                                bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.</span>
+                    @foreach ($publications as $publication)
+                        <div class="grid gap-6 mb-4 md:gap-8 grid-cols-1">
+                            <div class="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
+                                data-nc-id="Card3">
+                                <div class="flex flex-col flex-grow">
+                                    <div class="space-y-5 mb-4">
+                                        <div class="nc-CategoryBadgeList flex flex-wrap space-x-2"
+                                            data-nc-id="CategoryBadgeList"><a
+                                                class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-red-800 bg-red-100 hover:bg-red-800"
+                                                href="/">
+                                                @foreach ($publication->tags as $tag)
+                                                    <span>{{ $tag->name }}</span>
+                                                @endforeach
+                                            </a></div>
+                                        <div>
+                                            <h2
+                                                class="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
+                                                <a class="line-clamp-2"
+                                                    title="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities"
+                                                    href="/blog-single">Microsoft announces a five-year commitment to
+                                                    create
+                                                    bigger opportunities for people with disabilities</a>
+                                            </h2>
+                                            <div class="hidden sm:block sm:mt-2"><span
+                                                    class="text-neutral-500 dark:text-neutral-400 text-base line-clamp-1">{{ substr($publication->Contenu, 0, 150) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
+                                            data-nc-id="PostCardMeta"><a
+                                                class="flex-shrink-0 relative flex items-center space-x-2"
+                                                href="/author">
+                                                <div
+                                                    class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
+                                                   <span class="wil-avatar__name">P</span>
+                                                </div>
+                                                <span
+                                                    class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">By {{ $publication->coach->user->name }}</span>
+                                            </a><span
+                                                class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
+                                                class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">AT {{ $publication->created_at->format('Y-m-d H:i:s') }}</span>
                                         </div>
                                     </div>
-                                    <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
-                                        data-nc-id="PostCardMeta"><a
-                                            class="flex-shrink-0 relative flex items-center space-x-2" href="/author">
-                                            <div
-                                                class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                                                <img class="absolute inset-0 w-full h-full object-cover rounded-full"
-                                                    src="./static/media/Image-9.d879028d45de09c9ca3b.png"
-                                                    alt="Pillifant Vern"><span class="wil-avatar__name">P</span>
-                                            </div>
-                                            <span
-                                                class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">Pillifant
-                                                Vern</span>
-                                        </a><span
-                                            class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
-                                            class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">May
-                                            20, 2021</span></div>
                                 </div>
+                                <div
+                                    class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
+                                    <a class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 "
+                                        href="/blog-single">
+                                        <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"><img
+                                                src="https://images.pexels.com/photos/4009464/pexels-photo-4009464.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+                                                class="object-cover w-full h-full"
+                                                alt="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities">
+                                        </div><span>
+                                            <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
+                                                data-nc-id="PostTypeFeaturedIcon"></div>
+                                        </span>
+                                    </a></div>
                             </div>
-                            <div class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0"><a
-                                    class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 " href="/blog-single">
-                                    <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"><img
-                                            src="https://images.pexels.com/photos/4009464/pexels-photo-4009464.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                            class="object-cover w-full h-full"
-                                            alt="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities">
-                                    </div><span>
-                                        <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
-                                            data-nc-id="PostTypeFeaturedIcon"></div>
-                                    </span>
-                                </a></div>
-                        </div>
-                        <div class="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
-                            data-nc-id="Card3">
-                            <div class="flex flex-col flex-grow">
-                                <div class="space-y-5 mb-4">
-                                    <div class="nc-CategoryBadgeList flex flex-wrap space-x-2"
-                                        data-nc-id="CategoryBadgeList"><a
-                                            class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-red-800 bg-red-100 hover:bg-red-800"
-                                            href="/">Electronics</a></div>
-                                    <div>
-                                        <h2
-                                            class="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
-                                            <a class="line-clamp-2"
-                                                title="360-degree video: How Microsoft deployed a datacenter to the bottom of the ocean"
-                                                href="/blog-single">360-degree video: How Microsoft deployed a
-                                                datacenter to the bottom of the ocean</a>
-                                        </h2>
-                                        <div class="hidden sm:block sm:mt-2"><span
-                                                class="text-neutral-500 dark:text-neutral-400 text-base line-clamp-1">We’re
-                                                an online magazine dedicated to covering the best in international
-                                                product design. We started as a little blog back in 2002 covering
-                                                student work and over time</span></div>
-                                    </div>
-                                    <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
-                                        data-nc-id="PostCardMeta"><a
-                                            class="flex-shrink-0 relative flex items-center space-x-2" href="/author">
-                                            <div
-                                                class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                                                <img class="absolute inset-0 w-full h-full object-cover rounded-full"
-                                                    src="./static/media/Image-9.d879028d45de09c9ca3b.png"
-                                                    alt="Pillifant Vern"><span class="wil-avatar__name">P</span>
-                                            </div>
-                                            <span
-                                                class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">Pillifant
-                                                Vern</span>
-                                        </a><span
-                                            class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
-                                            class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">May
-                                            20, 2021</span></div>
-                                </div>
-                            </div>
-                            <div class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
-                                <a class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 "
-                                    href="/blog-single">
-                                    <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"><img
-                                            src="https://images.pexels.com/photos/4871012/pexels-photo-4871012.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-                                            class="object-cover w-full h-full"
-                                            alt="360-degree video: How Microsoft deployed a datacenter to the bottom of the ocean">
-                                    </div><span>
-                                        <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
-                                            data-nc-id="PostTypeFeaturedIcon"></div>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
-                            data-nc-id="Card3">
-                            <div class="flex flex-col flex-grow">
-                                <div class="space-y-5 mb-4">
-                                    <div class="nc-CategoryBadgeList flex flex-wrap space-x-2"
-                                        data-nc-id="CategoryBadgeList"><a
-                                            class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-yellow-800 bg-yellow-100 hover:bg-yellow-800"
-                                            href="/">Industrial</a></div>
-                                    <div>
-                                        <h2
-                                            class="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
-                                            <a class="line-clamp-2"
-                                                title="To cool datacenter servers, Microsoft turns to boiling liquid"
-                                                href="/blog-single">To cool datacenter servers, Microsoft turns to
-                                                boiling liquid</a>
-                                        </h2>
-                                        <div class="hidden sm:block sm:mt-2"><span
-                                                class="text-neutral-500 dark:text-neutral-400 text-base line-clamp-1">Nam
-                                                ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a
-                                                suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra
-                                                dapibus. Nulla suscipit ligula in lacus.</span></div>
-                                    </div>
-                                    <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
-                                        data-nc-id="PostCardMeta"><a
-                                            class="flex-shrink-0 relative flex items-center space-x-2" href="/author">
-                                            <div
-                                                class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                                                <img class="absolute inset-0 w-full h-full object-cover rounded-full"
-                                                    src="./static/media/Image-3.f257bc3c2ce5ae3a57db.png"
-                                                    alt="Foulcher Nathanil"><span class="wil-avatar__name">F</span>
-                                            </div><span
-                                                class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">Foulcher
-                                                Nathanil</span>
-                                        </a><span
-                                            class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
-                                            class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">May
-                                            20, 2021</span></div>
-                                </div>
-                            </div>
-                            <div class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
-                                <a class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 "
-                                    href="/blog-single">
-                                    <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"><img
-                                            src="https://images.pexels.com/photos/5092763/pexels-photo-5092763.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                            class="object-cover w-full h-full"
-                                            alt="To cool datacenter servers, Microsoft turns to boiling liquid"></div>
-                                    <span>
-                                        <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
-                                            data-nc-id="PostTypeFeaturedIcon"><span
-                                                class="bg-neutral-900 bg-opacity-60 rounded-full flex  items-center justify-center text-xl text-white border border-white w-8 h-8"><svg
-                                                    class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M17.13 7.9799C20.96 10.1899 20.96 13.8099 17.13 16.0199L14.04 17.7999L10.95 19.5799C7.13 21.7899 4 19.9799 4 15.5599V11.9999V8.43989C4 4.01989 7.13 2.2099 10.96 4.4199L13.21 5.7199"
-                                                        stroke="currentColor" stroke-width="1.5"
-                                                        stroke-miterlimit="10" stroke-linecap="round"
-                                                        stroke-linejoin="round"></path>
-                                                </svg></span></div>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-
+                           
 
 
                     </div>
-                    <div
-                        class="flex flex-col mt-12 md:mt-20 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-                        <nav class="nc-Pagination inline-flex space-x-1 text-base font-medium "><span
-                                class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-primary-6000 text-white focus:outline-none">1</span><a
-                                class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
-                                href="/blog">2</a><a
-                                class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
-                                href="/blog">3</a><a
-                                class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
-                                href="/blog">4</a></nav><button
-                            class="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0">Show
-                            me more</button>
-                    </div>
+                    @endforeach
+                        <div
+                            class="flex flex-col mt-12 md:mt-20 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
+                            <nav class="nc-Pagination inline-flex space-x-1 text-base font-medium "><span
+                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-primary-6000 text-white focus:outline-none">1</span><a
+                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
+                                    href="/blog">2</a><a
+                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
+                                    href="/blog">3</a><a
+                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
+                                    href="/blog">4</a></nav><button
+                                class="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0">Show
+                                me more</button>
+                        </div>
                 </div>
                 <div class="w-full space-y-7 mt-24 lg:mt-0 lg:w-2/5 lg:pl-10 xl:pl-0 xl:w-1/3 ">
                     <div class="nc-WidgetTags rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"
@@ -260,10 +150,15 @@
                                 class="flex-shrink-0 block text-primary-700 dark:text-primary-500 font-semibold text-sm"
                                 rel="noopener noreferrer" href="/">View all</a>
                         </div>
-                        <div class="flex flex-wrap p-4 xl:p-5"><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Outdoors<span class="text-xs font-normal">
-                                    (14)</span></a><a
+                        <div class="flex flex-wrap p-4 xl:p-5">
+                            @foreach($tags as $tag)
+                                <a class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
+                                   href="{{ route('publications.index', ['tag' => $tag->id]) }}">
+                                    {{ $tag->name }} <span class="text-xs font-normal">({{ $tag->publications_count }})</span>
+                                </a>
+                            @endforeach
+                        </div>
+                        {{-- </div><a
                                 class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
                                 data-nc-id="Tag" href="/">Health<span class="text-xs font-normal">
                                     (4)</span></a><a
@@ -302,7 +197,7 @@
                                     (18)</span></a><a
                                 class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
                                 data-nc-id="Tag" href="/">Graphic Design<span class="text-xs font-normal">
-                                    (25)</span></a></div>
+                                    (25)</span></a></div> --}}
                     </div>
 
                     <div class="nc-WidgetPosts rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"
