@@ -122,20 +122,33 @@
 
                     </div>
                     @endforeach
-                        <div
-                            class="flex flex-col mt-12 md:mt-20 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-                            <nav class="nc-Pagination inline-flex space-x-1 text-base font-medium "><span
-                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-primary-6000 text-white focus:outline-none">1</span><a
-                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
-                                    href="/blog">2</a><a
-                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
-                                    href="/blog">3</a><a
-                                    class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white hover:bg-neutral-100 border border-neutral-200 text-neutral-6000 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 focus:outline-none"
-                                    href="/blog">4</a></nav><button
-                                class="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0">Show
-                                me more</button>
-                        </div>
+                    <div class="flex flex-wrap justify-center mt-4">
+                        {{-- Bouton "Previous" --}}
+                        @if ($publications->previousPageUrl())
+                            <a href="{{ $publications->previousPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
+                        @else
+                            <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo; Previous</span>
+                        @endif
+                    
+                        {{-- Affichage des numéros de page --}}
+                        @for ($i = 1; $i <= $publications->lastPage(); $i++)
+                            @if ($i == $publications->currentPage())
+                                <span class="px-3 py-1 bg-blue-500 text-white rounded mr-1">{{ $i }}</span>
+                            @else
+                                <a href="{{ $publications->url($i) }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
+                            @endif
+                        @endfor
+                    
+                        {{-- Bouton "Next" --}}
+                        @if ($publications->nextPageUrl())
+                            <a href="{{ $publications->nextPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next &raquo;</a>
+                        @else
+                            <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next &raquo;</span>
+                        @endif
+                    </div>
                 </div>
+
+                    
                 <div class="w-full space-y-7 mt-24 lg:mt-0 lg:w-2/5 lg:pl-10 xl:pl-0 xl:w-1/3 ">
                     <div class="nc-WidgetTags rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"
                         data-nc-id="WidgetTags">
@@ -144,7 +157,7 @@
                             <h2 class="text-lg text-neutral-900 dark:text-neutral-100 font-semibold flex-grow">🏷
                                 Discover more tags</h2><a
                                 class="flex-shrink-0 block text-primary-700 dark:text-primary-500 font-semibold text-sm"
-                                rel="noopener noreferrer" href="/">View all</a>
+                                rel="noopener noreferrer" href="/"></a>
                         </div>
                         <div class="flex flex-wrap p-4 xl:p-5">
                             @foreach($tags as $tag)
@@ -203,7 +216,7 @@
                             <h2 class="text-lg text-neutral-900 dark:text-neutral-100 font-semibold flex-grow">🎯
                                 Popular Posts</h2><a
                                 class="flex-shrink-0 block text-primary-700 dark:text-primary-500 font-semibold text-sm"
-                                rel="noopener noreferrer" href="/">View all</a>
+                                rel="noopener noreferrer" href="/"></a>
                         </div>
                         <div class="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700">
                             <div class="nc-Card3Small relative flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center p-4 xl:px-5 xl:py-6 hover:bg-neutral-200 dark:hover:bg-neutral-700"
