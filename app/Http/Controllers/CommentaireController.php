@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Commentaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentaireController extends Controller
 {
@@ -28,8 +29,20 @@ class CommentaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'publication_id' => 'required',
+            'content' => 'required|string|max:255',
+        ]);
+
+        Commentaire::create([
+            'publication_id' => $request->publication_id,
+            'client_id' => Auth::id(),
+            'content' => $request->content,
+        ]);
+
+        return redirect()->back()->with('success', 'Comment added successfully');
     }
+
 
     /**
      * Display the specified resource.

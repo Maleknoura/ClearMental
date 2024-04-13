@@ -85,10 +85,10 @@
                                                 class="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
                                                 <a class="line-clamp-2"
                                                     title="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities"
-                                                    href="/blog-single">  {{ $publication->title }}</a>
+                                                    href="/blog-single"> {{ $publication->title }}</a>
                                             </h2>
                                             <div class="hidden sm:block sm:mt-2"><span
-                                                    class="text-neutral-500 dark:text-neutral-400 text-base ">{{ $publication->Contenu}}</span>
+                                                    class="text-neutral-500 dark:text-neutral-400 text-base ">{{ $publication->Contenu }}</span>
                                             </div>
                                         </div>
                                         <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
@@ -97,93 +97,122 @@
                                                 href="/author">
                                                 <div
                                                     class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                                                   <span class="wil-avatar__name">P</span>
+                                                    <span class="wil-avatar__name">P</span>
                                                 </div>
                                                 <div class="flex items-center space-x-2">
                                                     <!-- Icône de like -->
-                                                   <!-- Icône de like -->
-<form action="{{ route('publication.like', $publication->id) }}" method="POST">
-    @csrf
-    <button type="submit">
-        @if (Auth::check() && $publication->likedByUser(Auth::user()))
-            <i class="fas fa-thumbs-up text-black"></i>
-        @else
-            <i class="far fa-thumbs-up"></i>
-        @endif
-    </button>
-</form>
+                                                    <!-- Icône de like -->
+                                                    <form action="{{ route('publication.like', $publication->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit">
+                                                            @if (Auth::check() && $publication->likedByUser(Auth::user()))
+                                                                <i class="fas fa-thumbs-up text-black"></i>
+                                                            @else
+                                                                <i class="far fa-thumbs-up"></i>
+                                                            @endif
+                                                        </button>
+                                                    </form>
 
-<!-- Icône de dislike -->
-<form action="{{ route('publication.dislike', $publication->id) }}" method="POST">
-    @csrf
-    <button type="submit">
-        @if (Auth::check() && $publication->dislikedByUser(Auth::user()))
-            <i class="fas fa-thumbs-down text-black"></i>
-        @else
-            <i class="far fa-thumbs-down"></i>
-        @endif
-    </button>
-</form>
+                                                    <!-- Icône de dislike -->
+                                                    <form action="{{ route('publication.dislike', $publication->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit">
+                                                            @if (Auth::check() && $publication->dislikedByUser(Auth::user()))
+                                                                <i class="fas fa-thumbs-down text-black"></i>
+                                                            @else
+                                                                <i class="far fa-thumbs-down"></i>
+                                                            @endif
+                                                        </button>
+                                                    </form>
 
                                                 </div>
                                                 <span
-                                                    class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">By {{ $publication->coach->user->name }}</span>
+                                                    class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">By
+                                                    {{ $publication->coach->user->name }}</span>
                                             </a><span
                                                 class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
-                                                class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">AT {{ $publication->created_at->format('Y-m-d H:i:s') }}</span>
-                                        
+                                                class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">AT
+                                                {{ $publication->created_at->format('Y-m-d H:i:s') }}</span>
+
+                                        </div>
+                                    </div>
+                                    <!-- Placeholder pour les commentaires -->
+                                    <form action="{{ route('comments.store') }}" method="POST">
+                                        @csrf
+                                        <div class="flex items-center mb-4 border-b border-gray-300 pb-2">
+                                            <input type="hidden" name="publication_id" value="{{ $publication->id }}">
+                                            <input type="text" name="content" placeholder="Add your comment..."
+                                                class="border-none px-4 py-2 w-full">
+                                            <button type="submit"
+                                                class="bg-purple-900 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">Comment</button>
+                                      
                                             </div>
+                                    </form>
+                                    @foreach ($comments[$publication->id] as $comment)
+                                        <div class="comment">
+                                         
+                                            <p>{{ $comment->content }}</p>
+                                           
+                                            <p>Commenté par : {{ $comment->client->user->name }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                    <div
+                                        class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
+                                        <a class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 "
+                                            href="/blog-single">
+                                            <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"> <img
+                                                    class="object-cover w-full h-full"
+                                                    src="{{ asset('storage/images/' . $publication->image) }}"
+                                                    class="object-cover w-full h-full" alt="Image de la publication">
+                                            </div>
+                                            <span>
+                                                <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
+                                                    data-nc-id="PostTypeFeaturedIcon"></div>
+                                            </span>
+                                        </a>
+                                        <!-- Icônes de like et de dislike -->
+
                                     </div>
                                 </div>
-                                <div
-                                    class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
-                                    <a class="block w-full h-0 aspect-h-9 sm:aspect-h-16 aspect-w-16 "
-                                        href="/blog-single">
-                                        <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"> <img   class="object-cover w-full h-full" src="{{ asset('storage/images/' . $publication->image) }}" class="object-cover w-full h-full" alt="Image de la publication">                            </div><span>
-                                            <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
-                                                data-nc-id="PostTypeFeaturedIcon"></div>
-                                        </span>
-                                    </a>
-                                    <!-- Icônes de like et de dislike -->
-                                   
-                                  </div>
-                                  {{-- <!-- Placeholder pour les commentaires -->
-                                  <div class="mt-4">
-                                  <input type="text" placeholder="Add your comment..." class="border rounded px-4 py-2 w-full">
-                                  <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2">Comment</button>
-                                  </div> --}}
-                            </div>
-                           
 
-                    </div>
+
+                            </div>
                     @endforeach
                     <div class="flex flex-wrap justify-center mt-4">
                         {{-- Bouton "Previous" --}}
                         @if ($publications->previousPageUrl())
-                            <a href="{{ $publications->previousPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
+                            <a href="{{ $publications->previousPageUrl() }}"
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
                         @else
-                            <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo; Previous</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo;
+                                Previous</span>
                         @endif
-                    
+
                         {{-- Affichage des numéros de page --}}
                         @for ($i = 1; $i <= $publications->lastPage(); $i++)
                             @if ($i == $publications->currentPage())
                                 <span class="px-3 py-1 bg-blue-500 text-white rounded mr-1">{{ $i }}</span>
                             @else
-                                <a href="{{ $publications->url($i) }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
+                                <a href="{{ $publications->url($i) }}"
+                                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
                             @endif
                         @endfor
-                    
+
                         {{-- Bouton "Next" --}}
                         @if ($publications->nextPageUrl())
-                            <a href="{{ $publications->nextPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next &raquo;</a>
+                            <a href="{{ $publications->nextPageUrl() }}"
+                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next &raquo;</a>
                         @else
-                            <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next &raquo;</span>
+                            <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next
+                                &raquo;</span>
                         @endif
                     </div>
                 </div>
 
-                    
+
                 <div class="w-full space-y-7 mt-24 lg:mt-0 lg:w-2/5 lg:pl-10 xl:pl-0 xl:w-1/3 ">
                     <div class="nc-WidgetTags rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"
                         data-nc-id="WidgetTags">
@@ -195,14 +224,15 @@
                                 rel="noopener noreferrer" href="/"></a>
                         </div>
                         <div class="flex flex-wrap p-4 xl:p-5">
-                            @foreach($tags as $tag)
+                            @foreach ($tags as $tag)
                                 <a class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                   href="{{ route('publications.index', ['tag' => $tag->id]) }}">
-                                    {{ $tag->name }} <span class="text-xs font-normal">({{ $tag->publications_count }})</span>
+                                    href="{{ route('publications.index', ['tag' => $tag->id]) }}">
+                                    {{ $tag->name }} <span
+                                        class="text-xs font-normal">({{ $tag->publications_count }})</span>
                                 </a>
                             @endforeach
                         </div>
-                      
+
                     </div>
 
                     <div class="nc-WidgetPosts rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"

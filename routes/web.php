@@ -7,6 +7,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordLinkController;
@@ -68,8 +69,15 @@ Route::get('/pub', [PublicationController::class, 'show']);
 Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
 Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
 Route::put('/pub/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
+
+
+
+
+
 Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
 Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
+Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
+
 
 
 

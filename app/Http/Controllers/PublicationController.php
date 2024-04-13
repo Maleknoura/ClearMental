@@ -14,16 +14,19 @@ class PublicationController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        {
+    { {
             $tags = Tag::all();
             $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(1);
             if ($request->has('tag')) {
                 $tag = Tag::findOrFail($request->tag);
                 $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(1);
             }
-           
-            return view('actuality', compact('publications','tags'));
+            $comments = [];
+            foreach ($publications as $publication) {
+                $comments[$publication->id] = $publication->comments()->latest()->get();
+            }
+
+            return view('actuality', compact('publications', 'tags','comments'));
         }
     }
 
@@ -51,46 +54,46 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-      
+
         $request->validate([
             'Contenu' => 'required',
-            'tags' => 'array', 
+            'tags' => 'array',
             'image' => 'image',
-            'title'=> 'required'
+            'title' => 'required'
         ]);
-    
-       
+
+
         $coachId = auth()->user()->coach()->first()->id;
-    
+
         $image = $request->file('image');
         $imageName = time() . '.' . $image->extension();
         $image->storeAs('/public/images', $imageName);
-     
+
         $publication = Publication::create([
             'Contenu' => $request->Contenu,
             'coach_id' => $coachId,
-            'image'=> $imageName,
-            'title'=> $request->title,
+            'image' => $imageName,
+            'title' => $request->title,
         ]);
-    
-       
+
+
         $publication->tags()->sync($request->tags);
-    
+
         return redirect()->back()
             ->with('success', 'Publication créée avec succès.');
     }
-    
+
 
     /**
      * Display the specified resource.
      */
     public function show()
     {
-      
+
         $tags = Tag::all();
-       
+
         $coachId = auth()->user()->coach()->first()->id;
-  
+
         $publications = Publication::where('coach_id', $coachId)
             ->with('tags')
             ->get();
@@ -115,11 +118,11 @@ class PublicationController extends Controller
         // dd($request);
         $request->validate([
             'Contenu' => 'required',
-            'tags' => 'array', 
+            'tags' => 'array',
             'image' => 'image',
         ]);
-    
-       
+
+
 
         $image = $request->file('image');
         $imageName = time() . '.' . $image->extension();
@@ -127,9 +130,9 @@ class PublicationController extends Controller
 
         $id->update([
             'Contenu' => $request->Contenu,
-           
+
             'image' => $imageName,
-            
+
         ]);
         $id->tags()->sync($request->tags);
 
@@ -140,22 +143,21 @@ class PublicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
-       
+
 
         // Récupérer la publication à supprimer
         $publication = Publication::find($id);
-    
-    
-        
-            // Supprimer les relations dans la table pivot avec les tags
-            $publication->tags()->detach();
-            $publication->delete();
-    
-            // Supprimer la publication
-    
-            return redirect()->back()->with('success', 'La publication a été supprimée avec succès.');
-        
+
+
+
+        // Supprimer les relations dans la table pivot avec les tags
+        $publication->tags()->detach();
+        $publication->delete();
+
+        // Supprimer la publication
+
+        return redirect()->back()->with('success', 'La publication a été supprimée avec succès.');
     }
 }
