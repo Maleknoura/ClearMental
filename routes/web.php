@@ -69,6 +69,8 @@ Route::post('/pub/create', [PublicationController::class, 'store'])->name('publi
 Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
 Route::put('/pub/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
 Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
+Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
+
 
 
 

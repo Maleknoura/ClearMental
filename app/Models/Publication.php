@@ -40,4 +40,9 @@ public function likedByUser($user)
 {
     return $this->likes()->where('user_id', $user->id)->exists();
 }
+
+public function dislikedByUser($user)
+{
+    return $this->likes()->where('user_id', $user->id)->where('type', 'dislike')->exists();
+}
 }

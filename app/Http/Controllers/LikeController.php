@@ -35,6 +35,25 @@ class LikeController extends Controller
         }
     }
 
+    public function dislike($id)
+{
+    $publication = Publication::findOrFail($id);
+    $user = auth()->user();
+    
+   
+    if ($publication->likedByUser($user)) {
+        
+        $publication->likes()->where('user_id', $user->id)->delete();
+    }
+   
+    $publication->likes()->create([
+        'user_id' => $user->id,
+        'type' => 'dislike',
+    ]);
+
+    return redirect()->back()->with('success', 'Publication disliked successfully');
+}
+
     /**
      * Show the form for creating a new resource.
      */

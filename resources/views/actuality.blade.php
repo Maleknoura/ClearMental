@@ -101,18 +101,30 @@
                                                 </div>
                                                 <div class="flex items-center space-x-2">
                                                     <!-- Icône de like -->
-                                                    <form action="{{ route('publication.like', $publication->id) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit">
-                                                            @if (Auth::check() && $publication->likedByUser(Auth::user()))
-                                                                <i class="fas fa-thumbs-up text-black"></i>
-                                                            @else
-                                                                <i class="far fa-thumbs-up"></i>
-                                                            @endif
-                                                        </button>
-                                                    </form>
-                                                    <!-- Icône de dislike -->
-                                                    <i class="far fa-thumbs-down"></i>
+                                                   <!-- Icône de like -->
+<form action="{{ route('publication.like', $publication->id) }}" method="POST">
+    @csrf
+    <button type="submit">
+        @if (Auth::check() && $publication->likedByUser(Auth::user()))
+            <i class="fas fa-thumbs-up text-black"></i>
+        @else
+            <i class="far fa-thumbs-up"></i>
+        @endif
+    </button>
+</form>
+
+<!-- Icône de dislike -->
+<form action="{{ route('publication.dislike', $publication->id) }}" method="POST">
+    @csrf
+    <button type="submit">
+        @if (Auth::check() && $publication->dislikedByUser(Auth::user()))
+            <i class="fas fa-thumbs-down text-black"></i>
+        @else
+            <i class="far fa-thumbs-down"></i>
+        @endif
+    </button>
+</form>
+
                                                 </div>
                                                 <span
                                                     class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">By {{ $publication->coach->user->name }}</span>
