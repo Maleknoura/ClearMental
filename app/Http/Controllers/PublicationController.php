@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publication;
+use App\Models\User;
+
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -15,10 +17,10 @@ class PublicationController extends Controller
     {
         {
             $tags = Tag::all();
-            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(2);
+            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(1);
             if ($request->has('tag')) {
                 $tag = Tag::findOrFail($request->tag);
-                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(2);
+                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(1);
             }
            
             return view('actuality', compact('publications','tags'));
@@ -54,10 +56,11 @@ class PublicationController extends Controller
             'Contenu' => 'required',
             'tags' => 'array', 
             'image' => 'image',
+            'title'=> 'required'
         ]);
     
        
-        $coach_id = auth()->user()->coach->id;
+        $coachId = auth()->user()->coach()->first()->id;
     
         $image = $request->file('image');
         $imageName = time() . '.' . $image->extension();
@@ -65,8 +68,9 @@ class PublicationController extends Controller
      
         $publication = Publication::create([
             'Contenu' => $request->Contenu,
-            'coach_id' => $coach_id,
+            'coach_id' => $coachId,
             'image'=> $imageName,
+            'title'=> $request->title,
         ]);
     
        
@@ -84,8 +88,8 @@ class PublicationController extends Controller
     {
       
         $tags = Tag::all();
-        $coachId = auth()->user()->coach->id;
-
+       
+        $coachId = auth()->user()->coach()->first()->id;
   
         $publications = Publication::where('coach_id', $coachId)
             ->with('tags')

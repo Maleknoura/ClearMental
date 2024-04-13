@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('Contenu');
             $table->string('image')->nullable();
             $table->enum('statut', [ 'publié', 'en attente'])->default('en attente');

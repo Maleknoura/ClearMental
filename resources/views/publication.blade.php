@@ -89,6 +89,10 @@
                 <label for="Contenu" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                 <input type="text" name="Contenu" id="Contenu" class="form-input" placeholder="Enter book title" required>
             </div>
+            <div class="col-span-2">
+                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                <input type="text" name="title" id="title" class="form-input"  placeholder="Enter publication content" required>
+            </div>
             <div>
                 <label for="tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags</label>
                 <select name="tags[]" id="tags" class="form-multiselect" multiple>
@@ -101,7 +105,7 @@
                 <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
                 <input type="file" name="image" id="image" class="form-input" accept="image/*">
             </div>
-            <input type="hidden" name="coach_id" value="{{ auth()->user()->coach->id }}">
+            <input type="hidden" name="coach_id" value="{{ auth()->user()->coach->first()->id }} ">
 
         </div>
         <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
@@ -164,7 +168,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                              @endforeach
+                           
                             </tbody>
                         </table>
                     </div>
@@ -196,10 +200,14 @@
                     <input type="hidden" name="publication_id" value="{{ $publication->id }}">
 
                     <div class="grid gap-4 mb-4 grid-cols-2">
-                        <div class="col-span-2">
-                            <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-                            <input type="text" name="Contenu" id="content" class="form-input" value="{{ $publication->Contenu }}" placeholder="Enter publication content" required>
-                        </div>
+                            <div class="col-span-2">
+                                <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                                <input type="text" name="Contenu" id="content" class="form-input" value="{{ $publication->Contenu }}" placeholder="Enter publication content" required>
+                            </div>
+                            <div class="col-span-2">
+                                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                                <input type="text" name="title" id="title" class="form-input" value="{{ $publication->title }}" placeholder="Enter publication content" required>
+                            </div>
                         <div>
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
                             <input type="file" name="image" id="image" class="form-input" accept="image/*">
@@ -223,7 +231,7 @@
             </div>
         </div>
     </div>
-    
+    @endforeach
     
 </div>
 </div>

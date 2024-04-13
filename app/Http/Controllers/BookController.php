@@ -81,7 +81,14 @@ class BookController extends Controller
     {
         //
     }
-
+    public function searchBooks(Request $request)
+    {
+        $query = $request->input('query');
+    
+        $bookData = $this->getBookData($query);
+    
+        return response()->json($bookData);
+    }
     /**
      * Store a newly created resource in storage.
      */

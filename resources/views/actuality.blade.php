@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link rel="stylesheet" href="{{ asset('css/actuality.css') }}">
 
 
@@ -83,12 +85,10 @@
                                                 class="nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
                                                 <a class="line-clamp-2"
                                                     title="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities"
-                                                    href="/blog-single">Microsoft announces a five-year commitment to
-                                                    create
-                                                    bigger opportunities for people with disabilities</a>
+                                                    href="/blog-single">  {{ $publication->title }}</a>
                                             </h2>
                                             <div class="hidden sm:block sm:mt-2"><span
-                                                    class="text-neutral-500 dark:text-neutral-400 text-base line-clamp-1">{{ substr($publication->Contenu, 0, 150) }}</span>
+                                                    class="text-neutral-500 dark:text-neutral-400 text-base ">{{ $publication->Contenu}}</span>
                                             </div>
                                         </div>
                                         <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
@@ -99,12 +99,28 @@
                                                     class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
                                                    <span class="wil-avatar__name">P</span>
                                                 </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <!-- Icône de like -->
+                                                    <form action="{{ route('publication.like', $publication->id) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit">
+                                                            @if (Auth::check() && $publication->likedByUser(Auth::user()))
+                                                                <i class="fas fa-thumbs-up text-black"></i>
+                                                            @else
+                                                                <i class="far fa-thumbs-up"></i>
+                                                            @endif
+                                                        </button>
+                                                    </form>
+                                                    <!-- Icône de dislike -->
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </div>
                                                 <span
                                                     class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">By {{ $publication->coach->user->name }}</span>
                                             </a><span
                                                 class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
                                                 class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">AT {{ $publication->created_at->format('Y-m-d H:i:s') }}</span>
-                                        </div>
+                                        
+                                            </div>
                                     </div>
                                 </div>
                                 <div
@@ -115,10 +131,17 @@
                                             <div class="nc-PostTypeFeaturedIcon absolute left-2 bottom-2"
                                                 data-nc-id="PostTypeFeaturedIcon"></div>
                                         </span>
-                                    </a></div>
+                                    </a>
+                                    <!-- Icônes de like et de dislike -->
+                                   
+                                  </div>
+                                  {{-- <!-- Placeholder pour les commentaires -->
+                                  <div class="mt-4">
+                                  <input type="text" placeholder="Add your comment..." class="border rounded px-4 py-2 w-full">
+                                  <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2">Comment</button>
+                                  </div> --}}
                             </div>
                            
-
 
                     </div>
                     @endforeach
@@ -167,46 +190,7 @@
                                 </a>
                             @endforeach
                         </div>
-                        {{-- </div><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Health<span class="text-xs font-normal">
-                                    (4)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Electronics<span class="text-xs font-normal">
-                                    (7)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Industrial<span class="text-xs font-normal">
-                                    (26)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Health<span class="text-xs font-normal">
-                                    (20)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Toys<span class="text-xs font-normal">
-                                    (22)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Sports<span class="text-xs font-normal">
-                                    ()</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Automotive<span class="text-xs font-normal">
-                                    (9)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Computers<span class="text-xs font-normal">
-                                    (26)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Design<span class="text-xs font-normal">
-                                    (15)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Beauty<span class="text-xs font-normal">
-                                    (27)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Books<span class="text-xs font-normal">
-                                    (25)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">life Style<span class="text-xs font-normal">
-                                    (18)</span></a><a
-                                class="nc-Tag inline-block bg-white text-sm text-neutral-6000 dark:text-neutral-300 py-2 px-3 rounded-lg border border-neutral-100 md:py-2.5 md:px-4 dark:bg-neutral-700 dark:border-neutral-700 hover:border-neutral-200 dark:hover:border-neutral-6000 mr-2 mb-2"
-                                data-nc-id="Tag" href="/">Graphic Design<span class="text-xs font-normal">
-                                    (25)</span></a></div> --}}
+                      
                     </div>
 
                     <div class="nc-WidgetPosts rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-800"

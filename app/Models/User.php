@@ -61,11 +61,11 @@ class User extends Authenticatable
 
    public function coach()
     {
-        return $this->hasOne(Coach::class);
+        return $this->hasMany(Coach::class);
     }
 
     public function client()
     {
-        return $this->hasOne(Client::class);
+        return $this->hasMany(Client::class);
     }
 }

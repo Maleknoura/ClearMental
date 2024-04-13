@@ -15,6 +15,7 @@ class Publication extends Model
         'image',
         'statut',
         'coach_id',
+        'title',
     ];
 
     public function coach()
@@ -29,4 +30,14 @@ class Publication extends Model
     {
         return $this->belongsToMany(Tag::class,'tag_publication');
     }
+
+    public function likes()
+{
+    return $this->hasMany(Like::class);
+}
+
+public function likedByUser($user)
+{
+    return $this->likes()->where('user_id', $user->id)->exists();
+}
 }

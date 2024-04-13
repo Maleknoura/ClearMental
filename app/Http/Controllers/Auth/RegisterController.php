@@ -55,10 +55,10 @@ use App\Models\User;
                 'role' => $request->role,
             ]);
 
-            // Authentification de l'utilisateur
+       
             Auth::login($user);
 
-            // Attribution du rôle en fonction du type d'utilisateur
+        
             if (User::count() === 1) {
                 $user->assignRole('admin');
             } elseif ($request->role === 'coach') {
@@ -75,7 +75,7 @@ use App\Models\User;
                 ]);
             }
 
-            // Redirection vers la page de connexion
+          
             return redirect('/login');
         }
 

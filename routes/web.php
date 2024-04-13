@@ -11,6 +11,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
@@ -38,6 +39,7 @@ Route::post('/coach/book', [ReservationController::class, 'store'])->name('reser
 
 
 Route::get('/library', [BookController::class, 'index']);
+Route::get('/search-books', [BookController::class, 'searchBooks'])->name('search.books');
 
 
 
@@ -66,6 +68,7 @@ Route::get('/pub', [PublicationController::class, 'show']);
 Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
 Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
 Route::put('/pub/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
+Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
 
 
 
