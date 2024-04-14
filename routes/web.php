@@ -40,7 +40,7 @@ Route::post('/coach/book', [ReservationController::class, 'store'])->name('reser
 
 
 Route::get('/library', [BookController::class, 'index']);
-Route::get('/search-books', [BookController::class, 'searchBooks'])->name('search.books');
+Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
 
 
 

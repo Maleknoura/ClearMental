@@ -292,7 +292,7 @@
                         </div>
                         <div>
                             <label for="numbre_of_page" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of Pages</label>
-                            <input type="number" name="numbre_of_page" id="numbre_of_page" class="form-input" placeholder="Enter number of pages" required>
+                            <input type="text" name="auteur" id="auteur" class="form-input" placeholder="Enter number of pages" required>
                         </div>
                     </div>
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">

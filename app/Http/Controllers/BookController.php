@@ -54,6 +54,15 @@ class BookController extends Controller
                      $bookData[] = $bookInfo;
                  }
  
+                 foreach ($bookData as $bookInfo) {
+                    $truncatedContent = substr($bookInfo['description'], 0, 255); 
+                    Book::create([
+                        'title' => $bookInfo['title'],
+                        'auteur' => $bookInfo['authors'],
+                        'content' => $truncatedContent,
+                      
+                    ]);
+                }
                  return $bookData;
              } else {
                  return null;
@@ -65,7 +74,7 @@ class BookController extends Controller
  
     public function index()
     {
-        $bookData = $this->getBookData("SPERITUALITE");
+        $bookData = $this->getBookData("Personal development");
       
         $booksWithImages = array_filter($bookData, function ($book) {
             return isset($book['thumbnail']) && $book['thumbnail'] != '';
@@ -81,14 +90,16 @@ class BookController extends Controller
     {
         //
     }
-    public function searchBooks(Request $request)
-    {
-        $query = $request->input('query');
-    
-        $bookData = $this->getBookData($query);
-    
-        return response()->json($bookData);
-    }
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    $filteredBooks = Book::where('title', 'like', "%$query%")
+                         ->orWhere('auteur', 'like', "%$query%")
+                         ->get();
+
+    return view('library', ['bookData' => $filteredBooks]);
+}
     /**
      * Store a newly created resource in storage.
      */
@@ -98,7 +109,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'numbre_of_page' => 'required|numeric',
+            'auteur' => 'required',
          
         ]);
     // dd($request);
@@ -106,7 +117,7 @@ class BookController extends Controller
         Book::create([
             'title' => $request->title,
             'content' => $request->content,
-            'numbre_of_page' => $request->numbre_of_page,
+            'auteur' => $request->auteur,
            
         ]);
     

@@ -63,10 +63,23 @@ class CommentaireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Commentaire $commentaire)
+    public function update(Request $request, Commentaire $comment)
     {
-        //
+        $request->validate([
+            'content' => 'required|string|max:255',
+        ]);
+    
+        if ($comment->user_id != auth()->user()->id) {
+            return back()->with('error', 'You are not authorized to update this comment.');
+        }
+    
+        $comment->update([
+            'content' => $request->content,
+        ]);
+    
+        return back()->with('success', 'Comment updated successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
