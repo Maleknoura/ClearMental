@@ -152,7 +152,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="titlepage text_align_center">
-                                            <h2>What is Says Customers</h2>
+                                            <h2>About Us</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -172,23 +172,14 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-2 col-sm-8">
                                                     <div class="pro_file">
-                                                        <i><img src="images/test2.png" alt="#" /></i>
-                                                        <h4>English.Many</h4>
-                                                        <span>normal distribution</span>
+                                                    
+                                                        <h4>Notre Mission</h4>
+                                                      
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="test_box text_align_left">
-                                                        <p>Contrary to popular belief, Lorem Ipsum is not simply
-                                                            random text. It has
-                                                            roots in a piece of classical Latin literature from 45
-                                                            BC, making it
-                                                            over
-                                                            2000 years old. Richard McClintock, a Latin professor at
-                                                            Hampden-Sydney
-                                                            College in Virginia, looked up one of the more obscure
-                                                            Latin words,
-                                                            consectetur, from a Lorem Ipsum passage, and going </p>
+                                                        <p>Notre mission est d'inspirer et d'accompagner les individus dans leur voyage de croissance personnelle et de développement. Nous croyons fermement en le potentiel de chacun à atteindre ses objectifs et à vivre une vie épanouissante et alignée avec ses valeurs les plus profondes </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,23 +192,14 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-2 col-sm-8">
                                                     <div class="pro_file">
-                                                        <i><img src="images/test2.png" alt="#" /></i>
-                                                        <h4>English.Many</h4>
-                                                        <span>normal distribution</span>
+                                                    
+                                                        <h4>Notre Équipe de Coachs</h4>
+                                                      
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="test_box text_align_left">
-                                                        <p>Contrary to popular belief, Lorem Ipsum is not simply
-                                                            random text. It has
-                                                            roots in a piece of classical Latin literature from 45
-                                                            BC, making it
-                                                            over
-                                                            2000 years old. Richard McClintock, a Latin professor at
-                                                            Hampden-Sydney
-                                                            College in Virginia, looked up one of the more obscure
-                                                            Latin words,
-                                                            consectetur, from a Lorem Ipsum passage, and going </p>
+                                                        <p>Rencontrez notre équipe de coachs dévoués et expérimentés, prêts à vous guider à chaque étape de votre cheminement personnel. Ils sont là pour vous écouter, vous soutenir et vous motiver à surmonter les défis et à réaliser vos rêves. Ensemble, nous sommes là pour vous aider à atteindre votre plein potentiel </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -230,23 +212,14 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-2 col-sm-8">
                                                     <div class="pro_file">
-                                                        <i><img src="images/test2.png" alt="#" /></i>
-                                                        <h4>English.Many</h4>
-                                                        <span>normal distribution</span>
+                                                   
+                                                        <h4>Notre Histoire</h4>
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="test_box text_align_left">
-                                                        <p>Contrary to popular belief, Lorem Ipsum is not simply
-                                                            random text. It has
-                                                            roots in a piece of classical Latin literature from 45
-                                                            BC, making it
-                                                            over
-                                                            2000 years old. Richard McClintock, a Latin professor at
-                                                            Hampden-Sydney
-                                                            College in Virginia, looked up one of the more obscure
-                                                            Latin words,
-                                                            consectetur, from a Lorem Ipsum passage, and going </p>
+                                                        <p>Notre histoire commence avec une passion partagée pour le développement personnel et le bien-être. Fondée par un groupe de professionnels passionnés, notre entreprise est née de la conviction que chacun mérite d'avoir accès aux outils et aux ressources nécessaires pour créer une vie significative et épanouissante. Depuis lors, nous avons travaillé sans relâche pour offrir des programmes et des services de qualité supérieure à notre communauté, en nous engageant à être une source d'inspiration et de transformation pour tous ceux qui franchissent nos portes</p>
                                                     </div>
                                                 </div>
                                             </div>
