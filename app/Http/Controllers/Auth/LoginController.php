@@ -28,8 +28,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $user = User::find(Auth::id());
-            if($user->hasRole("admin")) return redirect()->intended('/dashboard');
-            elseif ($user->hasRole("coach")) return redirect()->intended('/dashboardcoach');
+            if($user->assignRole("admin")) return redirect()->intended('/dashboard');
+            elseif ($user->assignRole("coach")) return redirect()->intended('/dashboardcoach');
             else return redirect()->intended('/');
             return redirect('/');
         }

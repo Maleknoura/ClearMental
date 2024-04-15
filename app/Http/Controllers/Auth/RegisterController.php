@@ -59,19 +59,17 @@ use App\Models\User;
             Auth::login($user);
 
         
-            if (User::count() === 1) {
+            if ($user->role === "admin") {
                 $user->assignRole('admin');
             } elseif ($request->role === 'coach') {
                 $user->assignRole('coach');
                 Coach::create([
                     'user_id' => $user->id,
-                 
                 ]);
-            } else {
+            } elseif ($user->role === "client") {
                 $user->assignRole('client');
                 Client::create([
                     'user_id' => $user->id,
-                 
                 ]);
             }
 

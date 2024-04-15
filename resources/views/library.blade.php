@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="stylesheet" href="{{ asset('css/actuality.css') }}">
@@ -21,17 +22,13 @@
                     <div class="navbar-area">
                         <nav class="site-navbar">
                             <div class="logo">
-                                <img src="/images/logo.png" alt="" width="80px" height="140px">
+                                <img src="/images/logo.png" alt="" width="100px" height="170px">
                             </div>
                             <ul>
                                 <li><a class="active" href="">Home</a></li>
                                 <li><a href="">Actuality</a></li>
                                 <li><a href="">Library</a></li>
 
-                                {{-- <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-user"
-                                            aria-hidden="true"></i></a></li>
-                                <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
-                                            aria-hidden="true"></i></a></li> --}}
                             </ul>
                             <ul>
                                 <li><a href=""><a href="Javascript:void(0)"><i class="fa fa-user"
@@ -48,142 +45,151 @@
             </div>
         </div>
     </header>
-    {{-- <div class="grid grid-cols-1 gap-6 justify-center mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
-        <!-- Première carte -->
-        <div class="relative group">
-            <div class="overflow-hidden aspect-w-1 aspect-h-1">
-                <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-                    src="URL_DE_VOTRE_IMAGE" alt="Image du livre" />
-            </div>
-            <div class="absolute left-3 top-3">
-                <p
-                    class="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-gray-900 rounded-full">
-                    Nouveau</p>
-            </div>
-            <div class="flex items-start justify-between mt-2 space-x-2">
-                <div>
-                    <h3 class="text-[10px] font-bold text-gray-900 sm:text-sm md:text-base">
-                        <a href="#" title="Titre du livre">
-                            Titre du livre
-                            <span class="absolute inset-0" aria-hidden="true"></span>
-                        </a>
-                    </h3>
-                    <p class="text-[10px] text-gray-500">Nom de l'écrivain</p>
-                    <p class="text-[10px] text-gray-500">Petite description du livre</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-[10px] font-bold text-gray-900 sm:text-sm md:text-base">$XX.XX</p>
-                    <del class="mt-0.5 text-[9px] sm:text-sm font-bold text-gray-500"> $XX.XX </del>
-                </div>
-            </div>
-
-            <!-- Deuxième carte -->
-            <div class="relative group">
-                <div class="overflow-hidden aspect-w-1 aspect-h-1">
-                    <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-                        src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-3.png"
-                        alt="" />
-                </div>
-                <div class="absolute left-3 top-3">
-                    <p
-                        class="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-gray-900 rounded-full">
-                        Sale
-                    </p>
-                </div>
-                <div class="flex items-start justify-between mt-2 space-x-2">
-                    <div>
-                        <h3 class="text-[10px] font-bold text-gray-900 sm:text-sm md:text-base">
-                            <a href="#" title="">
-                                Beylob 90 Speaker
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                            </a>
-                        </h3>
-                        <div class="flex items-center mt-1 space-x-1">
-                            <svg class="w-2 h-3 text-gray-300 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <!-- Ajoutez les autres icônes ici -->
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] font-bold text-gray-900 sm:text-sm md:text-base">$49.00</p>
-                        <del class="mt-0.5 text-[9px] sm:text-sm font-bold text-gray-500"> $99.00 </del>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Troisième carte -->
-            <div class="relative group">
-                <div class="overflow-hidden aspect-w-1 aspect-h-1">
-                    <img class="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-                        src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-3.png"
-                        alt="" />
-                </div>
-                <div class="absolute left-3 top-3">
-                    <p
-                        class="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-gray-900 rounded-full">
-                        Sale
-                    </p>
-                </div>
-                <div class="flex items-start justify-between mt-2 space-x-2">
-                    <div>
-                        <h3 class="text-[10px] font-bold text-gray-900 sm:text-sm md:text-base">
-                            <a href="#" title="">
-                                Beylob 90 Speaker
-                                <span class="absolute inset-0" aria-hidden="true"></span>
-                            </a>
-                        </h3>
-                        <div class="flex items-center mt-1 space-x-1">
-                            <svg class="w-2 h-3 text-gray-300 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <!-- Ajoutez les autres icônes ici -->
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] font-bold text-gray-900 sm:text-sm md:text-base">$49.00</p>
-                        <del class="mt-0.5 text-[9px] sm:text-sm font-bold text-gray-500"> $99.00 </del>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-
-
-    <!-- resources/views/books/index.blade.php -->
-<div class="flex justify-between items-center mb-4">
-    {{-- Barre de recherche --}}
-    <form action="{{ route('books.search') }}" method="GET" class="relative ml-auto">
-        <input type="text" name="query" class="border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:border-blue-500" placeholder="Rechercher...">
-        <button class="absolute top-0 right-0 mt-2 mr-3 text-gray-600" type="submit">
-            <svg class="h-5 w-5 ml-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m-.45-.45a8 8 0 111.42-1.42l4.35 4.35zm-8-6a4 4 0 100-8 4 4 0 000 8z"></path>
-            </svg>
-        </button>
-    </form>
+    <div class="flex justify-between flex-end mb-4">
+    <div class="search-bar">
+        <form method="POST" action="{{ route('search') }}">
+            @csrf
+            <input type="text" name="query" placeholder="Search by title or author" class="search-input">
+            {{-- <button type="submit">Search</button> --}}
+        </form>
+    </div>
 </div>
-
 {{-- Espace vide pour l'alignement --}}
-<div></div>
+<div id="search-results"></div>
 
-<div class="flex flex-wrap -mx-4">
+<div class="flex flex-wrap mx-4">
     @foreach ($bookData as $book)
-        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="{{ $book['thumbnail'] }}" alt="Couverture du livre" class="w-full mb-4 rounded">
-                <h2 class="text-lg font-semibold">{{ $book['title'] }}</h2>
-                <p class="text-sm text-gray-600">{{ $book['authors'] }}</p>
-                <p class="text-sm text-gray-700 mt-2">{{ substr($book['description'], 0, 100) }}</p>
+        <div class="w-full sm:w-1/2 m-7 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">
+            <div class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+                <div class="relative pb-48 overflow-hidden">
+                    <img class="absolute inset-0 h-full w-full object-cover" src="{{ $book['image'] }}">
+                </div>
+                <div class="p-4">
+                    <h2 class="mt-2 mb-2  font-bold">{{ $book['title'] }}</h2>
+                    <p class="text-sm">{{ substr($book['description'], 0, 100) }}</p>
+                    <div class="mt-3 flex items-center">
+                        <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">{{ $book['authors'] }}</span>&nbsp;<span class="text-sm font-semibold"></span>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-b text-xs text-gray-700">
+                    <span class="flex items-center mb-1">
+                        <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> 
+                    </span>
+                
+                        
+                 
+                </div>
             </div>
         </div>
-    @endforeach
-</div>
+    @endforeach 
+
+            <div class="flex flex-wrap justify-center mt-4">
+                          
+                          
+                                @if ($bookData->previousPageUrl())
+                                    <a href="{{ $bookData->previousPageUrl() }}"
+                                        class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
+                                @else
+                                    <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo;
+                                        Previous</span>
+                                @endif
+                            
+                            
+                                @for ($i = 1; $i <= $bookData->lastPage(); $i++)
+                                    @if ($i == $bookData->currentPage())
+                                        <span class="px-3 py-1 bg-purple-500 text-white rounded mr-1">{{ $i }}</span>
+                                    @else
+                                        <a href="{{ $bookData->url($i) }}"
+                                            class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
+                                    @endif
+                                @endfor
+                            
+                         
+                                @if ($bookData->nextPageUrl())
+                                    <a href="{{ $bookData->nextPageUrl() }}"
+                                        class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next &raquo;</a>
+                                @else
+                                    <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next
+                                        &raquo;</span>
+                                @endif
+                            </div>
+                            
 
 
+<script>
+ let searchInput = document.querySelector('.search-input');
+let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+let searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('keyup', (event) => {
+    sendRequest(event.target.value);
+});
+
+function sendRequest(query) {
+    const url = "{{ route('search') }}";
+
+    const data = {
+        _token: token,
+        query: query
+    };
+
+    const options = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': "application/json, text-plain ",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": token
+        },
+        method: 'POST',
+        body: JSON.stringify(data)
+    };
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => displayResults(data))
+        .catch(error => console.error(error));
+}
+
+function displayResults(books) {
+    searchResults.innerHTML = '';
+
+    if (books.length === 0) {
+        searchResults.innerHTML = '<p>No results found</p>';
+        return;
+    }
+    const flexContainer = document.createElement('div');
+flexContainer.classList.add('flex', 'flex-wrap', 'mx-4');
+
+
+    books.forEach(book => {
+        const bookDiv = document.createElement('div');
+        bookDiv.classList.add('w-full', 'sm:w-1/2', 'm-7', 'md:w-1/3', 'lg:w-1/4', 'xl:w-1/5', 'px-4', 'mb-4');
+        bookDiv.innerHTML = `
+            <div class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+                <div class="relative pb-48 overflow-hidden">
+                    <img class="absolute inset-0 h-full w-full object-cover" src="${book.image }">
+                </div>
+                <div class="p-4">
+                    <h2 class="mt-2 mb-2  font-bold">${book.title}</h2>
+                    <p class="text-sm">${book.content}/p>
+                    <div class="mt-3 flex items-center">
+                        <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">${book.auteur}</span>&nbsp;<span class="text-sm font-semibold"></span>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-b text-xs text-gray-700">
+                    <span class="flex items-center mb-1">
+                        <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        `;
+
+        searchResults.appendChild(bookDiv);
+    });
+}
+</script>
 </body>
 
 </html>

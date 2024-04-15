@@ -18,6 +18,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\videocallController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +41,13 @@ Route::post('/coach/book', [ReservationController::class, 'store'])->name('reser
 
 
 Route::get('/library', [BookController::class, 'index']);
-Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
+// Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
 
 
 
 
 Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
 
-Route::get('/dashboard', [dashboardController::class, 'index']);
 Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
 Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
 Route::put('/tags/edit/{tag}', [TagController::class, 'update']);
@@ -100,7 +100,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/register', [RegisterController::class, 'store']);
 
-    Route::get('/login', [LoginController::class, 'login']);
+     Route::get('/login', [LoginController::class, 'login']);
     Route::post('/login', [LoginController::class, 'store']);
 });
 // Route::middleware(['auth'])->group(function () {
@@ -126,3 +126,16 @@ Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordControlle
 Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showForm'])->name('password.reset');
 
 Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
+
+Route::post('/search', [BookController::class, 'search'])->name('search');
+
+
+Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
+    Route::get('/dashboard', [dashboardController::class, 'index']);
+    Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
+    Route::put('/tags/edit/{tag}', [TagController::class, 'update']);
+    Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
+    Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
+    Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
+});

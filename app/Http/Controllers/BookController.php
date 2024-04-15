@@ -14,73 +14,72 @@ class BookController extends Controller
      */
 
 
-     public function getBookData($query)
-     {
-         $url = "https://www.googleapis.com/books/v1/volumes?q=" . urlencode($query);
+    //  public function getBookData($query)
+    //  {
+    //      $url = "https://www.googleapis.com/books/v1/volumes?q=" . urlencode($query);
  
-         $response = Http::get($url);
+    //      $response = Http::get($url);
  
-         if ($response->successful()) {
-             $data = $response->json();
+    //      if ($response->successful()) {
+    //          $data = $response->json();
  
-             if (isset($data['items'])) {
-                 $books = $data['items'];
+    //          if (isset($data['items'])) {
+    //              $books = $data['items'];
  
-                 $bookData = [];
+    //              $bookData = [];
  
-                 foreach ($books as $book) {
-                     $bookInfo = [];
+    //              foreach ($books as $book) {
+    //                  $bookInfo = [];
  
-                     $bookInfo['title'] = $book['volumeInfo']['title'];
+    //                  $bookInfo['title'] = $book['volumeInfo']['title'];
  
-                     if (isset($book['volumeInfo']['authors'])) {
-                         $bookInfo['authors'] = implode(", ", $book['volumeInfo']['authors']);
-                     } else {
-                         $bookInfo['authors'] = "Auteur inconnu";
-                     }
+    //                  if (isset($book['volumeInfo']['authors'])) {
+    //                      $bookInfo['authors'] = implode(", ", $book['volumeInfo']['authors']);
+    //                  } else {
+    //                      $bookInfo['authors'] = "Auteur inconnu";
+    //                  }
  
-                     if (isset($book['volumeInfo']['description'])) {
-                         $bookInfo['description'] = $book['volumeInfo']['description'];
-                     } else {
-                         $bookInfo['description'] = "Pas de description disponible";
-                     }
+    //                  if (isset($book['volumeInfo']['description'])) {
+    //                      $bookInfo['description'] = $book['volumeInfo']['description'];
+    //                  } else {
+    //                      $bookInfo['description'] = "Pas de description disponible";
+    //                  }
  
-                     if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
-                         $bookInfo['thumbnail'] = $book['volumeInfo']['imageLinks']['thumbnail'];
-                     } else {
-                         $bookInfo['thumbnail'] = "Pas d'image de couverture disponible";
-                     }
+    //                  if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
+    //                      $bookInfo['thumbnail'] = $book['volumeInfo']['imageLinks']['thumbnail'];
+    //                  } else {
+    //                      $bookInfo['thumbnail'] = "Pas d'image de couverture disponible";
+    //                  }
  
-                     $bookData[] = $bookInfo;
-                 }
+    //                  $bookData[] = $bookInfo;
+    //              }
  
-                 foreach ($bookData as $bookInfo) {
-                    $truncatedContent = substr($bookInfo['description'], 0, 255); 
-                    Book::create([
-                        'title' => $bookInfo['title'],
-                        'auteur' => $bookInfo['authors'],
-                        'content' => $truncatedContent,
+    //              foreach ($bookData as $bookInfo) {
+    //                 $truncatedContent = substr($bookInfo['description'], 0, 255); 
+    //                 Book::create([
+    //                     'title' => $bookInfo['title'],
+    //                     'auteur' => $bookInfo['authors'],
+    //                     'content' => $truncatedContent,
+    //                     'image'=>  $bookInfo['thumbnail'],
                       
-                    ]);
-                }
-                 return $bookData;
-             } else {
-                 return null;
-             }
-         } else {
-             return null;
-         }
-     }
+    //                 ]);
+    //             }
+    //              return $bookData;
+    //          } else {
+    //              return null;
+    //          }
+    //      } else {
+    //          return null;
+    //      }
+    //  }
  
     public function index()
     {
-        $bookData = $this->getBookData("Personal development");
-      
-        $booksWithImages = array_filter($bookData, function ($book) {
-            return isset($book['thumbnail']) && $book['thumbnail'] != '';
-        });
+        // $bookData = $this->getBookData("Personal development");
+      $bookData = Book::paginate(8);
+       
 
-        return view('library', ['bookData' => $booksWithImages]);
+        return view('library', ['bookData' => $bookData]);
     }
 
     /**
@@ -90,26 +89,38 @@ class BookController extends Controller
     {
         //
     }
-    public function search(Request $request)
+//     public function search(Request $request)
+// {
+//     $query = $request->input('query');
+
+//     $filteredBooks = Book::where('title', 'like', "%$query%")
+//                          ->orWhere('auteur', 'like', "%$query%")
+//                          ->get();
+
+//     return view('library', ['bookData' => $filteredBooks]);
+// }
+
+public function search(Request $request)
 {
     $query = $request->input('query');
 
     $filteredBooks = Book::where('title', 'like', "%$query%")
-                         ->orWhere('auteur', 'like', "%$query%")
-                         ->get();
+        ->orWhere('auteur', 'like', "%$query%")
+        ->get();
 
-    return view('library', ['bookData' => $filteredBooks]);
+    return response()->json($filteredBooks);
 }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // Valider les données du formulaire
+      
         $request->validate([
             'title' => 'required',
             'content' => 'required',
             'auteur' => 'required',
+            'image'=> 'required',
          
         ]);
     // dd($request);
@@ -118,6 +129,9 @@ class BookController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'auteur' => $request->auteur,
+            'image' => $request->image,
+
+            
            
         ]);
     
