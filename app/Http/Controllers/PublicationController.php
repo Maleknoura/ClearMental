@@ -25,8 +25,8 @@ class PublicationController extends Controller
             foreach ($publications as $publication) {
                 $comments[$publication->id] = $publication->comments()->latest()->get();
             }
-
-            return view('actuality', compact('publications', 'tags','comments'));
+            $popularpublications = Publication::withCount('likes')->orderByDesc('likes_count')->take(3)->get();
+            return view('actuality', compact('publications', 'tags', 'comments', 'popularpublications'));
         }
     }
 

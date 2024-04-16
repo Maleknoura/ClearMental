@@ -194,7 +194,7 @@
                         {{-- Affichage des numéros de page --}}
                         @for ($i = 1; $i <= $publications->lastPage(); $i++)
                             @if ($i == $publications->currentPage())
-                                <span class="px-3 py-1 bg-blue-500 text-white rounded mr-1">{{ $i }}</span>
+                                <span class="px-3 py-1 bg-purple-400 text-white rounded mr-1">{{ $i }}</span>
                             @else
                                 <a href="{{ $publications->url($i) }}"
                                     class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
@@ -253,40 +253,31 @@
                                     <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
                                         data-nc-id="PostCardMeta"><a
                                             class="flex-shrink-0 relative flex items-center space-x-2" href="/author">
-                                            <div
-                                                class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                                                <img class="absolute inset-0 w-full h-full object-cover rounded-full"
-                                                    src="./static/media/Image-5.b1088376a574bcedc983.png"
-                                                    alt="Tousy Vita"><span class="wil-avatar__name">T</span>
-                                            </div>
+                                            @foreach ($popularpublications as $popularpublication)
                                             <span
-                                                class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">Tousy
-                                                Vita</span>
+                                                class="block text-neutral-6000 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">{{ $popularpublication->auteur }}</span>
                                         </a><span
                                             class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
-                                            class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">May
-                                            20, 2021</span></div>
+                                            class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">{{ $popularpublication->created_at->formatLocalized('%d %B %Y') }}</span></div>
                                     <h2
                                         class="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100">
                                         <a class=" line-clamp-2"
                                             title="New tools for Black pregnant and postpartum mothers to save lives"
-                                            href="/blog-single">New tools for Black pregnant and postpartum mothers to
-                                            save lives</a>
+                                            href="/blog-single">{{ $popularpublication->title }}</a>
                                     </h2>
                                 </div><a title="New tools for Black pregnant and postpartum mothers to save lives"
                                     class="block sm:w-20 flex-shrink-0 relative rounded-lg overflow-hidden mb-5 sm:ml-4 sm:mb-0 group"
                                     href="/blog-single">
                                     <div class="w-full h-0 aspect-w-16 aspect-h-9 sm:aspect-h-16">
                                         <div class="nc-NcImage absolute inset-0" data-nc-id="NcImage"><img
-                                                src="https://images.pexels.com/photos/8241135/pexels-photo-8241135.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                                class="nc-will-change-transform object-cover w-full h-full group-hover:scale-110 transform transition-transform duration-300"
-                                                alt="nc-imgs"
-                                                title="New tools for Black pregnant and postpartum mothers to save lives">
+                                                src="{{ asset('storage/images/' . $popularpublication->image) }}"
+                                                class="nc-will-change-transform object-cover w-full h-full group-hover:scale-110 transform transition-transform duration-300"/>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <div class="nc-Card3Small relative flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center p-4 xl:px-5 xl:py-6 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                            @endforeach
+                            {{-- <div class="nc-Card3Small relative flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center p-4 xl:px-5 xl:py-6 hover:bg-neutral-200 dark:hover:bg-neutral-700"
                                 data-nc-id="Card3Small"><a class=" absolute inset-0"
                                     title="People who inspired us in 2019 " href="/blog-single"></a>
                                 <div class="relative space-y-2">
@@ -401,7 +392,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 </body>
