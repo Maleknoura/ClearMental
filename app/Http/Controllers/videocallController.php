@@ -14,9 +14,9 @@ class videocallController extends Controller
     public function startMeeting()
     {
         $domain = 'meet.jit.si';
-        $roomName = 'JitsiMeetAPIExample';
-        $width = 700;
-        $height = 700;
+        $roomName = 'your room';
+        $width = 1200;
+        $height = 600;
         $lang = 'fr';
         $meetingUrl = "https://$domain/$roomName";
         return view('meet', compact('domain', 'roomName', 'width', 'height', 'lang'));
