@@ -1,102 +1,52 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <body class=" m-24 overflow-hidden ">
-<section class=" flex items-stretch text-white ">
-    <div class="lg:flex w-2/3 hidden  bg-gray-500 bg-no-repeat bg-cover relative items-center"
+<section class="flex items-stretch text-white ">
+    <div class="lg:flex w-2/3 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
          style="background-image: url(https://i.pinimg.com/564x/aa/9a/3d/aa9a3daf1fbc4a3db8e1c27744704d0e.jpg);">
         <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
         <div class="w-full px-24 z-10">
+            <h1 class="text-4xl font-bold text-left tracking-wide"> </h1>
             <p class="text-2xl my-4">Connectez-vous à votre compte et débloquez un monde de croissance personnelle et d'épanouissement.</p>
         </div>
     </div>
-    <div class="lg:w-2/3 flex items-center justify-center text-center md:px-16 px-0 z-0"
-    style="background-color: #161616;">
-    <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
-    style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
-    <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
-</div>
-<div class="w-full py-6 z-20">
-    {{--            <h1 class="w-auto text-3xl">--}}
-        {{--                Evento--}}
-        {{--            </h1>--}}
-        
-        
-        <form enctype="multipart/form-data" method="post" action="/register"
-        class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
-        @csrf
-        <div class="pb-2 ">
-           
-            <h1 class="text-4xl font-bold mb-5 text-left tracking-wide">Bienvenue sur ClearMental !</h1>
-                    {{-- <div class="extraOutline p-4 bg-black bg-whtie m-auto rounded-lg">
-                        <div class="file_upload p-5 relative h-36 border-4 border-dotted border-gray-300 rounded-lg">
-                            <svg class="text-indigo-500 w-8 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                            </svg>
-                            <div class="input_field flex flex-col w-max mx-auto text-center">
-                                <label>
-                                    <input class="text-sm cursor-pointer w-36 hidden" type="file" name="picture"
-                                           id="picture"/>
-                                    <div
-                                        class="text bg-indigo-600 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                                        Select
-                                    </div>
-                                </label>
-
-                                <div class="title text-sm text-indigo-500 uppercase">or drop files here</div>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="pb-2  pt-2">
-                        <input class="block w-full p-2 text-lg rounded-sm bg-black" type="text" name="name" id="name"
-                               placeholder="Username">
-                    </div>
+    <div class="lg:w-2/3 w-full flex items-center justify-center text-center md:px-16 px-0 z-0" style="background-color: #161616;">
+        <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
+            <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
+        </div>
+        <div class="w-full py-6 z-20">
+                        <h1 class="w-auto text-3xl">
+                            ClearMental
+                        </h1>
+            <div class="py-6 space-x-2">
+   
+            </div>
+            <p class="text-gray-100">
+                or use your email account
+            </p>
+            <form enctype="multipart/form-data" method="post" action="/login"
+                  class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                @csrf
+                <div class="pb-2 pt-4">
                     <div class="pb-2 pt-4">
                         <input type="email" name="email" id="email" placeholder="Email"
-                               class="block w-full p-2 text-lg rounded-sm bg-black">
+                               class="block w-full p-4 text-lg rounded-sm bg-black">
                     </div>
                     <div class="pb-2 pt-4">
-                        <input class="block w-full p-2 text-lg rounded-sm bg-black" type="password" name="password"
+                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password"
                                id="password" placeholder="Password">
                     </div>
-                    <div class="pb-2 pt-4">
-                        <input class="block w-full p-2 text-lg rounded-sm bg-black" type="password"
-                               name="password_confirmation" id="password_confirmation"
-                               placeholder="password_confirmation">
-                    </div>
-
-                    <div class=" pt-2">
-                        <label class="mb-3 block text-base font-medium">
-                            Would you like to sign up as an Coach or a Client?
-                        </label>
-                        <div class="flex items-center space-x-6 px-24">
-                            <div class="flex items-center">
-                                <input type="radio" name="role" value="coach" id="radioButton1"
-                                       class="h-5 w-5"/>
-                                <label for="radioButton1" class="pl-3 text-base font-medium">
-                                    Coach
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="radio" name="role" value="client" id="radioButton2"
-                                       class="h-5 w-5"/>
-                                <label for="radioButton2" class="pl-3 text-base font-medium">
-                                    Client
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-right text-sm font-light text-gray-500 dark:text-gray-400">
+                        <a href="{{route('forgot-password')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                    </p>
                     <div class="px-4 pb-2 pt-4">
                         <button
-                            class="uppercase block w-full p-2 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
-                            Register
+                            class="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+                            Login
                         </button>
                     </div>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account? <a href="/login"
-                                                    class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
-                            here</a>
+                        Don't have an account? <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</a>
                     </p>
 
                     <div class="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">

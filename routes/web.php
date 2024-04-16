@@ -31,22 +31,30 @@ use App\Http\Middleware\CheckRole;
 |
 */
 
+
 Route::get('/', [HomeController::class,'index']);
-
-// Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
-// Route::post('/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
-
+Route::get('/library', [BookController::class, 'index']);
+Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
+Route::get('/start-meeting', [videocallController::class, 'startMeeting']);
+Route::post('/chat/send', [ChatController::class, 'sendMessage']);
+Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
+Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
+Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
 Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
 Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
+Route::post('/search', [BookController::class, 'search'])->name('search');
+Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
 
 
-Route::get('/library', [BookController::class, 'index']);
+
+
+
+
 // Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
 
 
 
 
-Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
 
 Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
 Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
@@ -56,12 +64,21 @@ Route::post('/dashboard/update/{id}', [PublicationController::class, 'publicatio
 Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
 
 
-Route::get('/start-meeting', [videocallController::class, 'startMeeting']);
 
 
 
 
-Route::post('/chat/send', [ChatController::class, 'sendMessage']);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,20 +86,6 @@ Route::get('/pub', [PublicationController::class, 'show']);
 Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
 Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
 Route::put('/pub/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
-
-
-
-
-
-Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
-Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
-Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
-
-
-
-
-
-
 Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
 Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
 Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
@@ -108,7 +111,6 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
 // });
 
-// Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
 
 
 
@@ -127,8 +129,6 @@ Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showForm
 
 Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 
-Route::post('/search', [BookController::class, 'search'])->name('search');
-Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
 
 
 

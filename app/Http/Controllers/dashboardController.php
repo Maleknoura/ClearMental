@@ -20,7 +20,9 @@ class dashboardController extends Controller
 
         $users = User::all();
         $tags = Tag::all();
-        $publications = Publication::with('coach')->get();
+        $publications = Publication::with('coach')
+        ->where('statut', 'en attente')
+        ->get();
         return view('dashboard', compact('totalTags', 'totalPublications', 'totalCoachs', 'totalClients', 'tags', 'users', 'publications'));
     }
     public function toggleStatus(Request $request, User $user)

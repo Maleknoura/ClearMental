@@ -57,10 +57,7 @@
                                     <li><a href="">Actuality</a></li>
                                     <li><a href="">Library</a></li>
 
-                                    {{-- <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-user"
-                                                aria-hidden="true"></i></a></li>
-                                    <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
-                                                aria-hidden="true"></i></a></li> --}}
+                                 
                                 </ul>
                                 <ul>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -69,8 +66,7 @@
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                    <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
-                                                aria-hidden="true"></i></a></li>
+                                    
                                 </ul>
                                 <button class="nav-toggler">
                                     <span></span>

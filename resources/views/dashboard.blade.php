@@ -108,7 +108,7 @@
                                             @foreach ($publications as $publication)
                                                 <tr>
                                                     <td class="p-3">{{ $publication->Contenu }}</td>
-                                                    <td class="p-3">{{ $publication->coach->name }}</td>
+                                                    <td class="p-3">{{ $publication->coach->user->name }}</td>
                                                     <td class="p-3">
                                                         <form method="POST"
                                                             action="{{ route('update.pub', $publication->id) }}">

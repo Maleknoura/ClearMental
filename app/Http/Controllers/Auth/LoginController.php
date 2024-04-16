@@ -29,7 +29,7 @@ class LoginController extends Controller
 
             $user = User::find(Auth::id());
             if($user->assignRole("admin")) return redirect()->intended('/dashboard');
-            elseif ($user->assignRole("coach")) return redirect()->intended('/dashboardcoach');
+            elseif ($user->assignRole("coach")) return redirect()->intended('/DashboardCoach');
             else return redirect()->intended('/');
             return redirect('/');
         }
