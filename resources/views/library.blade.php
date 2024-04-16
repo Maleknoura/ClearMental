@@ -45,126 +45,130 @@
             </div>
         </div>
     </header>
-    <div class="flex justify-between flex-end mb-4">
-    <div class="search-bar">
-        <form method="POST" action="{{ route('search') }}">
-            @csrf
-            <input type="text" name="query" placeholder="Search by title or author" class="search-input">
-            {{-- <button type="submit">Search</button> --}}
-        </form>
+    <div class="flex justify-between  mb-4">
+        <div class="search-bar ml-auto">
+            <form method="POST" action="{{ route('search') }}">
+                @csrf
+                <input type="text" name="query" placeholder="Search by title or author" class="search-input">
+             
+            </form>
+        </div>
     </div>
-</div>
-{{-- Espace vide pour l'alignement --}}
-<div id="search-results"></div>
+ 
 
-<div class="flex flex-wrap mx-4">
-    @foreach ($bookData as $book)
-        <div class="w-full sm:w-1/2 m-7 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">
-            <div class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                <div class="relative pb-48 overflow-hidden">
-                    <img class="absolute inset-0 h-full w-full object-cover" src="{{ $book['image'] }}">
-                </div>
-                <div class="p-4">
-                    <h2 class="mt-2 mb-2  font-bold">{{ $book['title'] }}</h2>
-                    <p class="text-sm">{{ substr($book['description'], 0, 100) }}</p>
-                    <div class="mt-3 flex items-center">
-                        <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">{{ $book['authors'] }}</span>&nbsp;<span class="text-sm font-semibold"></span>
+
+    <div id="search-results" class="flex flex-wrap mx-4">
+        @foreach ($bookData as $book)
+            <div class="w-full sm:w-1/2 m-7 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-4">
+                <div class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+                    <div class="relative pb-48 overflow-hidden">
+                        <img class="absolute inset-0 h-full w-full object-cover" src="{{ $book['image'] }}">
+                    </div>
+                    <div class="p-4">
+                        <h2 class="mt-2 mb-2  font-bold">{{ $book['title'] }}</h2>
+                        <p class="text-sm">{{ substr($book['description'], 0, 100) }}</p>
+                        <div class="mt-3 flex items-center">
+                            <span class="text-sm font-semibold"></span>&nbsp;<span
+                                class="font-bold text-xl">{{ $book['authors'] }}</span>&nbsp;<span
+                                class="text-sm font-semibold"></span>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-b text-xs text-gray-700">
+                        <span class="flex items-center mb-1">
+                            <i class="far fa-clock fa-fw mr-2 text-gray-900"></i>
+                        </span>
+
+
+
                     </div>
                 </div>
-                <div class="p-4 border-t border-b text-xs text-gray-700">
-                    <span class="flex items-center mb-1">
-                        <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> 
-                    </span>
-                
-                        
-                 
-                </div>
             </div>
+        @endforeach
+
+        <div class="flex flex-wrap justify-center mt-4">
+
+
+            @if ($bookData->previousPageUrl())
+                <a href="{{ $bookData->previousPageUrl() }}"
+                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
+            @else
+                <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo;
+                    Previous</span>
+            @endif
+
+
+            @for ($i = 1; $i <= $bookData->lastPage(); $i++)
+                @if ($i == $bookData->currentPage())
+                    <span class="px-3 py-1 bg-purple-500 text-white rounded mr-1">{{ $i }}</span>
+                @else
+                    <a href="{{ $bookData->url($i) }}"
+                        class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
+                @endif
+            @endfor
+
+
+            @if ($bookData->nextPageUrl())
+                <a href="{{ $bookData->nextPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next
+                    &raquo;</a>
+            @else
+                <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next
+                    &raquo;</span>
+            @endif
         </div>
-    @endforeach 
-
-            <div class="flex flex-wrap justify-center mt-4">
-                          
-                          
-                                @if ($bookData->previousPageUrl())
-                                    <a href="{{ $bookData->previousPageUrl() }}"
-                                        class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
-                                @else
-                                    <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo;
-                                        Previous</span>
-                                @endif
-                            
-                            
-                                @for ($i = 1; $i <= $bookData->lastPage(); $i++)
-                                    @if ($i == $bookData->currentPage())
-                                        <span class="px-3 py-1 bg-purple-500 text-white rounded mr-1">{{ $i }}</span>
-                                    @else
-                                        <a href="{{ $bookData->url($i) }}"
-                                            class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
-                                    @endif
-                                @endfor
-                            
-                         
-                                @if ($bookData->nextPageUrl())
-                                    <a href="{{ $bookData->nextPageUrl() }}"
-                                        class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next &raquo;</a>
-                                @else
-                                    <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next
-                                        &raquo;</span>
-                                @endif
-                            </div>
-                            
 
 
-<script>
- let searchInput = document.querySelector('.search-input');
-let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-let searchResults = document.getElementById('search-results');
 
-searchInput.addEventListener('keyup', (event) => {
-    sendRequest(event.target.value);
-});
+        <script>
+            let searchInput = document.querySelector('.search-input');
+            let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let searchResults = document.getElementById('search-results');
 
-function sendRequest(query) {
-    const url = "{{ route('search') }}";
+            searchInput.addEventListener('keyup', (event) => {
+                sendRequest(event.target.value);
+            });
 
-    const data = {
-        _token: token,
-        query: query
-    };
+            function sendRequest(query) {
+                const url = "{{ route('search') }}";
 
-    const options = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': "application/json, text-plain ",
-            "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-TOKEN": token
-        },
-        method: 'POST',
-        body: JSON.stringify(data)
-    };
+                const data = {
+                    _token: token,
+                    query: query
+                };
 
-    fetch(url, options)
-        .then(response => response.json())
-        .then(data => displayResults(data))
-        .catch(error => console.error(error));
-}
+                const options = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': "application/json, text-plain ",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": token
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                };
 
-function displayResults(books) {
-    searchResults.innerHTML = '';
+                fetch(url, options)
+                    .then(response => response.json())
+                    .then(data => displayResults(data))
+                    .catch(error => console.error(error));
+            }
 
-    if (books.length === 0) {
-        searchResults.innerHTML = '<p>No results found</p>';
-        return;
-    }
-    const flexContainer = document.createElement('div');
-flexContainer.classList.add('flex', 'flex-wrap', 'mx-4');
+            function displayResults(books) {
+                searchResults.innerHTML = '';
 
+                if (books.data.length === 0) {
+                    searchResults.innerHTML = '<p>No results found</p>';
+                    return;
+                }
+                const flexContainer = document.createElement('div');
+                flexContainer.classList.add('flex', 'flex-wrap', 'mx-4');
 
-    books.forEach(book => {
-        const bookDiv = document.createElement('div');
-        bookDiv.classList.add('w-full', 'sm:w-1/2', 'm-7', 'md:w-1/3', 'lg:w-1/4', 'xl:w-1/5', 'px-4', 'mb-4');
-        bookDiv.innerHTML = `
+                console.log(books);
+                books.data.forEach(book => {
+                    const bookDiv = document.createElement('div');
+                    bookDiv.classList.add('w-full', 'sm:w-1/2', 'm-7', 'md:w-1/3', 'lg:w-1/4', 'xl:w-1/5',
+                        'px-4',
+                        'mb-4');
+                    bookDiv.innerHTML = `
             <div class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
                 <div class="relative pb-48 overflow-hidden">
                     <img class="absolute inset-0 h-full w-full object-cover" src="${book.image }">
@@ -186,10 +190,10 @@ flexContainer.classList.add('flex', 'flex-wrap', 'mx-4');
 
         `;
 
-        searchResults.appendChild(bookDiv);
-    });
-}
-</script>
+                    searchResults.appendChild(bookDiv);
+                });
+            }
+        </script>
 </body>
 
 </html>

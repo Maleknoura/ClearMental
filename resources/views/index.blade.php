@@ -152,7 +152,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="titlepage text_align_center">
-                                            <h2>About Us</h2>
+                                            <h2>A propos de Nous</h2>
                                         </div>
                                     </div>
                                 </div>
