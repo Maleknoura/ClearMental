@@ -66,10 +66,10 @@
                     </div>
                     <div class="p-4">
                         <h2 class="mt-2 mb-2  font-bold">{{ $book['title'] }}</h2>
-                        <p class="text-sm">{{ substr($book['description'], 0, 100) }}</p>
+                        <p class="text-sm">{{ substr($book['content'], 0, 100) }}</p>
                         <div class="mt-3 flex items-center">
                             <span class="text-sm font-semibold"></span>&nbsp;<span
-                                class="font-bold text-xl">{{ $book['authors'] }}</span>&nbsp;<span
+                                class="font-bold text-xl">{{ $book['auteur'] }}</span>&nbsp;<span
                                 class="text-sm font-semibold"></span>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                 </div>
                 <div class="p-4">
                     <h2 class="mt-2 mb-2  font-bold">${book.title}</h2>
-                    <p class="text-sm">${book.content}/p>
+                    <p class="text-sm">${book.content}</p>
                     <div class="mt-3 flex items-center">
                         <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">${book.auteur}</span>&nbsp;<span class="text-sm font-semibold"></span>
                     </div>
@@ -192,6 +192,7 @@
 
                     searchResults.appendChild(bookDiv);
                 });
+                
             }
         </script>
 </body>
