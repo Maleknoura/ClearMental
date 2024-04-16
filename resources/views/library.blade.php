@@ -7,12 +7,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="{{ asset('css/actuality.css') }}">
 
     <title>Document</title>
 </head>
 
-<body class="">
+<body >
     <header class="header-area">
         <div class="container">
             <div class="row d_flex">
@@ -65,9 +68,16 @@
                         <img class="absolute inset-0 h-full w-full object-cover" src="{{ $book['image'] }}">
                     </div>
                     <div class="p-4">
-                        <h2 class="mt-2 mb-2  font-bold">{{ $book['title'] }}</h2>
-                        <p class="text-sm">{{ substr($book['content'], 0, 100) }}</p>
+                        <div class="flex">
+
+                            <h2 class="mt-2 mb-2  font-bold">{{ $book['title'] }}</h2>
+                            <a href="{{ route('book.details', ['id' => $book->id]) }}">
+                                <i class='bx bx-show text-xl text-gray-600'></i>
+                            </a>
+                        </div>
+                        <p class="text-sm">{{ $book['content'] }}</p>
                         <div class="mt-3 flex items-center">
+                       
                             <span class="text-sm font-semibold"></span>&nbsp;<span
                                 class="font-bold text-xl">{{ $book['auteur'] }}</span>&nbsp;<span
                                 class="text-sm font-semibold"></span>
@@ -174,7 +184,10 @@
                     <img class="absolute inset-0 h-full w-full object-cover" src="${book.image }">
                 </div>
                 <div class="p-4">
+                    <div class="flex">
                     <h2 class="mt-2 mb-2  font-bold">${book.title}</h2>
+                    <i class='bx bx-show text-xl text-gray-600'></i>
+                        </div>
                     <p class="text-sm">${book.content}</p>
                     <div class="mt-3 flex items-center">
                         <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">${book.auteur}</span>&nbsp;<span class="text-sm font-semibold"></span>

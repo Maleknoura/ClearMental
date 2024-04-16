@@ -155,6 +155,13 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    public function detailofbook($id){
+
+        $book = Book::findOrFail($id);
+        // dd($book);
+        return view('singlepagebook', ['book' => $book]);
+      
+    }
     public function edit(Book $book)
     {
         //

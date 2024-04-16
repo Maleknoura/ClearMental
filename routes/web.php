@@ -85,7 +85,7 @@ Route::post('/publication/comment', [CommentaireController::class, 'store'])->na
 
 Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
 Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
-Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
+Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
 Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
 
@@ -128,6 +128,9 @@ Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showForm
 Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 
 Route::post('/search', [BookController::class, 'search'])->name('search');
+Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
+
+
 
 
 Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
