@@ -75,7 +75,7 @@
                                 <i class='bx bx-show text-xl text-gray-600'></i>
                             </a>
                         </div>
-                        <p class="text-sm">{{ $book['content'] }}</p>
+                        <p class="text-sm">{{ $book->content.substr(0, 100) }}</p>
                         <div class="mt-3 flex items-center">
                        
                             <span class="text-sm font-semibold"></span>&nbsp;<span
@@ -188,7 +188,7 @@
                     <h2 class="mt-2 mb-2  font-bold">${book.title}</h2>
                     <i class='bx bx-show text-xl text-gray-600'></i>
                         </div>
-                    <p class="text-sm">${book.content}</p>
+                    <p class="text-sm">${ book.content.slice(0, 100) }</p>
                     <div class="mt-3 flex items-center">
                         <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">${book.auteur}</span>&nbsp;<span class="text-sm font-semibold"></span>
                     </div>

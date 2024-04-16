@@ -52,7 +52,7 @@
                 class="max-w-3xl mx-auto text-xl sm:text-4xl text-gray-400 inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">{{ $book->title }}</a>
     
             <a href="#">
-                <img class="w-full h-80 my-4 "
+                <img class="w-2/3 h-80  bg-center my-4  mx-auto"
                     src="{{ $book->image }}"
                     alt="">
             </a>
@@ -85,6 +85,9 @@
     
         </div>
     
+    </div>
+    <div class="col-md-12 text-center text-white" style="background-color: #3e033b;">
+        <p>© 2020 All Rights Reserved. Design </p>
     </div>
 </body>
 

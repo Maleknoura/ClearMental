@@ -321,9 +321,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <p>© 2020 All Rights Reserved. Design by <a href="https://html.design/">
-                                                    Free html
-                                                    Templates</a></p>
+                                            <p>© 2020 All Rights Reserved. Design  
+                                                   </p>
                                         </div>
                                     </div>
                                 </div>
