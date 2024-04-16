@@ -61,7 +61,7 @@
                                 </ul>
                                 <ul>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                        @csrf <!-- Ajoutez le jeton CSRF pour protéger votre formulaire -->
+                                        @csrf 
                                         <button type="submit">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                         </button>

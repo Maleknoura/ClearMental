@@ -31,7 +31,7 @@ use App\Http\Middleware\CheckRole;
 |
 */
 
-
+Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class,'index']);
 Route::get('/library', [BookController::class, 'index']);
 Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
@@ -44,7 +44,7 @@ Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile
 Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/search', [BookController::class, 'search'])->name('search');
 Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
-
+});
 
 
 
@@ -56,12 +56,6 @@ Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.d
 
 
 
-Route::post('/dashboard/create', [TagController::class, 'store'])->name('tags.store');
-Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
-Route::put('/tags/edit/{tag}', [TagController::class, 'update']);
-Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
-Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
-Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
 
 
 
@@ -81,7 +75,7 @@ Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('t
 
 
 
-
+Route::middleware(['auth', CheckRole::class . ':coach'])->group(function () {
 Route::get('/pub', [PublicationController::class, 'show']);
 Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
 Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
@@ -91,7 +85,7 @@ Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.inde
 Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
 Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
-
+});
 
 
 
@@ -141,4 +135,5 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
     Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
     Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
+    
 });

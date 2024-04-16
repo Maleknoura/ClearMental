@@ -49,13 +49,21 @@
                 </div>
                 <div class="pt-5 pb-4">
                     <nav class="mt-5 px-2 space-y-1"><a href="#"
-                            class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"><svg
-                                class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-300" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16m-7 6h7"></path>
+                            class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
+                              
                             </svg>Dashboard</a></nav>
                 </div>
+            </a>
+            {{-- <a href="#"
+            class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
+           
+        </a> --}}
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="px-2">
+            @csrf 
+            <button type="submit" class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
+                <i class="fa fa-user" aria-hidden="true"> Log Out</i>
+            </button>
+        </form>
             </div>
             <div class="flex-grow  ">
                 <div class="grid lg:ml-44 px-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
