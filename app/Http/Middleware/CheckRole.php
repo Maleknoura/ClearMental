@@ -16,7 +16,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles): mixed{$user = $request->user();
         if (!$user || !in_array($user->role, $roles)) {Log::warning('Unauthorized access. User role: ' . ($user ? $user->role : 'Guest'));
-            return view('login');}
+            return response()->view('login');}
         return $next($request);
     }
 }

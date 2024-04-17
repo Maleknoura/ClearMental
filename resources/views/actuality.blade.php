@@ -72,11 +72,13 @@
                                 data-nc-id="Card3">
                                 <div class="flex flex-col flex-grow">
                                     <div class="space-y-5 mb-4">
+                                        
                                         <div class="nc-CategoryBadgeList flex flex-wrap space-x-2"
-                                            data-nc-id="CategoryBadgeList"><a
-                                                class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-red-800 bg-red-100 hover:bg-red-800"
-                                                href="/">
-                                                @foreach ($publication->tags as $tag)
+                                        data-nc-id="CategoryBadgeList">
+                                        @foreach ($publication->tags as $tag)
+                                        <a
+                                            class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-red-800 bg-red-100 hover:bg-red-800"
+                                            href="/">
                                                     <span>{{ $tag->name }}</span>
                                                 @endforeach
                                             </a></div>

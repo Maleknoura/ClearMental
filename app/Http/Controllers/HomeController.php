@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $coachs = User::where('role', 'coach')->with('coach')->get();
+        $coachs = Coach::with('user')->get();
+        // dd($coachs);
 
         return view('index', compact('coachs'));
     }

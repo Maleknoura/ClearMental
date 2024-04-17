@@ -31,33 +31,32 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   
+
     public function store(Request $request)
     {
-      
-        
-        // Récupérez les données du formulaire
+
+
         $coachId = $request->input('coach_id');
-        
-        $clientId = Auth::user()->client->id;
+
+        $clientId = Auth::user()->client->first()->id;
         $timeSlot = $request->input('selected_hour');
         $appointmentDate = $request->input('appointment_date');
-        
+
         // dd($appointmentDate);
-        // Créez la réservation
+
         Reservation::create([
             'coach_id' => $coachId,
             'client_id' => $clientId,
             'time_slot' => $timeSlot,
             'appointment_date' => $appointmentDate,
         ]);
-    
+
         return redirect()->back()->with('success', 'Réservation effectuée avec succès !');
     }
-    
-    
-    
-    
+
+
+
+
 
 
     /**
@@ -65,40 +64,35 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        // Récupérez le coach à partir de l'ID
-        $coach = User::where('id', $id)->where('role', 'coach')->firstOrFail();
-        
-        // Assurez-vous que l'utilisateur est authentifié avant de poursuivre
+        $coach = Coach::with('user')->findOrFail($id);
+
+
         $user = auth()->user();
         if (!$user) {
-            // Redirigez l'utilisateur vers la page de connexion s'il n'est pas authentifié
             return redirect()->route('login');
         }
-        
+
         // Date actuelle
         $currentDate = now()->format('Y-m-d');
-        
-        // Heures réservées pour la journée actuelle
+
         $reservedHours = Reservation::whereDate('appointment_date', $currentDate)
             ->where('coach_id', $id)
             ->pluck('time_slot');
-        
+
         // Heures disponibles
         $availableHours = range(9, 17);
-        
-        // Supprimez les heures réservées des heures disponibles
+
         $availableHours = array_diff($availableHours, $reservedHours->toArray());
-    
-        // Date du rendez-vous
+
         $appointment_date = $currentDate;
-        
+
         return view('profile', compact('coach', 'availableHours', 'appointment_date'));
     }
-    
-    
-    
 
-    
+
+
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -110,14 +104,14 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-      
+
         $reservation = Reservation::findOrFail($id);
         $reservation->update([
             'statut' => $request->statut,
         ]);
-    
+
         return redirect()->back()->with('success', 'La réservation a été acceptée avec succès.');
     }
 

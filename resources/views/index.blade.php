@@ -27,9 +27,7 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   
 </head>
 <!-- body -->
 
@@ -54,7 +52,7 @@
                             <nav class="site-navbar">
                                 <ul>
                                     <li><a class="active" href="">Home</a></li>
-                                    <li><a href="">Actuality</a></li>
+                                    <li><a href="{{ route('publications.index') }}">Actuality</a></li>
                                     <li><a href="">Library</a></li>
 
                                  
@@ -125,7 +123,7 @@
                                 @foreach($coachs as $coach)
                                 <div class="col-md-4">
                                     <div id="ho_shad" class="services_box text_align_left">
-                                        <h3>{{ $coach->name }}</h3>
+                                        <h3>{{ $coach->user->name }}</h3>
                                         <figure><img src="images/service1.jpg" alt="#" /></figure>
                                         <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</p>
                                         <a class="read_more" href="{{ route('profile', ['id' => $coach->id]) }}">Read More</a>
