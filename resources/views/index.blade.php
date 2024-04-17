@@ -123,6 +123,7 @@
                                 @foreach($coachs as $coach)
                                 <div class="col-md-4">
                                     <div id="ho_shad" class="services_box text_align_left">
+                                        
                                         <h3>{{ $coach->user->name }}</h3>
                                         <figure><img src="images/service1.jpg" alt="#" /></figure>
                                         <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</p>

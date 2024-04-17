@@ -31,4 +31,8 @@ class Client extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function coachs()
+    {
+        return $this->belongsToMany(Coach::class, 'favoris', 'client_id', 'coach_id');
+    }
 }

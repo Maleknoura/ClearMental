@@ -27,4 +27,16 @@ protected $name=['coaches'];
     {
         return $this->belongsTo(User::class);
     }
+    public function isFavoritedBy($user)
+    {
+        return $this->favoris()->where('user_id', $user->id)->exists();
+    }
+    public function favoris()
+    {
+        return $this->belongsToMany(Client::class, 'favoris', 'coach_id', 'client_id');
+    }
+    public function client()
+    {
+        return $this->belongsToMany(Client::class, 'favoris', 'coach_id', 'client_id');
+    }
 }

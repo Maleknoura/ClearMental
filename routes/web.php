@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\HomeController;
@@ -44,6 +45,8 @@ Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile
 Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/search', [BookController::class, 'search'])->name('search');
 Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
+Route::post('/favorites/{coach}', [FavorisController::class, 'store'])->name('favorites.toggle');
+
 });
 
 
@@ -85,6 +88,7 @@ Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.inde
 Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
 Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
+
 });
 
 
@@ -97,7 +101,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/register', [RegisterController::class, 'store']);
 
-     Route::get('/login', [LoginController::class, 'login']);
+     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 });
 // Route::middleware(['auth'])->group(function () {

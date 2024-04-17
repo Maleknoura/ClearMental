@@ -102,7 +102,7 @@
                                                     <span class="wil-avatar__name">P</span>
                                                 </div>
                                                 <div class="flex items-center space-x-2">
-                                                    <!-- Icône de like -->
+                                                 
                                                     <!-- Icône de like -->
                                                     <form action="{{ route('publication.like', $publication->id) }}"
                                                         method="POST">
@@ -127,7 +127,7 @@
                                                                 <i class="far fa-thumbs-down"></i>
                                                             @endif
                                                         </button>
-                                                    </form>
+                                                    </form>l
 
                                                 </div>
                                                 <span
