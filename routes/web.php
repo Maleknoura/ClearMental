@@ -43,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
     Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
     Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
+    Route::put('/comments/{comment}', [CommentaireController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{comment}', [CommentaireController::class, 'destroy'])->name('comments.destroy');
+
     Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
     Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
     Route::post('/search', [BookController::class, 'search'])->name('searchbook');

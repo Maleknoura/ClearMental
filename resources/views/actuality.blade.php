@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/actuality.css') }}">
 
@@ -19,45 +23,7 @@
     <!-- end loader -->
     <div class="full_bg">
         <!-- header -->
-        <header class="header-area">
-            <div class="container">
-                <div class="row d_flex">
-                    <div class=" col-md-3 col-sm-3">
-                    </div>
-                    <div class="col-md-9 col-sm-9">
-                        <div class="navbar-area">
-                            <nav class="site-navbar">
-                                <div class="logo">
-                                    <img src="/images/logo.png" alt="" width="80px" height="140px">
-                                </div>
-                                <ul>
-                                    <li><a class="active" href="">Home</a></li>
-                                    <li><a href="">Actuality</a></li>
-                                    <li><a href="">Library</a></li>
-
-                                    {{-- <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-user"
-                                                aria-hidden="true"></i></a></li>
-                                    <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
-                                                aria-hidden="true"></i></a></li> --}}
-                                </ul>
-                                <ul>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                        @csrf 
-                                        <button type="submit">
-                                            <i class="fa fa-user" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                    
-                                </ul>
-                                <button class="nav-toggler">
-                                    <span></span>
-                                </button>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <x-nav-bar />
         <div class="nc-SectionLatestPosts relative px-12 py-16 lg:py-28">
             <div class="flex flex-col lg:flex-row">
                 <div class="w-full lg:w-3/5 xl:w-2/3 xl:pr-14">
@@ -83,6 +49,7 @@
                                             class="transition-colors hover:text-white duration-300 nc-Badge inline-flex px-2.5 py-1 rounded-full font-medium text-xs relative text-red-800 bg-red-100 hover:bg-red-800"
                                             href="/">
                                                     <span>{{ $tag->name }}</span>
+                                                    
                                                 @endforeach
                                             </a></div>
                                         <div>
@@ -91,30 +58,30 @@
                                                 <a class="line-clamp-2"
                                                     title="Microsoft announces a five-year commitment to create bigger opportunities for people with disabilities"
                                                     href="/blog-single"> {{ $publication->title }}</a>
-                                            </h2>
+                                                </h2>
                                             <div class="hidden sm:block sm:mt-2"><span
                                                     class="text-neutral-500 dark:text-neutral-400 text-base ">{{ $publication->Contenu }}</span>
                                             </div>
                                         </div>
                                         <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
-                                            data-nc-id="PostCardMeta"><a
-                                                class="flex-shrink-0 relative flex items-center space-x-2"
-                                                href="/author">
-                                                <div
-                                                    class="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-7 w-7 text-sm ring-1 ring-white dark:ring-neutral-900">
-                                                    <span class="wil-avatar__name">P</span>
+                                            data-nc-id="PostCardMeta">
+                                                <div>
+                                                    
+                                                    <i class='bx bx-message-rounded-dots text-2xl'id="comment-icon"></i>
+                                                </div>
+                                                <div class="sidebar hidden bg-gray-200 p-4">
+                                                    <!-- Contenu des commentaires -->
                                                 </div>
                                                 <div class="flex items-center space-x-2">
-                                                 
                                                     <!-- Icône de like -->
                                                     <form action="{{ route('publication.like', $publication->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         <button type="submit">
                                                             @if (Auth::check() && $publication->likedByUser(Auth::user()))
-                                                                <i class="fas fa-thumbs-up text-black"></i>
+                                                                <i class="fas fa-thumbs-up text-black text-xl"></i>
                                                             @else
-                                                                <i class="far fa-thumbs-up"></i>
+                                                                <i class="far fa-thumbs-up text-xl"></i>
                                                             @endif
                                                         </button>
                                                     </form>
@@ -125,9 +92,9 @@
                                                         @csrf
                                                         <button type="submit">
                                                             @if (Auth::check() && $publication->dislikedByUser(Auth::user()))
-                                                                <i class="fas fa-thumbs-down text-black"></i>
+                                                                <i class="fas fa-thumbs-down text-black text-xl"></i>
                                                             @else
-                                                                <i class="far fa-thumbs-down"></i>
+                                                                <i class="far fa-thumbs-down text-xl"></i>
                                                             @endif
                                                         </button>
                                                     </form>l
@@ -139,30 +106,49 @@
                                             </a><span
                                                 class="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">·</span><span
                                                 class="text-neutral-500 dark:text-neutral-400 font-normal line-clamp-1">AT
-                                                {{ $publication->created_at->format('Y-m-d H:i:s') }}</span>
+                                                {{ $publication->created_at->formatLocalized('%d %B %Y')}}</span>
 
+                                            </div>
                                         </div>
-                                    </div>
                                     <!-- Placeholder pour les commentaires -->
-                                    <form action="{{ route('comments.store') }}" method="POST">
+                                     <form action="{{ route('comments.store') }}" method="POST">
                                         @csrf
                                         <div class="flex items-center mb-4 border-b border-gray-300 pb-2">
                                             <input type="hidden" name="publication_id" value="{{ $publication->id }}">
                                             <input type="text" name="content" placeholder="Add your comment..."
                                                 class="border-none px-4 py-2 w-full">
                                             <button type="submit"
-                                                class="bg-purple-900 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">Comment</button>
+                                                class="bg-orange-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Comment</button>
                                       
                                             </div>
                                     </form>
-                                    @foreach ($comments[$publication->id] as $comment)
+                                     @foreach ($comments[$publication->id] as $comment)
                                         <div class="comment">
                                          
                                             <p>{{ $comment->content }}</p>
                                            
                                             <p>Commenté par : {{ $comment->client->user->name }}</p>
-                                        </div>
-                                    @endforeach
+                                            @if(Auth::check() && $comment->client_id == Auth::user()->client->id)
+                                            <button data-modal-target="update-modal" id=""
+                                            data-modal-toggle="update-modal"
+                                            data-comment-id="{{ $comment->id }}"
+                                            data-comment-content="{{ $comment->content }}"
+                                            class="update-comment block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                            type="button">
+                                            update
+                                        </button>
+                                        
+                                            <form action="{{ route('comments.destroy', ['comment' => $comment->id]) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Are you sure you want to delete this comment?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        
+@endif
+</div>
+                                    @endforeach 
                                 </div>
                                     <div
                                         class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
@@ -183,7 +169,7 @@
                                     </div>
                                 </div>
 
-
+                            
                             </div>
                     @endforeach
                     <div class="flex flex-wrap justify-center mt-4">
@@ -198,7 +184,7 @@
 
                         @for ($i = 1; $i <= $publications->lastPage(); $i++)
                             @if ($i == $publications->currentPage())
-                                <span class="px-3 py-1 bg-purple-400 text-white rounded mr-1">{{ $i }}</span>
+                                <span class="px-3 py-1 bg-orange-400 text-white rounded mr-1">{{ $i }}</span>
                             @else
                                 <a href="{{ $publications->url($i) }}"
                                     class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
@@ -283,6 +269,80 @@
                            
             </div>
         </div>
-</body>
+     
+        <div>
+        <div id="update-modal" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative  p-6 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                           Update comment
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="update-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <form method="post" action="{{ route('comments.update', ['comment' => $comment->id]) }}" class="p-4 md:p-5">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                        <input type="hidden" name="publication_id" value="{{ $comment->publication_id }}">
+
+        
+                        <div class="grid gap-4  p-4 grid-cols-2">
+                            <div class="col-span-2">
+                                <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <input type="text" name="content" id="content"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="Type product name" required="">
+                                    
+                                    
+                                    <button type="submit"
+                                    class="text-white mt-4 inline-flex items-center bg-gray-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"></path>
+                            </svg>
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+                </div>
+            </div>
+        
+        
+        </div>
+        <script>
+       
+    const updateBtns = document.querySelectorAll('[data-modal-toggle="update-modal"]');
+    updateBtns.forEach(btn => {
+        btn.addEventListener("click", (event) => {
+            const commentId = btn.getAttribute("data-comment-id");
+            const commentContent = btn.getAttribute("data-comment-content");
+
+            const modal = document.querySelector("#update-modal form");
+            modal.action = `/comments/${commentId}/`;
+
+            document.querySelector("input[name='content']").value = commentContent;
+        });
+    });
+
+
+        </script>
+        
+        </body>
 
 </html>
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>

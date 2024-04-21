@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\commentRequest;
 use App\Models\Commentaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,16 +28,13 @@ class CommentaireController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(commentRequest $request)
     {
-        $request->validate([
-            'publication_id' => 'required',
-            'content' => 'required|string|max:255',
-        ]);
+       
 
         Commentaire::create([
             'publication_id' => $request->publication_id,
-            'client_id' => Auth::id(),
+            'client_id' => Auth()->user()->client->id,
             'content' => $request->content,
         ]);
 
@@ -63,19 +61,16 @@ class CommentaireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Commentaire $comment)
+    public function update(commentRequest $request,Commentaire $comment)
     {
-        $request->validate([
-            'content' => 'required|string|max:255',
-        ]);
-    
-        if ($comment->user_id != auth()->user()->id) {
-            return back()->with('error', 'You are not authorized to update this comment.');
-        }
-    
+
+       
+        
+        
         $comment->update([
             'content' => $request->content,
         ]);
+      
     
         return back()->with('success', 'Comment updated successfully.');
     }
@@ -84,8 +79,15 @@ class CommentaireController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Commentaire $commentaire)
+    public function destroy(Commentaire $comment)
     {
-        //
+       
+        if ($comment->client_id != auth()->user()->client->id) {
+            return back()->with('error', 'You are not authorized to delete this comment.');
+        }
+    
+        $comment->delete();
+    
+        return back()->with('success', 'Comment deleted successfully.');
     }
 }
