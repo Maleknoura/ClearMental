@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coaches', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('image')->nullable();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coaches');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

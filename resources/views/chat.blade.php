@@ -16,12 +16,9 @@
     encrypted: true
 });
 
-// Abonnement au canal de chat
 const channel = pusher.subscribe('chat-channel');
 
-// Écoute de l'événement 'new-message'
 channel.bind('new-message', function(data) {
-    // Mettre à jour l'interface utilisateur avec le nouveau message
     const messageElement = document.createElement('div');
     messageElement.textContent = `${data.user}: ${data.message}`;
     document.getElementById('messages').appendChild(messageElement);

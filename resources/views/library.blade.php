@@ -50,7 +50,7 @@
     </header>
     <div class="flex justify-between  mb-4">
         <div class="search-bar ml-auto">
-            <form method="POST" action="{{ route('search') }}">
+            <form method="POST" action="{{ route('searchbook') }}">
                 @csrf
                 <input type="text" name="query" placeholder="Search by title or author" class="search-input">
 

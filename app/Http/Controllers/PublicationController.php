@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\publicationRequest;
 use App\Models\Publication;
 use App\Models\User;
 
@@ -16,10 +17,10 @@ class PublicationController extends Controller
     public function index(Request $request)
     { {
             $tags = Tag::all();
-            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(1);
+            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(3);
             if ($request->has('tag')) {
                 $tag = Tag::findOrFail($request->tag);
-                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(1);
+                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(3);
             }
             $comments = [];
             foreach ($publications as $publication) {
@@ -52,17 +53,9 @@ class PublicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(publicationRequest $request)
     {
-
-        $request->validate([
-            'Contenu' => 'required',
-            'tags' => 'array',
-            'image' => 'image',
-            'title' => 'required'
-        ]);
-
-
+// dd($request);
         $coachId = auth()->user()->coach()->first()->id;
 
         $image = $request->file('image');
@@ -98,7 +91,7 @@ class PublicationController extends Controller
             ->with('tags')
             ->get();
 
-        return view('publication', compact('publications', 'tags'));
+        return view('pub', compact('publications', 'tags'));
     }
 
 

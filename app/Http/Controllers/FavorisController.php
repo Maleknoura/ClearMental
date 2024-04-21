@@ -27,17 +27,17 @@ class FavorisController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$coachId)
-    {
-        // dd($request);
-        $client = auth()->user()->client;
-        $coach = Coach::findOrFail($coachId);
+    // public function store(Request $request,$coachId)
+    // {
+    //     // dd($request);
+    //     $client = auth()->user()->client;
+    //     $coach = Coach::findOrFail($coachId);
 
       
-        $client->coachs()->attach($coach);
+    //     $client->coachs()->attach($coach);
 
-        return redirect()->back()->with('success', 'Coach added to favorites successfully');
-    }
+    //     return redirect()->back()->with('success', 'Coach added to favorites successfully');
+    // }
 
     /**
      * Display the specified resource.

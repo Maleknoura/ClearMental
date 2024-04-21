@@ -35,4 +35,8 @@ class Client extends Model
     {
         return $this->belongsToMany(Coach::class, 'favoris', 'client_id', 'coach_id');
     }
+    public function favoris()
+    {
+        return $this->belongsToMany(Favoris::class, "favoris", 'client_id', 'coach_id')->withTimestamps();
+    }
 }

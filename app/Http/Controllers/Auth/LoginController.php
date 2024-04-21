@@ -14,31 +14,41 @@ class LoginController extends Controller
      */
     public function login()
     {
-        return view('register');
+        return view('/login');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            $user = User::find(Auth::id());
-            if($user->assignRole("admin")) return redirect()->intended('/dashboard');
-            elseif ($user->assignRole("coach")) return redirect()->intended('/DashboardCoach');
-            else return redirect()->intended('/');
-            return redirect('/');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
-    }
-
+     public function store(Request $request)
+     {
+         try {
+             $credentials = $request->only('email', 'password');
+     
+             if (Auth::attempt($credentials)) {
+                 $request->session()->regenerate();
+     
+                 $user = User::find(Auth::id());
+                 if ($user->hasRole("admin")) {
+                     return redirect()->intended('/dashboard');
+                 } elseif ($user->hasRole("coach")) {
+                     return redirect()->intended('/DashboardCoach');
+                 } else {
+                     return redirect()->intended('/');
+                 }
+             } else {
+                 return back()->withErrors([
+                     'email' => 'The provided credentials do not match our records.',
+                 ]);
+             }
+         } catch(\Exception $e) {
+             return back()->withErrors([
+                 'error' => $e->getMessage(),
+             ]);
+         }
+     }
+     
     /**
      * Display the specified resource.
      */

@@ -5,12 +5,8 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\CoachController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\FavorisController;
-use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
@@ -31,101 +27,65 @@ use App\Http\Middleware\CheckRole;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('/side', function () {
+//     return view('side');
+// });
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
-Route::get('/', [HomeController::class,'index']);
-Route::get('/library', [BookController::class, 'index']);
-Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
-Route::get('/start-meeting', [videocallController::class, 'startMeeting']);
-Route::post('/chat/send', [ChatController::class, 'sendMessage']);
-Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
-Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
-Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
-Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
-Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
-Route::post('/search', [BookController::class, 'search'])->name('search');
-Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
-Route::post('/favorites/{coach}', [FavorisController::class, 'store'])->name('favorites.toggle');
+    // Route::post('/{id}', [HomeController::class,'togglefavoris']);
+    Route::post('favoris', [HomeController::class, 'store'])->name('toggle.coach');
 
+    Route::get('/library', [BookController::class, 'index']);
+    Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
+    Route::get('/start-meeting', [videocallController::class, 'startMeeting'])->name('meet');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage']);
+    Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
+    Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
+    Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
+    Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
+    Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
+    Route::post('/search', [BookController::class, 'search'])->name('searchbook');
+    Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
 });
-
-
-
-
-
-// Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Route::middleware(['auth', CheckRole::class . ':coach'])->group(function () {
-Route::get('/pub', [PublicationController::class, 'show']);
-Route::post('/pub/create', [PublicationController::class, 'store'])->name('publication.store');
-Route::delete('/pub/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
-Route::put('/pub/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
-Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
-Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
-Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
-Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
-Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
 
+Route::get('/publication', [PublicationController::class, 'show'])->name('publication.approuver');
+    Route::post('/publication/create', [PublicationController::class, 'store'])->name('publication.store');
+    Route::delete('/publication/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
+    Route::put('/publication/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
+    Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
+    Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
+    Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations');
+
+    Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
 });
-
-
-
-
-
 
 Route::middleware(['guest'])->group(function () {
 
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/register', [RegisterController::class, 'store']);
 
-     Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/login', [LoginController::class, 'login']);
     Route::post('/login', [LoginController::class, 'store']);
 });
 // Route::middleware(['auth'])->group(function () {
 
-    Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
+Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
 // });
-
-
-
 
 
 Route::get('/forgot-password', [ForgotPasswordLinkController::class, 'create'])->name('forgot-password');
 
 Route::post('/forgot-request', [ForgotPasswordLinkController::class, 'store']);
 
-Route::post('/forgot-password', [ForgotPasswordController::class, 'reset'])->name('new_password');
 
 // Password Reset
-Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 
-Route::get('password/reset/{token}', [ForgotPasswordController::class, 'showForm'])->name('password.reset');
 
-Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 
 
 
@@ -139,5 +99,4 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::patch('/dashboard/{user}', [dashboardController::class, 'toggleStatus'])->name('users.update');
     Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
     Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
-    
 });

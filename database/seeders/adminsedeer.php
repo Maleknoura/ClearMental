@@ -16,8 +16,8 @@ class adminsedeer extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => bcrypt('admin@example.com'), // Vous pouvez utiliser Hash::make('password') si vous utilisez Laravel 8 ou supérieur
-            'role' => 'admin',
+            'password' => bcrypt('admin@example.com'), 
+                     'role' => 'admin',
         ]);
     }
 }

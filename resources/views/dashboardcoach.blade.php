@@ -14,13 +14,7 @@
 
 <body>
     <div>
-        <nav
-            class="sticky lg:ml-40 mb-7 top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-full  p-2 backdrop-blur-xl ]">
-            <div class="ml-[6px]">
-                <p class="shrink  capitalize text-navy-700 dark:text-white"><a
-                        class="font-bold capitalize hover:text-navy-700 dark:hover:text-white"
-                        href="/dashboard">Dashboard</a></p>
-            </div>
+      
             <div>
                 <div class="flex h-full items-center ">
                     <!-- Modal toggle -->

@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('favoris', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained()->onDelete('cascade');
-            $table->foreignId('coach_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('coach_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('coach_id')->references('id')->on('coaches');      
+                 $table->timestamps();
         });
     }
 

@@ -41,10 +41,13 @@
                                                 aria-hidden="true"></i></a></li> --}}
                                 </ul>
                                 <ul>
-                                    <li><a href=""><a href="Javascript:void(0)"><i class="fa fa-user"
-                                                    aria-hidden="true"></i></a></li>
-                                    <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
-                                                aria-hidden="true"></i></a></li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf 
+                                        <button type="submit">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                    
                                 </ul>
                                 <button class="nav-toggler">
                                     <span></span>

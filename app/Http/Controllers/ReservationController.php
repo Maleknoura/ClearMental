@@ -17,7 +17,12 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $coachId = auth()->user()->coach->first()->id;
+
+        $reservations = Reservation::where('coach_id', $coachId)->where('statut', 'en attente')
+            ->get();
+
+        return view('reservation', compact('reservations'));
     }
 
     /**

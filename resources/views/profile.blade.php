@@ -9,16 +9,18 @@
     <title>Coach Profile</title>
 </head>
 <body>
+    <x-nav-bar />
     <div class="container">
+
         <h1>Coach Profile</h1>
         <p><strong>Name:{{  $coach->user->name }}</p>
         <p><strong>Email: {{ $coach->user->email  }}</p>
-            <form id="favorite-form" action="{{ route('favorites.toggle', $coach->id) }}" method="POST">
+            {{-- <form id="favorite-form" action="{{ route('favorites.toggle', $coach->id) }}" method="POST">
                 @csrf
                 <button type="submit" onclick="event.preventDefault(); toggleHeartIcon(); document.getElementById('favorite-form').submit();">
                     <i id="heart-icon" class="bx {{ $coach->isFavoritedBy(auth()->user()) ? 'bx-heart-full' : 'bx-heart' }}"></i>
                 </button>
-            </form>
+            </form> --}}
 
     </div>
     <form action="{{ route('reservation.store') }}" method="POST">
@@ -33,7 +35,7 @@
         </select>
         <button type="submit">Réserver</button>
     </form>
-    <script>
+    {{-- <script>
         
         function toggleHeartIcon() {
         var heartIcon = document.getElementById('heart-icon');
@@ -45,6 +47,6 @@
             heartIcon.classList.add('bx-heart');
         }
     }
-    </script>
+    </script> --}}
 </body>
 </html>

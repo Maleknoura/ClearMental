@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
     public function register()
     {
-        return view('login');
+        return view('/register ');
     }
 
     /**
@@ -38,21 +38,19 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-            // 'picture' => 'required',
+        
             'role' => 'required'
         ]);
 
         // Traitement de l'upload de l'image
-        // $fileName = time() . $request->file('picture')->getClientOriginalName();
-        // $path = $request->file('picture')->storeAs('picture', $fileName, 'public');
-        // $picturePath = Storage::url($path);
+
 
         // Création de l'utilisateur
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'picture' => $picturePath,
+          
             'role' => $request->role,
         ]);
 
@@ -75,7 +73,7 @@ class RegisterController extends Controller
         }
 
 
-        return redirect('/login');
+      
     }
 
 

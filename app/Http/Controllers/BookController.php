@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -116,27 +117,18 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
 
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'auteur' => 'required',
-            'image' => 'required',
-
-        ]);
-        // dd($request);
+      
 
         Book::create([
             'title' => $request->title,
             'content' => $request->content,
             'auteur' => $request->auteur,
             'image' => $request->image,
-
-
-
         ]);
+        // dd($request);
 
 
         return redirect()->back()->with('success', 'Livre ajouté avec succès');
@@ -147,9 +139,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $books = Book::all();
+        $books = Book::paginate(7);
         $reservations = Reservation::with('client')->where('statut', 'en attente')->get();
-        return view('dashboardcoach', compact('books', 'reservations'));
+        return view('side', compact('books', 'reservations'));
     }
 
     /**
@@ -170,22 +162,19 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest $request, $id)
     {
 
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'numbre_of_page' => 'required|integer',
-        ]);
-
+      
+// dd($request);
         $book = Book::findOrFail($id);
 
 
         $book->update([
             'title' => $request->title,
             'content' => $request->content,
-            'numbre_of_page' => $request->numbre_of_page,
+            'auteur' => $request->auteur,
+            'image'=>$request->image,
         ]);
 
 

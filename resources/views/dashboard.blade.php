@@ -19,7 +19,7 @@
             class="sticky lg:ml-40 mb-7 top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-full  p-2 backdrop-blur-xl ]">
             <div class="ml-[6px]">
                 <p class="shrink  capitalize text-navy-700 dark:text-white"><a
-                        class="font-bold capitalize hover:text-navy-700 dark:hover:text-white"
+                        class="font-bold capitalize hover:text-navy-700 dark:hover:text-black"
                         href="/dashboard">Dashboard</a></p>
             </div>
             <div>
@@ -54,10 +54,7 @@
                             </svg>Dashboard</a></nav>
                 </div>
             </a>
-            {{-- <a href="#"
-            class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
-           
-        </a> --}}
+         
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="px-2">
             @csrf 
             <button type="submit" class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
@@ -65,7 +62,8 @@
             </button>
         </form>
             </div>
-            <div class="flex-grow  ">
+            <div class="flex flex-col lg:flex-row"> 
+            <div class="flex-grow flex-wrap ">
                 <div class="grid lg:ml-44 px-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
                     <div class="bg-white-600 dark:bg-slate-800 shadow  rounded-md w-full relative ">
                         <div class="flex-auto p-4 text-center">
@@ -92,13 +90,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="gap-14 ml-9 grid grid-cols-2">
+
+                <div class="gap-14 ml-9 grid grid-cols-2 overflow-x-hidden flex-wrap ">
                     <div class="grid lg:ml-36 w-[50rem] grid-cols-1 p-4">
                         <div class="sm:-mx-6 lg:-mx-8">
                             <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
                                 <div class=" ">
                                     <table class="w-full">
-                                        <thead class="bg-[#4a044e]">
+                                        <thead class="bg-[#f97316]">
                                             <tr class="text-white">
                                                 <th scope="col"
                                                     class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
@@ -136,12 +135,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="grid lg:ml-36 w-[35rem] grid-cols-1 p-4">
+                    
+                    <div class="grid lg:ml-36 w-[35rem] grid-cols-1  flex-wrap  p-4">
                         <div class="sm:-mx-6 lg:-mx-8">
                             <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
                                 <div class="">
                                     <table class="w-full">
-                                        <thead class="bg-[#4a044e]">
+                                        <thead class="bg-[#f97316]">
                                             <tr class="text-white">
                                                 <th scope="col"
                                                     class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
@@ -197,7 +197,7 @@
                             <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
                                 <div class="shadow-lg bg-white rounded-lg overflow-hidden">
                                     <table class="w-full">
-                                        <thead class="bg-[#4a044e]">
+                                        <thead class="bg-[#f97316]">
                                             <tr class="text-white">
                                                 <th scope="col"
                                                     class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
@@ -271,10 +271,12 @@
             </div>
         </div>
     </div>
+</div>
 
 
 
 
+{{--  --}}
 
 
     <!-- Main modal -->
@@ -282,7 +284,7 @@
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative bg-white rounded-lg shadow dark:bg-black-700">
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">

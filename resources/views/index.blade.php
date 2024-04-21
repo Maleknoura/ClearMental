@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- basic -->
+    {{-- csrf token for ajax --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- mobile metas -->
@@ -24,10 +26,16 @@
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-l5O58ny+InAIa27KQ6mCX+9SV8ZdD3gAoXQVsgTHhsR89TdJ3r+v2+cAlT4V1z0jPp97T9jyUcqGKkQDZpRW5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
     <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-   
+
 </head>
 <!-- body -->
 
@@ -50,21 +58,21 @@
                     <div class="col-md-9 col-sm-9">
                         <div class="navbar-area">
                             <nav class="site-navbar">
-                                <ul>
-                                    <li><a class="active" href="">Home</a></li>
+                                <ul> --}} --}}
+                                    {{-- <li><a class="active" href="">Home</a></li>
                                     <li><a href="{{ route('publications.index') }}">Actuality</a></li>
                                     <li><a href="">Library</a></li>
 
-                                 
+
                                 </ul>
                                 <ul>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                        @csrf 
+                                        @csrf
                                         <button type="submit">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                    
+
                                 </ul>
                                 <button class="nav-toggler">
                                     <span></span>
@@ -93,7 +101,7 @@
                                 <div class="row d-flex align-items-center justify-content-between">
                                     <div class="col-md-5">
                                         <div class="creative">
-                                            <h1>Croissance <br> personnelle</h1>
+                                            <h1>Croissance personnelle</h1>
                                             <p>
                                                 Le voyage le plus important que vous pouvez entreprendre est celui de la
                                                 découverte de vous-même.
@@ -120,28 +128,38 @@
                                 </div>
                             </div>
                             <div class="row">
-                                @foreach($coachs as $coach)
-                                <div class="col-md-4">
-                                    <div id="ho_shad" class="services_box text_align_left">
-                                        
-                                        <h3>{{ $coach->user->name }}</h3>
-                                        <figure><img src="images/service1.jpg" alt="#" /></figure>
-                                        <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</p>
-                                        <a class="read_more" href="{{ route('profile', ['id' => $coach->id]) }}">Read More</a>
+                                @foreach ($coachs as $coach)
+                                    <div class="col-md-4">
+                                        <div id="ho_shad" class="services_box text_align_left">
+                                            @if ($coach->favoris())
+                                                <button type="button" id="favorite-btn" data-coach-id="{{ $coach->id }}">
+                                                    
+                                                    <i class='bx bx-heart' ></i>
+                                                </button>
+                                            @else
+                                                <button type="button" id="favorite-btn"  data-coach-id="{{ $coach->id }}">
+                                                    <i class='bx bxs-heart'></i>
+                                                </button>
+                                            @endif
+                                            <h3>{{ $coach->user->name }}</h3>
+                                            <figure><img src="images/service1.jpg" alt="#" /></figure>
+                                            <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</p>
+                                            <a class="read_more"
+                                                href="{{ route('profile', ['id' => $coach->id]) }}">Read More</a>
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- end services -->
-                    
-                 
-                    
+
+
+
 
 
                     <!-- customers -->
-                    <div class="customers">
+                    {{-- <div class="customers">
                         <div class="clients_bg">
                             <div class="container">
                                 <div class="row">
@@ -152,9 +170,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- start slider section -->
-                        <div id="myCarousel" class="carousel slide clients_banner" data-ride="carousel">
+                        {{-- <div id="myCarousel" class="carousel slide clients_banner" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                                 <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -166,15 +184,20 @@
                                         <div class="carousel-caption relative">
                                             <div class="row d_flex">
                                                 <div class="col-md-2 col-sm-8">
-                                                    <div class="pro_file">
-                                                    
+                                                    <div class="pro_file"> --}}
+{{-- 
                                                         <h4>Notre Mission</h4>
-                                                      
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="test_box text_align_left">
-                                                        <p>Notre mission est d'inspirer et d'accompagner les individus dans leur voyage de croissance personnelle et de développement. Nous croyons fermement en le potentiel de chacun à atteindre ses objectifs et à vivre une vie épanouissante et alignée avec ses valeurs les plus profondes </p>
+                                                        <p>Notre mission est d'inspirer et d'accompagner les individus
+                                                            dans leur voyage de croissance personnelle et de
+                                                            développement. Nous croyons fermement en le potentiel de
+                                                            chacun à atteindre ses objectifs et à vivre une vie
+                                                            épanouissante et alignée avec ses valeurs les plus profondes
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,14 +210,19 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-2 col-sm-8">
                                                     <div class="pro_file">
-                                                    
+
                                                         <h4>Notre Équipe de Coachs</h4>
-                                                      
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="test_box text_align_left">
-                                                        <p>Rencontrez notre équipe de coachs dévoués et expérimentés, prêts à vous guider à chaque étape de votre cheminement personnel. Ils sont là pour vous écouter, vous soutenir et vous motiver à surmonter les défis et à réaliser vos rêves. Ensemble, nous sommes là pour vous aider à atteindre votre plein potentiel </p>
+                                                        <p>Rencontrez notre équipe de coachs dévoués et expérimentés,
+                                                            prêts à vous guider à chaque étape de votre cheminement
+                                                            personnel. Ils sont là pour vous écouter, vous soutenir et
+                                                            vous motiver à surmonter les défis et à réaliser vos rêves.
+                                                            Ensemble, nous sommes là pour vous aider à atteindre votre
+                                                            plein potentiel </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,14 +235,24 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-2 col-sm-8">
                                                     <div class="pro_file">
-                                                   
+
                                                         <h4>Notre Histoire</h4>
-                                                       
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="test_box text_align_left">
-                                                        <p>Notre histoire commence avec une passion partagée pour le développement personnel et le bien-être. Fondée par un groupe de professionnels passionnés, notre entreprise est née de la conviction que chacun mérite d'avoir accès aux outils et aux ressources nécessaires pour créer une vie significative et épanouissante. Depuis lors, nous avons travaillé sans relâche pour offrir des programmes et des services de qualité supérieure à notre communauté, en nous engageant à être une source d'inspiration et de transformation pour tous ceux qui franchissent nos portes</p>
+                                                        <p>Notre histoire commence avec une passion partagée pour le
+                                                            développement personnel et le bien-être. Fondée par un
+                                                            groupe de professionnels passionnés, notre entreprise est
+                                                            née de la conviction que chacun mérite d'avoir accès aux
+                                                            outils et aux ressources nécessaires pour créer une vie
+                                                            significative et épanouissante. Depuis lors, nous avons
+                                                            travaillé sans relâche pour offrir des programmes et des
+                                                            services de qualité supérieure à notre communauté, en nous
+                                                            engageant à être une source d'inspiration et de
+                                                            transformation pour tous ceux qui franchissent nos portes
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -316,22 +354,26 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <p>© 2020 All Rights Reserved. Design  
-                                                   </p>
+                                            <p>© 2020 All Rights Reserved. Design
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </footer>
+                    </footer> --}}
+
+
+
                     <!-- end footer -->
                     <!-- Javascript files-->
+                    {{-- <script src="js/favorite.js"></script>
                     <script src="js/jquery.min.js"></script>
-                    <script src="js/bootstrap.bundle.min.js"></script>
-                    <script src="js/jquery-3.0.0.min.js"></script>
-                    <script src="js/owl.carousel.min.js"></script>
-                    <script src="js/bootstrap-datepicker.min.js"></script>
-                    <script src="js/custom.js"></script>
+                    <script src="js/bootstrap.bundle.min.js"></script> --}}
+                    {{-- <script src="js/jquery-3.0.0.min.js"></script> --}}
+                    {{-- <script src="js/owl.carousel.min.js"></script> --}}
+                    {{-- <script src="js/bootstrap-datepicker.min.js"></script> --}}
+                    {{-- <script src="js/custom.js"></script>
 </body>
 
-</html>
+</html> --}}

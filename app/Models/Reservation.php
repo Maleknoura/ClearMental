@@ -26,4 +26,8 @@ class Reservation extends Model
     {
         return $this->belongsTo(Seance::class);
     }
+    public function coach()
+    {
+        return $this->belongsTo(Coach::class);
+    }
 }

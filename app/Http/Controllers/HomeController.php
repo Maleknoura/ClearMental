@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\Favoris;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,26 +15,48 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $coachs = Coach::with('user')->get();
+        $coachs = Coach::with('user')->paginate(3);
+
         // dd($coachs);
-
-        return view('index', compact('coachs'));
+        $favorites = Favoris::all();
+        // dd($favorites);
+        return view('home', compact('coachs', 'favorites'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // Check authentication
+        $user = auth()->user();
+        if (!$user || !$user->client) {
+            return response()->json(["success" => false, "message" => "Unauthorized"], 401);
+        }
+    
+        // Validate request data
+        $request->validate([
+            'coachId' => 'required|exists:coaches,id',
+        ]);
+    
+        // Fetch client and coach
+        $client = $user->client;
+        $coachId = $request->coachId;
+        $coach = Coach::find($coachId);
+    
+        if (!$coach) {
+            return response()->json(["success" => false, "message" => "Coach not found"], 404);
+        }
+    
+        // Check if coach is already favorited
+        if ($client->favoris()->where('coach_id', $coachId)->exists()        ) {
+            $client->favoris()->where("coach_id", $coachId)->delete();
+            return response()->json(["success" => true, "message" => "The coach removed from favorites"], 200);
+        } else {
+            // Create new favorite
+            $client->favoris()->create([
+                "coach_id" => $coachId,
+            ]);
+            return response()->json(["success" => true, "message" => "The coach synced to client favorites"], 200);
+        }
     }
 
     /**
