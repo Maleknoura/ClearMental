@@ -22,43 +22,34 @@ class HomeController extends Controller
         // dd($favorites);
         return view('home', compact('coachs', 'favorites'));
     }
-
-
-    public function store(Request $request)
+    
+    public function favoris(Request $request)
     {
-        // Check authentication
-        $user = auth()->user();
-        if (!$user || !$user->client) {
-            return response()->json(["success" => false, "message" => "Unauthorized"], 401);
-        }
-    
-        // Validate request data
         $request->validate([
-            'coachId' => 'required|exists:coaches,id',
+            'coach_id' => 'required|exists:coaches,id',
         ]);
+        
+        $user = auth()->user();
     
-        // Fetch client and coach
-        $client = $user->client;
-        $coachId = $request->coachId;
-        $coach = Coach::find($coachId);
+        if ($user->clients()->exists()) {
+            $client = $user->clients()->first();
     
-        if (!$coach) {
-            return response()->json(["success" => false, "message" => "Coach not found"], 404);
-        }
+            $coachId = $request->coach_id;
     
-        // Check if coach is already favorited
-        if ($client->favoris()->where('coach_id', $coachId)->exists()        ) {
-            $client->favoris()->where("coach_id", $coachId)->delete();
-            return response()->json(["success" => true, "message" => "The coach removed from favorites"], 200);
+            if ($client->favoris()->where('coaches.id', $coachId)->exists()) {
+                $client->favoris()->detach($coachId);
+                return response()->json(["success" => true, "message" => "The coach removed from favorites"], 200);
+            } else {
+                $client->favoris()->attach($coachId);
+                return response()->json(["success" => true, "message" => "The coach synced to client favorites"], 200);
+            }
         } else {
-            // Create new favorite
-            $client->favoris()->create([
-                "coach_id" => $coachId,
-            ]);
-            return response()->json(["success" => true, "message" => "The coach synced to client favorites"], 200);
+            return response()->json(["success" => false, "message" => "User has no associated clients"], 404);
         }
     }
-
+    
+    
+    
     /**
      * Display the specified resource.
      */

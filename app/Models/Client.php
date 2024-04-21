@@ -27,16 +27,18 @@ class Client extends Model
     {
         return $this->hasMany(Commentaire::class);
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    public function coachs()
-    {
-        return $this->belongsToMany(Coach::class, 'favoris', 'client_id', 'coach_id');
-    }
+  
+    // public function coachs()
+    // {
+    //     return $this->belongsToMany(Coach::class, 'favoris', 'client_id', 'coach_id');
+    // }
     public function favoris()
     {
-        return $this->belongsToMany(Favoris::class, "favoris", 'client_id', 'coach_id')->withTimestamps();
+        return $this->belongsToMany(Coach::class, 'favoris', 'client_id', 'coach_id')->withTimestamps();
     }
+   
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

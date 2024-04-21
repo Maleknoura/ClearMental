@@ -27,14 +27,11 @@ use App\Http\Middleware\CheckRole;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/side', function () {
-//     return view('side');
-// });
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
-    // Route::post('/{id}', [HomeController::class,'togglefavoris']);
-    Route::post('favoris', [HomeController::class, 'store'])->name('toggle.coach');
+    Route::post('/favoris', [HomeController::class, 'favoris'])->name('toggle.coach');
 
     Route::get('/library', [BookController::class, 'index']);
     Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');

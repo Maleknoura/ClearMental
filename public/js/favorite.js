@@ -1,15 +1,17 @@
-const favoriteBtns = document.querySelectorAll("#favorite-btn");
+const favoriteBtns = document.querySelectorAll(".favorite-btn");
 let token = document
     .querySelector('meta[name="csrf-token"]')
     .getAttribute("content");
-favoriteBtns.forEach((element) => {
-    element.addEventListener("click", (event) => {
-        let url = "/favoris";
-        let coachId = element.getAttribute("data-coach-id");
-
+    // console.log(favoriteBtns)
+    favoriteBtns.forEach((element) => {
+        element.addEventListener("click", (event) => {
+            let url = "/favoris";
+            let coachId = element.dataset.coachId;
+            console.log(coachId);
+            
         const data = {
             _token: token,
-            coachId: coachId,
+            coach_id: coachId,
         };
 
         const options = {
@@ -24,6 +26,7 @@ favoriteBtns.forEach((element) => {
         };
         fetch(url, options)
             .then((response) => response.json())
+            // console.log(response)
             .then((data) => handleResponse(data, element))
             .catch((error) => console.error(error));
     });

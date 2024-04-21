@@ -1,4 +1,5 @@
 <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+     <meta name="csrf-token" content="{{ csrf_token() }}"> 
 
 
     <x-nav-bar />
@@ -39,13 +40,16 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-16 max-md:max-w-lg mx-auto">
                     @foreach ($coachs as $coach)
-                    <div class="cursor-pointer h-64 shadow-lg rounded group">
+                    <div class=" h-64 shadow-lg rounded group">
                         <div>
                             <h3 class="text-xl font-bold text-[#333] group-hover:text-blue-500 text-center transition-all">{{ $coach->user->name }}</h3>
                             <div class="mt-4">
                                 <p class="text-gray-400 text-center text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
                             </div>
                         </div>
+                        <button type="button" class="favorite-btn" data-coach-id="{{ $coach->id }}">
+                            <i class="bx bx-heart"></i>
+                        </button>
                         <hr class="my-6" />
                         <div class="flex flex-wrap ml-5 flex flex-wrap items-center justify-center gap-3">
                           
@@ -86,4 +90,4 @@
 
 
     </section>
-    
+    <script src="./js/favorite.js"></script>

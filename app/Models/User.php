@@ -65,9 +65,9 @@ class User extends Authenticatable
         return $this->hasMany(Coach::class);
     }
 
-    public function client()
+    public function clients()
     {
-        return $this->hasOne(Client::class);
+        return $this->hasMany(Client::class);
     }
  
 }

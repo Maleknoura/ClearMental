@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,13 +28,15 @@ protected $name=['coaches'];
         return $this->belongsTo(User::class);
     }
   
-    public function favoris()
-    {
-        return $this->belongsToMany(Client::class, 'favoris', 'coach_id', 'client_id');
-    }
+
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'favoris', 'coach_id', 'client_id')->withTimestamps();
     }
   
 }
