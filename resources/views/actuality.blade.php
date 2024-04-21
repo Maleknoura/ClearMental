@@ -196,7 +196,6 @@
                                 Previous</span>
                         @endif
 
-                        {{-- Affichage des numéros de page --}}
                         @for ($i = 1; $i <= $publications->lastPage(); $i++)
                             @if ($i == $publications->currentPage())
                                 <span class="px-3 py-1 bg-purple-400 text-white rounded mr-1">{{ $i }}</span>
@@ -206,8 +205,7 @@
                             @endif
                         @endfor
 
-                        {{-- Bouton "Next" --}}
-                        @if ($publications->nextPageUrl())
+                           @if ($publications->nextPageUrl())
                             <a href="{{ $publications->nextPageUrl() }}"
                                 class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next &raquo;</a>
                         @else
