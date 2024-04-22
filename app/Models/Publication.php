@@ -28,21 +28,21 @@ class Publication extends Model
     }
     public function tags()
     {
-        return $this->belongsToMany(Tag::class,'tag_publication');
+        return $this->belongsToMany(Tag::class, 'tag_publication');
     }
 
     public function likes()
-{
-    return $this->hasMany(Like::class);
-}
+    {
+        return $this->hasMany(Like::class);
+    }
 
-public function likedByUser($user)
-{
-    return $this->likes()->where('user_id', $user->id)->exists();
-}
+    public function likedByUser($user)
+    {
+        return $this->likes()->where('user_id', $user->id)->where('type', 'like')->exists();
+    }
 
-public function dislikedByUser($user)
-{
-    return $this->likes()->where('user_id', $user->id)->where('type', 'dislike')->exists();
-}
+    public function dislikedByUser($user)
+    {
+        return $this->likes()->where('user_id', $user->id)->where('type', 'dislike')->exists();
+    }
 }

@@ -2,13 +2,13 @@ const favoriteBtns = document.querySelectorAll(".favorite-btn");
 let token = document
     .querySelector('meta[name="csrf-token"]')
     .getAttribute("content");
-    // console.log(favoriteBtns)
-    favoriteBtns.forEach((element) => {
-        element.addEventListener("click", (event) => {
-            let url = "/favoris";
-            let coachId = element.dataset.coachId;
-            console.log(coachId);
-            
+// console.log(favoriteBtns)
+favoriteBtns.forEach((element) => {
+    element.addEventListener("click", (event) => {
+        let url = "/favoris";
+        let coachId = element.dataset.coachId;
+        console.log(coachId);
+
         const data = {
             _token: token,
             coach_id: coachId,
@@ -33,10 +33,9 @@ let token = document
 });
 
 const handleResponse = (data, element) => {
-    console.log(data);
-    if(data.success){
+    if (element.innerHTML.trim() === '<i class="bx bx-heart"></i>') {
         element.innerHTML = "<i class='bx bxs-heart' ></i>";
-    }else {
+    } else {
         element.innerHTML = "<i class='bx bx-heart' ></i>";
     }
-}
+};
