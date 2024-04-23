@@ -17,16 +17,16 @@ class LikeController extends Controller
     }
     public function like($id)
     {
-       
+
         $publication = Publication::findOrFail($id);
         $user = auth()->user();
-       
+
         if ($publication->likedByUser($user)) {
-         
+
             $publication->likes()->where('user_id', $user->id)->delete();
             return redirect()->back()->with('success', 'Like removed successfully');
         } else {
-          
+
             $publication->likes()->create([
                 'user_id' => $user->id,
                 'type' => 'like',
@@ -39,25 +39,25 @@ class LikeController extends Controller
     {
         $publication = Publication::findOrFail($id);
         $user = auth()->user();
-    
- 
-        if ($publication->dislikedByUser($user) || $publication->likedByUser($user)){
-          
+
+
+        if ($publication->dislikedByUser($user)) {
+
             $publication->likes()->where('user_id', $user->id)->delete();
-        }
-    
-     
-        if (!$publication->dislikedByUser($user)) {
-        
+        } else {
+            if ($publication->likedByUser($user)) {
+                $publication->likes()->where('user_id', $user->id)->delete();
+            }
+
             $publication->likes()->create([
                 'user_id' => $user->id,
                 'type' => 'dislike',
             ]);
         }
-    
+
         return redirect()->back()->with('success', 'Publication disliked successfully');
     }
-    
+
 
     /**
      * Show the form for creating a new resource.

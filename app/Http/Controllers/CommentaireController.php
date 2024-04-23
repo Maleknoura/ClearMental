@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\commentRequest;
+use App\Models\Client;
 use App\Models\Commentaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,12 +32,14 @@ class CommentaireController extends Controller
     public function store(commentRequest $request)
     {
        
-
+        $client = client::where("user_id", Auth::user()->id)->first()->id;
+       
         Commentaire::create([
             'publication_id' => $request->publication_id,
-            'client_id' => Auth()->user()->client->id,
+            'client_id' => $client,
             'content' => $request->content,
         ]);
+
 
         return redirect()->back()->with('success', 'Comment added successfully');
     }
@@ -66,11 +69,11 @@ class CommentaireController extends Controller
 
        
         
+        dd($request);
         
         $comment->update([
             'content' => $request->content,
         ]);
-      
     
         return back()->with('success', 'Comment updated successfully.');
     }
@@ -82,9 +85,7 @@ class CommentaireController extends Controller
     public function destroy(Commentaire $comment)
     {
        
-        if ($comment->client_id != auth()->user()->client->id) {
-            return back()->with('error', 'You are not authorized to delete this comment.');
-        }
+  
     
         $comment->delete();
     

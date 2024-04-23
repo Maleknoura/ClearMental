@@ -15,6 +15,7 @@ class Publication extends Model
         'image',
         'statut',
         'coach_id',
+
         'title',
     ];
 
@@ -24,7 +25,7 @@ class Publication extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Commentaire::class);
+        return $this->hasMany(Commentaire::class, 'publication_id')->with("client");
     }
     public function tags()
     {
@@ -35,6 +36,8 @@ class Publication extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+
 
     public function likedByUser($user)
     {

@@ -43,7 +43,8 @@ class ReservationController extends Controller
 
         $coachId = $request->input('coach_id');
 
-        $clientId = Auth::user()->client->first()->id;
+        $clientId = client::where("user_id", Auth::user()->id)->first()->id;
+
         $timeSlot = $request->input('selected_hour');
         $appointmentDate = $request->input('appointment_date');
 

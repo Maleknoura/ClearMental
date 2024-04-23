@@ -17,17 +17,18 @@ class PublicationController extends Controller
     public function index(Request $request)
     { {
             $tags = Tag::all();
-            $publications = Publication::with(['tags', 'coach'])->orderBy('created_at', 'desc')->paginate(3);
+            $publications = Publication::with(['tags', 'coach', 'comments.client'])->orderBy('created_at', 'desc')->paginate(3);
+            // dd($publications);
             if ($request->has('tag')) {
                 $tag = Tag::findOrFail($request->tag);
-                $publications = $tag->publications()->with('coach', 'tags')->orderByDesc('created_at')->paginate(3);
+                $publications = $tag->publications()->with('coach', 'tags','comments')->orderByDesc('created_at')->paginate(3);
             }
             $comments = [];
             foreach ($publications as $publication) {
-                $comments[$publication->id] = $publication->comments()->latest()->get();
+                $comments[$publication->id] = $publication->comments;
             }
             $popularpublications = Publication::withCount('likes')->orderByDesc('likes_count')->take(1)->get();
-            return view('actuality', compact('publications', 'tags', 'comments', 'popularpublications'));
+            return view('actuality', compact('publications', 'tags','comments', 'popularpublications'));
         }
     }
 

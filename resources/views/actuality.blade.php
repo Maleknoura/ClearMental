@@ -35,6 +35,7 @@
 
                         </div>
                     </div>
+
                     @foreach ($publications as $publication)
                         <div class="grid gap-6 mb-4 md:gap-8 grid-cols-1">
                             <div class="nc-Card3 relative flex flex-col-reverse sm:flex-row sm:items-center rounded-[40px] group "
@@ -64,16 +65,11 @@
                                         </div>
                                         <div class="nc-PostCardMeta inline-flex items-center fledx-wrap text-neutral-800 dark:text-neutral-200 text-sm leading-none"
                                             data-nc-id="PostCardMeta">
-                                            <div>
-
-                                                <i class='bx bx-message-rounded-dots text-2xl'id="comment-icon"></i>
-                                            </div>
                                             <div class="sidebar hidden bg-gray-200 p-4">
 
                                             </div>
                                             <div class="flex items-center space-x-2">
-                                                <!-- Icône de like -->
-                                                <!-- Icône de dislike -->
+
 
                                                 <form action="{{ route('publication.like', $publication->id) }}"
                                                     method="POST">
@@ -99,6 +95,10 @@
                                                     </button>
                                                 </form>
 
+                                                <div>
+
+                                                    <i class='bx bx-message-rounded-dots text-2xl'id="comment-icon"></i>
+                                                </div>
 
 
                                             </div>
@@ -124,13 +124,18 @@
 
                                         </div>
                                     </form>
+                                    {{-- @dd( $publication->comments(Auth::user())); --}}
+
                                     @foreach ($comments[$publication->id] as $comment)
                                         <div class="comment">
 
-                                            <p>{{ $comment->content }}</p>
 
+                                            <p>{{ $comment->content }}</p>
+                                            {{-- @dd(Auth::check() && $publication->comments(Auth::user())) --}}
                                             <p>Commenté par : {{ $comment->client->user->name }}</p>
-                                            @if (Auth::check() && $comment->client_id == Auth::user()->client->id)
+                                            {{-- @dd(Auth::user()->id) --}}
+
+                                            @if (Auth::check() && $comment->client->user_id == Auth::user()->id)
                                                 <button data-modal-target="update-modal" id=""
                                                     data-modal-toggle="update-modal"
                                                     data-comment-id="{{ $comment->id }}"
