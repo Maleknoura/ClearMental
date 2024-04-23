@@ -2,7 +2,7 @@
 
 interface TagRepositoryInterface{
 	
-    public function all();
+ 
 
  
 

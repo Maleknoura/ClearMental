@@ -12,10 +12,7 @@ class TagRepository implements TagRepositoryInterface
         $this->tag = $tag;
     }
 
-    public function all()
-    {
-        return $this->tag->all();
-    }
+   
 
     public function create(array $data)
     {
