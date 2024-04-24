@@ -65,7 +65,11 @@
                                name="password_confirmation" id="password_confirmation"
                                placeholder="password_confirmation">
                     </div>
-
+                    <div class="pb-2 pt-4">
+                        <input class="block w-full p-2 text-lg rounded-sm bg-black" type="text" name="description"
+                               id="description" placeholder="Description (optional)" aria-describedby="description-description">
+                        <p id="description-description" class="text-sm text-gray-500">Optional description about yourself.</p>
+                    </div>
                     <div class=" pt-2">
                         <label class="mb-3 block text-base font-medium">
                             Would you like to sign up as an Coach or a Client?

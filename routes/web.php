@@ -29,8 +29,8 @@ use App\Http\Middleware\CheckRole;
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index']);
     Route::post('/favoris', [HomeController::class, 'favoris'])->name('toggle.coach');
 
     Route::get('/library', [BookController::class, 'index']);
@@ -49,7 +49,7 @@ Route::delete('/comments/{comment}', [CommentaireController::class, 'destroy'])-
     Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
 });
 
-Route::middleware(['auth', CheckRole::class . ':coach'])->group(function () {
+Route::middleware([CheckRole::class, 'admin'])->group(function () {
 
 Route::get('/publication', [PublicationController::class, 'show'])->name('publication.approuver');
     Route::post('/publication/create', [PublicationController::class, 'store'])->name('publication.store');

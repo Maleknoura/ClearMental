@@ -4,19 +4,38 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Log; // Add Log facade for logging
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; 
 
 class CheckRole
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request 
+     * @param  \Closure  
+     * @param  string  
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$roles): mixed{$user = $request->user();
-        if (!$user || !in_array($user->role, $roles)) {Log::warning('Unauthorized access. User role: ' . ($user ? $user->role : 'Guest'));
-            return response()->view('login');}
+    public function handle(Request $request, Closure $next, ...$roles)
+    {
+        $user = Auth::user();
+        
+        if (!$user || !$user->role || !in_array($user->role, $roles)) {
+            switch ($user->role) {
+                case 'admin':
+                    return redirect('/dashboard');
+                    break;
+                case 'coach':
+                    return redirect('/dashboardcoach');
+                    break;
+                default:
+                    return redirect('/');
+            }
+        }
+
         return $next($request);
     }
 }
+
+

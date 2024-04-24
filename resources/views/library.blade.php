@@ -16,39 +16,8 @@
 </head>
 
 <body>
-    <header class="header-area">
-        <div class="container">
-            <div class="row d_flex">
-                <div class=" col-md-3 col-sm-3">
-                </div>
-                <div class="col-md-9 col-sm-9">
-                    <div class="navbar-area">
-                        <nav class="site-navbar">
-                            <div class="logo">
-                                <img src="/images/logo.png" alt="" width="100px" height="170px">
-                            </div>
-                            <ul>
-                                <li><a class="active" href="">Home</a></li>
-                                <li><a href="">Actuality</a></li>
-                                <li><a href="">Library</a></li>
-
-                            </ul>
-                            <ul>
-                                <li><a href=""><a href="Javascript:void(0)"><i class="fa fa-user"
-                                                aria-hidden="true"></i></a></li>
-                                <li class="d_none"><a href="Javascript:void(0)"><i class="fa fa-search"
-                                            aria-hidden="true"></i></a></li>
-                            </ul>
-                            <button class="nav-toggler">
-                                <span></span>
-                            </button>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="flex justify-between  mb-4">
+    <x-nav-bar />
+    <div class="flex justify-between  mt-9 mb-5">
         <div class="search-bar ml-auto">
             <form method="POST" action="{{ route('searchbook') }}">
                 @csrf

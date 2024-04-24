@@ -20,7 +20,7 @@ class HomeController extends Controller
         // dd($coachs);
         $favorites = Favoris::all();
         // dd($favorites);
-        return view('home', compact('coachs', 'favorites'));
+        return view('index', compact('coachs', 'favorites'));
     }
     
     public function favoris(Request $request)

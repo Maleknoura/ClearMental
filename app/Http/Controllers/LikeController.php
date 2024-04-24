@@ -25,8 +25,14 @@ class LikeController extends Controller
 
             $publication->likes()->where('user_id', $user->id)->delete();
             return redirect()->back()->with('success', 'Like removed successfully');
-        } else {
-
+        } else if($publication->dislikedByUser($user)){
+            $publication->likes()->where('user_id', $user->id)->delete();
+            $publication->likes()->create([
+                'user_id' => $user->id,
+                'type' => 'like',
+            ]);
+            return redirect()->back()->with('success', 'Publication liked successfully');
+        } else{
             $publication->likes()->create([
                 'user_id' => $user->id,
                 'type' => 'like',
@@ -41,21 +47,30 @@ class LikeController extends Controller
         $user = auth()->user();
 
 
+
         if ($publication->dislikedByUser($user)) {
 
             $publication->likes()->where('user_id', $user->id)->delete();
-        } else {
-            if ($publication->likedByUser($user)) {
+            return redirect()->back()->with('success', 'Publication disliked successfully');
+        } else if($publication->likedByUser($user)) {
+            // if ($publication->likedByUser($user)) {
                 $publication->likes()->where('user_id', $user->id)->delete();
-            }
-
+            // }
+            
             $publication->likes()->create([
                 'user_id' => $user->id,
                 'type' => 'dislike',
             ]);
+            
+        return redirect()->back()->with('success', 'Publication disliked successfully');
+        }else{
+            $publication->likes()->create([
+                'user_id' => $user->id,
+                'type' => 'dislike',
+            ]);
+            return redirect()->back()->with('success', 'Publication liked successfully');
         }
 
-        return redirect()->back()->with('success', 'Publication disliked successfully');
     }
 
 

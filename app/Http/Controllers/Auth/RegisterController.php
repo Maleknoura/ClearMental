@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-        
+            'description' => 'nullable|string',
             'role' => 'required'
         ]);
 
@@ -50,7 +50,8 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-          
+            'description' => $request->description, 
+
             'role' => $request->role,
         ]);
 
@@ -73,7 +74,7 @@ class RegisterController extends Controller
         }
 
 
-      
+        return redirect('/login');
     }
 
 

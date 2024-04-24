@@ -5,7 +5,7 @@
 
 <div>
     <header class="">
-        <div class="px-4 mx-auto sm:px-6 lg:px-8">
+        <div class=" shadow-md px-4 mx-auto sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 lg:h-20">
                 <div class="flex-shrink-0">
                     <a href="#" title="" class="flex">
@@ -24,11 +24,11 @@
                 </button>
 
                 <div class="hidden ml-auto lg:flex lg:items-center lg:justify-center lg:space-x-10">
-                    <a href="#" title="" class="text-base active font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Home </a>
+                    <a href="/" title="" class="text-base active font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Home </a>
 
                     <a href="{{ route('publications.index') }}" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Actuality </a>
 
-                    <a href="#" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Library </a>
+                    <a href="/library" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Library </a>
 
 
                     <div class="w-px h-5 bg-black/20"></div>
