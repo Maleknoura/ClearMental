@@ -118,7 +118,7 @@ class ReservationController extends Controller
             'statut' => $request->statut,
         ]);
 
-        return redirect()->back()->with('success', 'La réservation a été acceptée avec succès.');
+            return redirect()->back()->with('success', 'La réservation a été acceptée avec succès.');
     }
 
     /**

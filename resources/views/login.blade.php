@@ -102,7 +102,13 @@
         <button
         class="uppercase block w-full p-4 text-lg rounded-full bg-orange-400 hover:bg-orange-600 focus:outline-none">
         Login
-    </button>      </form>
+    </button>     
+</form>
+<p class="text-sm font-light mb-5 text-center  text-gray-500 dark:text-gray-400">
+   Don't have an account? <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Register here</a>
+
+
+
     </div>
    </div>
 </body>

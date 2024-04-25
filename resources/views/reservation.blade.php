@@ -6,10 +6,7 @@
 
 <!-- component -->
 <div x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
-  
-
-
-<div class="text-center">
+  <div class="text-center">
     <h2 class="text-3xl mt-24 font-extrabold text-[#333] inline-block">Reservations</h2>
 </div>
     <div class="flex items-center justify-center " >

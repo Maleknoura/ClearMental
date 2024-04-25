@@ -19,8 +19,17 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $user = Auth::user();
-        
+        if(Auth::user()->status == 1)
+        {
+            Auth::logout();
+            abort('403','your banned');
+        }
+        return $next($request);
+    
         if (!$user || !$user->role || !in_array($user->role, $roles)) {
             switch ($user->role) {
                 case 'admin':

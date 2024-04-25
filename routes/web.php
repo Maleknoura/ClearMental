@@ -16,6 +16,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\videocallController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,6 @@ use App\Http\Middleware\CheckRole;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/favoris', [HomeController::class, 'favoris'])->name('toggle.coach');
-
     Route::get('/library', [BookController::class, 'index']);
     Route::get('/actuality', [PublicationController::class, 'index'])->name('publications.index');
     Route::get('/start-meeting', [videocallController::class, 'startMeeting'])->name('meet');
@@ -64,29 +64,21 @@ Route::middleware([CheckRole::class, 'coach'])->group(function () {
     Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
 });
 
-Route::middleware(['guest'])->group(function () {
-
-    Route::get('/register', [RegisterController::class, 'register']);
-    Route::post('/register', [RegisterController::class, 'store']);
-
-    Route::get('/login', [LoginController::class, 'login']);
-    Route::post('/login', [LoginController::class, 'store']);
+Route::middleware(RedirectIfAuthenticated::class)->group(function () {
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login');
+    Route::get('/register', function () {
+        return view('register');
+    });
 });
-// Route::middleware(['auth'])->group(function () {
+    Route::post('/register', [RegisterController::class, 'store']);
+    Route::post('/login', [LoginController::class, 'store']);
+
+Route::middleware(['auth'])->group(function () {
 
 Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
-// });
-
-
-Route::get('/forgot-password', [ForgotPasswordLinkController::class, 'create'])->name('forgot-password');
-
-Route::post('/forgot-request', [ForgotPasswordLinkController::class, 'store']);
-
-
-// Password Reset
-
-
-
+});
 
 
 

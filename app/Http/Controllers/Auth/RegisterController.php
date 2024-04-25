@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\Client;
 use App\Models\Coach;
 use App\Models\User;
@@ -27,21 +28,11 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         /*
             Validation des données
             */
-
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
-            'description' => 'nullable|string',
-            'role' => 'required'
-        ]);
-
-
 
         $user = User::create([
             'name' => $request->name,
