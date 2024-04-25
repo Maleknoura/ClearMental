@@ -1,25 +1,19 @@
-<script src="https://cdn.tailwindcss.com"></script>
+{{-- <script src="https://cdn.tailwindcss.com"></script>
 
-<body class=" m-24 overflow-hidden ">
+<body class="card">
 <section class=" flex items-stretch text-white ">
-    <div class="lg:flex w-2/3 hidden  bg-gray-500 bg-no-repeat bg-cover relative items-center"
-         style="background-image: url(https://i.pinimg.com/564x/aa/9a/3d/aa9a3daf1fbc4a3db8e1c27744704d0e.jpg);">
-        <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
-        <div class="w-full px-24 z-10">
-            <p class="text-2xl my-4">Connectez-vous à votre compte et débloquez un monde de croissance personnelle et d'épanouissement.</p>
-        </div>
+    <div class="lg:flex  hidden  bg-center bg-cover relative items-center"
+         style="background-image: url(https://i.pinimg.com/564x/46/05/41/46054169dc397b1ab3e02846e8fa1f06.jpg);">
+       
     </div>
     <div class="lg:w-2/3 flex items-center justify-center text-center md:px-16 px-0 z-0"
-    style="background-color: #161616;">
+    >
     <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
     style="background-image: url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80);">
     <div class="absolute bg-black opacity-60 inset-0 z-0"></div>
 </div>
 <div class="w-full py-6 z-20">
-    {{--            <h1 class="w-auto text-3xl">--}}
-        {{--                Evento--}}
-        {{--            </h1>--}}
-        
+  
         
         <form enctype="multipart/form-data" method="post" action="/register"
         class="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
@@ -27,27 +21,7 @@
         <div class="pb-2 ">
            
             <h1 class="text-4xl font-bold mb-5 text-left tracking-wide">Bienvenue sur ClearMental !</h1>
-                    {{-- <div class="extraOutline p-4 bg-black bg-whtie m-auto rounded-lg">
-                        <div class="file_upload p-5 relative h-36 border-4 border-dotted border-gray-300 rounded-lg">
-                            <svg class="text-indigo-500 w-8 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg"
-                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                            </svg>
-                            <div class="input_field flex flex-col w-max mx-auto text-center">
-                                <label>
-                                    <input class="text-sm cursor-pointer w-36 hidden" type="file" name="picture"
-                                           id="picture"/>
-                                    <div
-                                        class="text bg-indigo-600 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-indigo-500">
-                                        Select
-                                    </div>
-                                </label>
-
-                                <div class="title text-sm text-indigo-500 uppercase">or drop files here</div>
-                            </div>
-                        </div>
-                    </div> --}}
+                
                     <div class="pb-2  pt-2">
                         <input class="block w-full p-2 text-lg rounded-sm bg-black" type="text" name="name" id="name"
                                placeholder="Username">
@@ -130,4 +104,128 @@
         </div>
     </div>
 </section>
-</body>
+</body> --}}
+<!-- source: https://gist.github.com/nraloux/bce10c4148380061781b928cdab9b193 -->
+<!-- I have added support for dark mode and improved UI -->
+ <script src="https://cdn.tailwindcss.com"></script>: 
+<div class="h-full bg-gray-400 dark:bg-gray-900">
+	<!-- Container -->
+	<div class="mx-auto">
+		<div class="flex justify-center px-6 py-12">
+			<!-- Row -->
+			<div class="w-full xl:w-3/4 lg:w-11/12 flex">
+				<!-- Col -->
+				<div class="w-full h-auto bg-gray-400 bg-center dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
+					style="background-image: url(https://i.pinimg.com/736x/57/d9/4e/57d94eefc6c004088a5b51dccb009444.jpg)"></div>
+				<!-- Col -->
+				<div class="w-full lg:w-7/12 bg-white dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
+					<h3 class="py-4 text-2xl text-center text-gray-800 dark:text-white">Create an Account!</h3>
+					<form class="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded"enctype="multipart/form-data" method="post" action="/register">
+                       @csrf
+
+						<div class="mb-4 md:flex md:justify-between">
+                            <div class="mb-4 ">
+                                <label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="fullName">
+                                    Full Name
+                                </label>
+                                <input
+                                    class="block px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    name="name" id="name"
+                                    type="text"
+                                    placeholder="Full Name"
+                                />
+                            </div>
+                            
+							{{-- <div class="md:ml-2">
+								<label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="lastName">
+                                    Last Name
+                                </label>
+								<input
+                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="lastName"
+                                    type="text"
+                                    placeholder="Last Name"
+                                />
+							</div> --}}
+						</div>
+						<div class="mb-4">
+							<label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="email">
+                                Email
+                            </label>
+							<input
+                                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                name="email" id="email"
+                                type="email"
+                                placeholder="Email"
+                            />
+						</div>
+						<div class="mb-4 md:flex md:justify-between">
+							<div class="mb-4 md:mr-2 md:mb-0">
+								<label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="password">
+                                    Password
+                                </label>
+								<input
+                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="password" name="password"
+                                    type="password"
+                                    placeholder="******************"
+                                />
+								<p class="text-xs italic text-red-500">Please choose a password.</p>
+							</div>
+							<div class="md:ml-2">
+								<label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="c_password">
+                                    Confirm Password
+                                </label>
+								<input
+                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    name="password_confirmation" id="password_confirmation"
+                                    type="password"
+                                    placeholder="******************"
+                                />
+							</div>
+						</div>
+                        <div class=" pt-2">
+                            <label class="mb-3 block text-base font-medium">
+                                Would you like to sign up as an Coach or a Client?
+                            </label>
+                            <div class="flex items-center space-x-6 px-24">
+                                <div class="flex items-center">
+                                    <input type="radio" name="role" value="coach" id="radioButton1"
+                                           class="h-5 w-5"/>
+                                    <label for="radioButton1" class="pl-3 text-base font-medium">
+                                        Coach
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" name="role" value="client" id="radioButton2"
+                                           class="h-5 w-5"/>
+                                    <label for="radioButton2" class="pl-3 text-base font-medium">
+                                        Client
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+    
+						<div class="mt-9 text-center">
+							<button
+                            class="uppercase block w-full  p-2 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+                            Register
+                        </button>
+						</div>
+						<hr class="mb-6 border-t" />
+						<div class="text-center">
+							
+						</div>
+						<div class="text-center">
+                            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                                Already have an account? <a href="/login"
+                                                            class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
+                                    here</a>
+                            </p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
