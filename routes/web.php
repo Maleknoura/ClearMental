@@ -39,9 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/chat/send', [ChatController::class, 'sendMessage']);
     Route::post('/publication/{id}/like', [LikeController::class, 'like'])->name('publication.like');
     Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
-    Route::post('/publication/comment', [CommentaireController::class, 'store'])->name('comments.store');
     Route::put('/comments/{comment}', [CommentaireController::class, 'update'])->name('comments.update');
-Route::delete('/comments/{comment}', [CommentaireController::class, 'destroy'])->name('comments.destroy');
+    Route::delete('/comments/{comment}', [CommentaireController::class, 'destroy'])->name('comments.destroy');
 
     Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
     Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
@@ -51,7 +50,7 @@ Route::delete('/comments/{comment}', [CommentaireController::class, 'destroy'])-
 
 Route::middleware([CheckRole::class, 'admin'])->group(function () {
 
-Route::get('/publication', [PublicationController::class, 'show'])->name('publication.approuver');
+    Route::get('/publication', [PublicationController::class, 'show'])->name('publication.approuver');
     Route::post('/publication/create', [PublicationController::class, 'store'])->name('publication.store');
     Route::delete('/publication/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
     Route::put('/publication/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
@@ -100,3 +99,7 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
     Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
 });
+
+
+Route::get("comments/{id}", [CommentaireController::class, "postComments"]);
+Route::post('/comments', [CommentaireController::class, 'store'])->name('comments.store');

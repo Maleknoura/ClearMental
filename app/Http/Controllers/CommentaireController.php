@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\commentRequest;
 use App\Models\Client;
 use App\Models\Commentaire;
+use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,17 +32,15 @@ class CommentaireController extends Controller
      */
     public function store(commentRequest $request)
     {
-       
         $client = client::where("user_id", Auth::user()->id)->first()->id;
-       
-        Commentaire::create([
+
+        $comment = Commentaire::create([
             'publication_id' => $request->publication_id,
             'client_id' => $client,
             'content' => $request->content,
         ]);
 
-
-        return redirect()->back()->with('success', 'Comment added successfully');
+        return response()->json(['comment' => $comment], 200);
     }
 
 
@@ -64,31 +63,38 @@ class CommentaireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(commentRequest $request,Commentaire $comment)
+    public function update(commentRequest $request, Commentaire $comment)
     {
 
-       
-        
+
+
         dd($request);
-        
+
         $comment->update([
             'content' => $request->content,
         ]);
-    
+
         return back()->with('success', 'Comment updated successfully.');
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Commentaire $comment)
     {
-       
-  
-    
+
+
+
         $comment->delete();
-    
+
         return back()->with('success', 'Comment deleted successfully.');
+    }
+    public function postComments(string $id)
+    {
+
+        $comments = Commentaire::where("publication_id", $id)->get();
+
+        return response()->json(["result" => $comments], 200);
     }
 }

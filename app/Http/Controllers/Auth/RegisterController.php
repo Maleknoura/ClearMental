@@ -33,7 +33,6 @@ class RegisterController extends Controller
             Validation des données
             */
 
-        // Validation des données soumises
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -42,10 +41,8 @@ class RegisterController extends Controller
             'role' => 'required'
         ]);
 
-        // Traitement de l'upload de l'image
 
 
-        // Création de l'utilisateur
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

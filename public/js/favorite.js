@@ -26,7 +26,7 @@ favoriteBtns.forEach((element) => {
         };
         fetch(url, options)
             .then((response) => response.json())
-            // console.log(response)
+           
             .then((data) => handleResponse(data, element))
             .catch((error) => console.error(error));
     });

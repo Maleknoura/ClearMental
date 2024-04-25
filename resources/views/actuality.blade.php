@@ -7,9 +7,11 @@
     <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/actuality.css') }}">
 
@@ -19,6 +21,7 @@
 </head>
 
 <body>
+
 
     <!-- end loader -->
     <div class="full_bg">
@@ -97,7 +100,16 @@
 
                                                 <div>
 
-                                                    <i class='bx bx-message-rounded-dots text-2xl'id="comment-icon"></i>
+                                                    <button id="showCommentBtn" type="button"
+                                                        data-drawer-target="drawer-right-example"
+                                                        data-publication-id="{{ $publication->id }}"
+                                                        data-drawer-show="drawer-right-example"
+                                                        data-drawer-placement="right"
+                                                        aria-controls="drawer-right-example">
+                                                        <i
+                                                            class='bx bx-message-rounded-dots text-2xl'id="comment-icon"></i>
+
+                                                    </button>
                                                 </div>
 
 
@@ -117,25 +129,25 @@
                                         @csrf
                                         <div class="flex items-center mb-4 border-b border-gray-300 pb-2">
                                             <input type="hidden" name="publication_id" value="{{ $publication->id }}">
-                                            <input type="text" name="content" placeholder="Add your comment..."
+                                            {{-- <input type="text" name="content" placeholder="Add your comment..."
                                                 class="border-none px-4 py-2 w-full">
                                             <button type="submit"
-                                                class="bg-orange-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Comment</button>
+                                                class="bg-orange-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Comment</button> --}}
 
                                         </div>
                                     </form>
                                     {{-- @dd( $publication->comments(Auth::user())); --}}
 
-                                    @foreach ($comments[$publication->id] as $comment)
-                                        <div class="comment">
+                                    {{-- @foreach ($comments[$publication->id] as $comment) --}}
+                                    {{-- <div class="comment"> --}}
 
 
-                                            <p>{{ $comment->content }}</p>
-                                            {{-- @dd(Auth::check() && $publication->comments(Auth::user())) --}}
-                                            <p>Commenté par : {{ $comment->client->user->name }}</p>
-                                            {{-- @dd(Auth::user()->id) --}}
+                                    {{-- <p>{{ $comment->content }}</p> --}}
+                                    {{-- @dd(Auth::check() && $publication->comments(Auth::user())) --}}
+                                    {{-- <p>Commenté par : {{ $comment->client->user->name }}</p> --}}
+                                    {{-- @dd(Auth::user()->id) --}}
 
-                                            @if (Auth::check() && $comment->client->user_id == Auth::user()->id)
+                                    {{-- @if (Auth::check() && $comment->client->user_id == Auth::user()->id)
                                                 <button data-modal-target="update-modal" id=""
                                                     data-modal-toggle="update-modal"
                                                     data-comment-id="{{ $comment->id }}"
@@ -143,9 +155,9 @@
                                                     class="update-comment block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                                     type="button">
                                                     update
-                                                </button>
+                                                </button> --}}
 
-                                                <form
+                                    {{-- <form
                                                     action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
                                                     method="POST" style="display: inline;">
                                                     @csrf
@@ -154,10 +166,10 @@
                                                         onclick="return confirm('Are you sure you want to delete this comment?')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
-                                                </form>
-                                            @endif
+                                                </form> --}}
+                                    {{-- @endif
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                                 <div
                                     class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
@@ -337,22 +349,48 @@
                                 </div>
                             </div>
 
-
                         </div>
-                        <script>
-                            const updateBtns = document.querySelectorAll('[data-modal-toggle="update-modal"]');
-                            updateBtns.forEach(btn => {
-                                btn.addEventListener("click", (event) => {
-                                    const commentId = btn.getAttribute("data-comment-id");
-                                    const commentContent = btn.getAttribute("data-comment-content");
 
-                                    const modal = document.querySelector("#update-modal form");
-                                    modal.action = `/comments/${commentId}/`;
 
-                                    document.querySelector("input[name='content']").value = commentContent;
-                                });
-                            });
-                        </script>
+
+
+
+
+
+
+                        <!-- drawer component -->
+                        <div id="drawer-right-example"
+                            class="fixed top-0 right-0  z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800"
+                            tabindex="-1" aria-labelledby="drawer-right-label">
+                            <h5 id="drawer-right-label"
+                                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                                <svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                </svg>Right drawer
+                            </h5>
+                            <button type="button" data-drawer-hide="drawer-right-example"
+                                aria-controls="drawer-right-example"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close menu</span>
+                            </button>
+                            <div id="commentsContainer" class="mb-6">
+                            </div>
+                            <input type="text" id="commentInput"
+                                class="w-full border border-gray-200 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:ring focus:border-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:focus:border-blue-600"
+                                placeholder="Add a comment">
+
+                            <input type="hidden" id="publicationId">
+                            <button id="submitButton"
+                                class="w-full py-2 px-4 text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring focus:ring-blue-300 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                        </div>
+                        <script src="./js/addcommentaire.js"></script>
 
 </body>
 
