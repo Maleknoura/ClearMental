@@ -27,7 +27,7 @@ class CheckRole
                     return redirect('/dashboard');
                     break;
                 case 'coach':
-                    return redirect('/publication');
+                    return redirect('/DashboardCoach');
                     break;
                 default:
                     return redirect('/');

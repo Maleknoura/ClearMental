@@ -30,7 +30,7 @@ use App\Http\Middleware\CheckRole;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/favoris', [HomeController::class, 'favoris'])->name('toggle.coach');
 
     Route::get('/library', [BookController::class, 'index']);
@@ -41,21 +41,22 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/publication/{id}/dislike', [LikeController::class, 'dislike'])->name('publication.dislike');
     Route::put('/comments/{comment}', [CommentaireController::class, 'update'])->name('comments.update');
     Route::delete('/comments/{comment}', [CommentaireController::class, 'destroy'])->name('comments.destroy');
-
+    Route::get("comments/{id}", [CommentaireController::class, "postComments"]);
+    Route::post('/comments', [CommentaireController::class, 'store'])->name('comments.store');
     Route::get('/coach/{id}', [ReservationController::class, 'show'])->name('profile');
     Route::post('/coach/book', [ReservationController::class, 'store'])->name('reservation.store');
     Route::post('/search', [BookController::class, 'search'])->name('searchbook');
     Route::get('/books/{id}', [BookController::class, 'detailofbook'])->name('book.details');
 });
 
-Route::middleware([CheckRole::class, 'admin'])->group(function () {
 
+Route::middleware([CheckRole::class, 'coach'])->group(function () {
+    Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
     Route::get('/publication', [PublicationController::class, 'show'])->name('publication.approuver');
     Route::post('/publication/create', [PublicationController::class, 'store'])->name('publication.store');
     Route::delete('/publication/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
     Route::put('/publication/update/{id}', [PublicationController::class, 'update'])->name('publication.update');
     Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
-    Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
     Route::delete('/books/delete/{id}', [BookController::class, 'destroy'])->name('books.destroy');
     Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations');
@@ -99,7 +100,3 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::post('/dashboard/update/{id}', [PublicationController::class, 'publication'])->name('update.pub');
     Route::patch('/dashboard/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
 });
-
-
-Route::get("comments/{id}", [CommentaireController::class, "postComments"]);
-Route::post('/comments', [CommentaireController::class, 'store'])->name('comments.store');

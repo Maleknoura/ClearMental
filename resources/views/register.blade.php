@@ -108,12 +108,12 @@
 <!-- source: https://gist.github.com/nraloux/bce10c4148380061781b928cdab9b193 -->
 <!-- I have added support for dark mode and improved UI -->
  <script src="https://cdn.tailwindcss.com"></script>: 
-<div class="h-full bg-gray-400 dark:bg-gray-900">
+<div class="h-full">
 	<!-- Container -->
 	<div class="mx-auto">
 		<div class="flex justify-center px-6 py-12">
 			<!-- Row -->
-			<div class="w-full xl:w-3/4 lg:w-11/12 flex">
+			<div class="w-full shadow-lg xl:w-3/4 lg:w-11/12 flex">
 				<!-- Col -->
 				<div class="w-full h-auto bg-gray-400 bg-center dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
 					style="background-image: url(https://i.pinimg.com/736x/57/d9/4e/57d94eefc6c004088a5b51dccb009444.jpg)"></div>
@@ -208,7 +208,7 @@
     
 						<div class="mt-9 text-center">
 							<button
-                            class="uppercase block w-full  p-2 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+                            class="uppercase block w-64 mx-auto  p-2 text-lg rounded-full bg-gray-400 hover:bg-indigo-600 focus:outline-none">
                             Register
                         </button>
 						</div>
