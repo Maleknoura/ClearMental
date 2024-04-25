@@ -15,7 +15,10 @@ class Client extends Model
     ];
 
 
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
 
@@ -37,8 +40,4 @@ class Client extends Model
         return $this->belongsToMany(Coach::class, 'favoris', 'client_id', 'coach_id')->withTimestamps();
     }
    
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
 }

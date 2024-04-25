@@ -138,7 +138,8 @@
                                     </form>
                                     {{-- @dd( $publication->comments(Auth::user())); --}}
 
-                                    {{-- @foreach ($comments[$publication->id] as $comment) --}}
+                                    {{-- @foreach ($comments[$publication->id] as $comment)
+                                    @dd($comment->client->user->name); --}}
                                     {{-- <div class="comment"> --}}
 
 
@@ -168,8 +169,8 @@
                                                     </button>
                                                 </form> --}}
                                     {{-- @endif
-                                        </div>
-                                    @endforeach --}}
+                                        {{-- </div> --}}
+                                    {{-- @endforeach --}}
                                 </div>
                                 <div
                                     class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
@@ -294,73 +295,11 @@
                     </div>
 
                     <div>
-                        <div id="update-modal" tabindex="-1" aria-hidden="true"
-                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="relative  p-6 w-full max-w-md max-h-full">
-                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-
-                                    <div
-                                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                            Update comment
-                                        </h3>
-                                        <button type="button"
-                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                            data-modal-toggle="update-modal">
-                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span class="sr-only">Close modal</span>
-                                        </button>
-                                    </div>
-                                    {{-- <form method="post" action="{{ route('comments.update', ['comment' => $comment->id]) }}" class="p-4 md:p-5">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                        <input type="hidden" name="publication_id" value="{{ $comment->publication_id }}"> --}}
-
-
-                                    <div class="grid gap-4  p-4 grid-cols-2">
-                                        <div class="col-span-2">
-                                            <label for="content"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                            <input type="text" name="content" id="content"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Type product name" required="">
-
-
-                                            <button type="submit"
-                                                class="text-white mt-4 inline-flex items-center bg-gray-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor"
-                                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                Update
-                                            </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
 
 
 
-
-
-
-
-
-                        <!-- drawer component -->
                         <div id="drawer-right-example"
-                            class="fixed top-0 right-0  z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800"
+                            class="fixed top-0 right-0 w-96 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800"
                             tabindex="-1" aria-labelledby="drawer-right-label">
                             <h5 id="drawer-right-label"
                                 class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
@@ -368,8 +307,9 @@
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path
                                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                                </svg>Right drawer
+                                </svg>Comments
                             </h5>
+
                             <button type="button" data-drawer-hide="drawer-right-example"
                                 aria-controls="drawer-right-example"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -380,15 +320,18 @@
                                 </svg>
                                 <span class="sr-only">Close menu</span>
                             </button>
-                            <div id="commentsContainer" class="mb-6">
-                            </div>
-                            <input type="text" id="commentInput"
-                                class="w-full border border-gray-200 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:ring focus:border-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:focus:border-blue-600"
-                                placeholder="Add a comment">
-
+                            <input type="text" id="commentInput" class= "border-none px-4 py-2 w-full"
+                            placeholder="Add your comment..." placeholder="Add a comment">
+                         
                             <input type="hidden" id="publicationId">
                             <button id="submitButton"
-                                class="w-full py-2 px-4 text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring focus:ring-blue-300 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                            class="bg-orange-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Submit</button>
+                            <div id="commentsContainer" class="mb-6">
+
+                            </div>
+                            
+                            <hr>
+                            
                         </div>
                         <script src="./js/addcommentaire.js"></script>
 

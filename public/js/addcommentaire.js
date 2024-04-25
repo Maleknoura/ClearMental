@@ -34,18 +34,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
         xhr.send();
     }
-
     function displayComments(comments) {
         var commentsContainer = document.getElementById('commentsContainer');
         commentsContainer.innerHTML = ''; 
-
+    
         comments.forEach(function(comment) {
-        
+            console.log(comment)
+            var createdAtDate = new Date(comment.created_at);
+    
+            var formattedCreatedAt = createdAtDate.toLocaleDateString('en-US', { day: '2-digit', month: 'long' });
+    
             var commentDiv = document.createElement('div');
-            commentDiv.textContent = comment.content;
+            commentDiv.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow-md');
+            commentDiv.innerHTML = `
+                <h3 class="text-lg font-bold">user name</h3>
+                <p class="text-gray-700 text-sm mb-2">${formattedCreatedAt}</p>
+                <p class="text-gray-700">${comment.content}</p>
+            `;
             commentsContainer.appendChild(commentDiv);
         });
     }
+    
 
 
 
@@ -93,10 +102,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayComment(comment) {
-        var commentsContainer = document.getElementById('commentsContainer');
-        var commentDiv = document.createElement('div');
-        commentDiv.textContent = comment.body;
-        commentsContainer.appendChild(commentDiv);
+        var contentElement = document.createElement('p');
+        contentElement.classList.add('text-gray-700');
+        contentElement.textContent = comment.content;
+        commentDiv.appendChild(contentElement);
+
+        
     }
 
     fetchComments();

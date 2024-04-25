@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::middleware([CheckRole::class, 'coach'])->group(function () {
+// Route::middleware([CheckRole::class, 'coach'])->group(function () {
     Route::get('/DashboardCoach', [BookController::class, 'show'])->name('books.index');
     Route::get('/publication', [PublicationController::class, 'show'])->name('publication.approuver');
     Route::post('/publication/create', [PublicationController::class, 'store'])->name('publication.store');
@@ -62,7 +62,7 @@ Route::middleware([CheckRole::class, 'coach'])->group(function () {
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations');
 
     Route::patch('/reservations/{id}/accept', [ReservationController::class, 'update'])->name('reservations.accept');
-});
+// });
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::get('/login', function () {
@@ -75,10 +75,10 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::post('/register', [RegisterController::class, 'store']);
     Route::post('/login', [LoginController::class, 'store']);
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
 
 Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
-});
+// });
 
 
 

@@ -14,9 +14,7 @@
 </head>
 
 <body>
-    {{-- @if (session('success'))
-        <p>{{session('success')}}</p>
-    @endif --}}
+   
     <div>
         <nav
             class="sticky lg:ml-40 mb-7 top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-full  p-2 backdrop-blur-xl ]">

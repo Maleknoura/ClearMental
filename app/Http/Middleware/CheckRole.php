@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use App\Http\Controllers\LoginController;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class CheckRole
             Auth::logout();
             abort('403','your banned');
         }
-        return $next($request);
+     
     
         if (!$user || !$user->role || !in_array($user->role, $roles)) {
             switch ($user->role) {
