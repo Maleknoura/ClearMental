@@ -33,14 +33,14 @@ class CommentaireController extends Controller
     public function store(commentRequest $request)
     {
         $client = client::where("user_id", Auth::user()->id)->first()->id;
-
-        $comment = Commentaire::create([
+// dd($request);
+        Commentaire::create([
             'publication_id' => $request->publication_id,
             'client_id' => $client,
             'content' => $request->content,
         ]);
 
-        return response()->json(['comment' => $comment], 200);
+        return redirect()->back()->with('succes','Commentaire ajouté avec succés');
     }
 
 

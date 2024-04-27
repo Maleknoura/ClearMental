@@ -116,7 +116,7 @@
 </div>
 </div>
     
-    <div class="ml-9">
+    {{-- <div class="ml-9">
         <div class="grid lg:ml-36 w-[35rem] grid-cols-1 p-4">
             <div class="sm:-mx-6 lg:-mx-8">
                 <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
@@ -175,9 +175,33 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     
-        
+<ul class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
+    <li class="relative flex flex-col sm:flex-row xl:flex-col items-start">
+        <div class="order-1 sm:ml-6 xl:ml-0">
+            @foreach($publications as $publication) 
+            <h3 class="mb-1 text-slate-900 font-semibold">
+                @foreach($publication->tags as $tag)
+
+                <span class="mb-1 block text-sm leading-6 text-indigo-500">{{ $tag->name }}</span>
+                                                          @endforeach
+                                                          {{ $publication->title }}
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+                <p>  {{ $publication->Contenu }}</p>
+            </div><span class="sr-only">, Completely unstyled, fully accessible UI components</span>
+                <svg class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                    width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M0 0L3 3L0 6"></path>
+                </svg></a>
+        </div>
+        <img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt="" class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full" width="1216" height="640">
+    </li>
+   
+   @endforeach
+</ul>   
 
     <div id="update-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">

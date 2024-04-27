@@ -28,7 +28,9 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');

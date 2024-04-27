@@ -16,57 +16,87 @@
 <div class="text-center">
     <h2 class="text-3xl font-extrabold text-[#333] inline-block">Books</h2>
 </div>
-    <div class="flex items-center justify-center " >
-    <table class="w-full border-collapse border border-orange-500 max-w-xl mt-16 mx-auto">
+  
 
-        <thead>
-          <tr class="bg-orange-500 text-white">
-            <th class="py-4 px-4 text-left">Id</th>
-            <th class="py-4 px-4 text-left">Title</th>
-            <th class="py-4 px-4 text-left">Author</th>
-            <th class="py-4 px-4 text-left">Action</th>
-<th></th>
-          </tr>
-        </thead>
-        <tbody>
-            @foreach ($books as $book)
-          <tr class="bg-white border-b border-orange-500">
-            <td class="py-2 px-8">  {{ $book->id }}</td>
-            <td class="py-2 px-8">{{ $book->title }}
-            </td>
-            <td class="py-2 px-8">{{ $book->auteur }}</td>
-            <td class="px-8 py-2  text-sm whitespace-nowrap">
-                <button data-modal-target="update-modal" id=""
-                data-modal-toggle="update-modal"
-                data-book-id="{{ $book->id }}"
-                data-book-title="{{ $book->title }}"
-                data-book-author="{{ $book->auteur }}"
-                data-book-content="{{ $book->content }}"
-                class="update-modal block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button">
-                update
-            </button>
-                                               
-            <x-book-add :book="$book" />
-            </td>
-            <td class="px-8 py-2">
+<div id="search-results" class="flex flex-wrap mx-4">
+  @foreach ($bookData as $book)
+      <div class="w-full sm:w-1/3 m-7 md:w-1/3 lg:w-1/3 xl:w-1/5 px-4 mb-4">
+          <div class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+              <div class="relative pb-48 overflow-hidden">
+             
+                  @if ($book->image && filter_var($book->image, FILTER_VALIDATE_URL))
+                  <img class="absolute inset-0 h-full w-full object-cover" src="{{ asset($book->image) }}">
+              @elseif($book->image && !filter_var($book->image, FILTER_VALIDATE_URL))
+              <img class="absolute inset-0 h-full w-full object-cover" src="{{ asset('storage/images/' . $book->image)  }} ">
+              @else
+                  <p>No Image Available</p>
+              @endif
+              </div>
+              <div class="p-4">
+                  <h2 class="mt-2 mb-2 font-bold">{{ $book['title'] }}</h2>
+                  <p class="text-sm">{{ $book->content . substr(0, 80) }}</p>
+                  <div class="mt-3 flex justify-between">
+                      <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">{{ $book['auteur'] }}</span>&nbsp;<span class="text-sm font-semibold"></span>
+                  </div>
+                  <div class="mt-3 flex justify-between">
+                      <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" onclick="return confirm('Are you sure you want to delete this book?')" class="text-red-500">
+                              <i class="fas fa-trash-alt"></i> 
+                          </button> 
+                      </form>
+                      <button data-modal-target="update-modal" id=""
+                      data-modal-toggle="update-modal"
+                      data-book-id="{{ $book->id }}"
+                      data-book-title="{{ $book->title }}"
+                      data-book-author="{{ $book->auteur }}"
+                      data-book-content="{{ $book->content }}"
+                      class="update-modal  text-blue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      type="button">
+                      <i class="fas fa-edit"></i> 
+                  </button>
+                  <x-book-add :book="$book" />
+                  </div>
+              </div>
+          </div>
+      </div>
+  @endforeach
+</div>
 
-                <form action="{{ route('books.destroy', $book->id) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this book?')" class="text-red-500">Delete</button>
-                </form>
-            </td>
-         
-       
-         </tr>
 
-     @endforeach  
-        </tbody>
-      </table>  
-    </div>
-<div class="flex h-screen antialiased text-gray-900  dark:bg-dark dark:text-light">
- <!-- Loading screen -->
+    <div class="flex flex-wrap justify-end ml-auto mt-4">
+
+
+      @if ($bookData->previousPageUrl())
+          <a href="{{ $bookData->previousPageUrl() }}"
+              class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
+      @else
+          <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">&laquo;
+              Previous</span>
+      @endif
+
+
+      @for ($i = 1; $i <= $bookData->lastPage(); $i++)
+          @if ($i == $bookData->currentPage())
+              <span class="px-3 py-1 bg-orange-500 text-white rounded mr-1">{{ $i }}</span>
+          @else
+              <a href="{{ $bookData->url($i) }}"
+                  class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">{{ $i }}</a>
+          @endif
+      @endfor
+
+
+      @if ($bookData->nextPageUrl())
+          <a href="{{ $bookData->nextPageUrl() }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">Next
+              &raquo;</a>
+      @else
+          <span class="px-3 py-1 bg-gray-200 text-gray-500 rounded mr-1 cursor-not-allowed">Next
+              &raquo;</span>
+      @endif
+  </div>
+
+{{-- <div class="flex h-screen antialiased text-gray-900  dark:bg-dark dark:text-light"> --}}
  
 
   <div
@@ -76,7 +106,6 @@
    
   </div>
 
-  <!-- Sidebar -->
   <div
     x-transition:enter="transform transition-transform duration-300"
     x-transition:enter-start="-translate-x-full"
@@ -87,7 +116,6 @@
     x-show="isSidebarOpen"
     class="fixed inset-y-0 z-10 flex w-80"
   >
-    <!-- Curvy shape -->
     <svg
       class="absolute inset-0 w-full h-full text-white"
       style="filter: drop-shadow(10px 0 10px #00000030)"
@@ -100,15 +128,12 @@
         d="M268.487 0H0V800H247.32C207.957 725 207.975 492.294 268.487 367.647C329 243 314.906 53.4314 268.487 0Z"
       />
     </svg>
-    <!-- Sidebar content -->
     <div class="z-10 flex flex-col flex-1">
       <div class="flex items-center justify-between flex-shrink-0 w-64 p-4">
-        <!-- Logo -->
         <a href="#">
           <span class="sr-only"></span>
          
         </a>
-        <!-- Close btn -->
         <button @click="isSidebarOpen = false" class="p-1 rounded-lg focus:outline-none focus:ring">
           <svg
             class="w-6 h-6"
@@ -220,12 +245,11 @@
   </main>
 </div>
 
+
 <div id="crud-modal" tabindex="-1" aria-hidden="true"
 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
 <div class="relative p-4 w-full max-w-md max-h-full">
-    <!-- Modal content -->
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <!-- Modal header -->
         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
            
@@ -241,10 +265,9 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
                 <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <!-- Modal body -->
-        <form method="post" action="{{ route('books.store') }}" class="p-4 md:p-5">
+        <form method="post" action="{{ route('books.store') }}" class="p-8 md:p-5"  enctype="multipart/form-data">
             @csrf
-            <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="grid gap-4 mb-7 grid-cols-2">
                 <div>
                     <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                     <input type="text"class="w-full" name="title" id="title" class="form-input" placeholder="Enter book title" required>
@@ -254,15 +277,18 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
                     <input type="text"class="w-full" name="content" id="content" class="form-input" placeholder="Enter book content" required>
                 </div>
                 <div>
-                    <label for="numbre_of_page" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of Pages</label>
-                    <input type="text" class="w-full" name="auteur" id="auteur" class="form-input" placeholder="Enter number of pages" required>
+                    <label for="numbre_of_page" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Auteur</label>
+                    <input type="text" class="w-full" name="auteur" id="auteur" class="form-input" placeholder="Enter Author" required>
                 </div>
+              </div>
+              <div>
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                <input type="file" name="image" id="image" class="form-input w-full" accept="image/*">
             </div>
             <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
                 Add new Book
             </button>
         </form>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.1/alpine.js"></script>
 <script>

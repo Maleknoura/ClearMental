@@ -10,47 +10,41 @@
     <h2 class="text-3xl mt-24 font-extrabold text-[#333] inline-block">Reservations</h2>
 </div>
     <div class="flex items-center justify-center " >
-    <table class="w-full border-collapse border border-orange-500 max-w-xl mt-16 mx-auto">
-
+      <table class="w-full border-collapse border border-orange-500 max-w-xl mt-16 mx-auto">
         <thead>
-          <tr class="bg-orange-500 text-white">
-            <th class="py-4 px-4 text-left">Id</th>
-            <th class="py-4 px-4 text-left">Client</th>
-            <th class="py-4 px-4 text-left"></th>
-            <th class="py-4 px-4 text-left">Action</th>
-<th></th>
-          </tr>
+            <tr class="bg-orange-500 text-white">
+                <th class="py-4 px-4 text-left">Id</th>
+                <th class="py-4 px-4 text-left">Client</th>
+                <th class="py-4 px-4 text-left">Créneau horaire</th>
+                <th class="py-4 px-9 text-left">Créé le</th>
+                <th class="py-4 px-4 text-left">Action</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             @foreach ($reservations as $reservation)
-          <tr class="bg-white border-b border-orange-500">
-            <td class="py-2 px-8">  {{ $reservation->id }}</td>
-            <td class="py-2 px-8">{{ $reservation->coach->user->name }}
-            </td>
-            <td class="py-2 px-8"></td>
-            <td class="px-8 py-2  text-sm whitespace-nowrap">
-           
-                <form action="{{ route('reservations.accept', $reservation->id) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <input type="hidden" name="statut" value="confirmée">
-                    <button type="submit" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-md text-xs">
-                        Approuver
-                    </button>
-                    
-                </form>                                
-         
-            </td>
-            <td class="px-8 py-2">
-
-                
-            </td>
-         
-       
-         </tr>
-
-     @endforeach  
+            <tr class="bg-white border-b border-orange-500">
+                <td class="py-2 px-8">{{ $reservation->id }}</td>
+                <td class="py-2 px-8">{{ $reservation->coach->user->name }}</td>
+                <td class="py-2 px-8">{{ $reservation->time_slot }}</td>
+                <td class="py-2 px-8">{{ $reservation->created_at->formatLocalized('%e %B') }}
+                </td>
+                <td class="px-8 py-2 text-sm whitespace-nowrap">
+                    <form action="{{ route('reservations.accept', $reservation->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <input type="hidden" name="statut" value="confirmée">
+                        <button type="submit" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-md text-xs">
+                            Approuver
+                        </button>
+                    </form>                                
+                </td>
+                <td class="px-8 py-2"></td>
+            </tr>
+            @endforeach  
         </tbody>
+    </table>
+    
       </table>  
     </div>
 <div class="flex h-screen antialiased text-gray-900  dark:bg-dark dark:text-light">

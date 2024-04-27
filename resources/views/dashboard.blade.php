@@ -41,7 +41,7 @@
         </nav>
         <div class="flex h-full w-full">
             <div
-                class="fixed inset-y-0 left-0 z-50 lg:w-40 bg-gray-200 overflow-y-auto transition-all duration-300 ease-in-out w-0">
+                class="fixed inset-y-0 left-0 z-50 lg:w-40 bg-white-200 shadow-lg overflow-y-auto transition-all duration-300 ease-in-out w-0">
                 <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center">
                         <div class="flex-shrink-0"></div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="pt-5 pb-4">
                     <nav class="mt-5 px-2 space-y-1"><a href="#"
-                            class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
+                            class="group flex items-center px-2 py-2 text-sm font-medium text-black-300 rounded-md hover:text-white hover:bg-gray-700">
                               
                             </svg>Dashboard</a></nav>
                 </div>
@@ -58,7 +58,7 @@
          
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="px-2">
             @csrf 
-            <button type="submit" class="group flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700">
+            <button type="submit" class="group flex items-center px-2 py-2 text-sm font-medium text-black-300 rounded-md hover:text-white hover:bg-gray-700">
                 <i class="fa fa-user" aria-hidden="true"> Log Out</i>
             </button>
         </form>

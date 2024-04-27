@@ -12,30 +12,11 @@
 </head>
 <body>
     <x-nav-bar />
-{{-- 
-        <h1>Coach Profile</h1>
-        <p><strong>Name:{{  $coach->user->name }}</p>
-        <p><strong>Email: {{ $coach->user->email  }}</p>
-         
 
-    </div>
-    <form action="{{ route('reservation.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="coach_id" value="{{ $coach->id }}">
-        <input type="hidden" name="appointment_date" value="{{ $appointment_date }}">
-        <label for="selected_hour">Choisissez l'heure de votre rendez-vous :</label>
-        <select name="selected_hour" id="selected_hour">
-            @foreach ($availableHours as $hour)
-                <option value="{{ $hour }}">{{ $hour }}:00</option>
-            @endforeach
-        </select>
-        <button type="submit">Réserver</button>
-    </form> --}}
-   <!-- Profile Card -->
 <div>
     <div class="md:grid grid-cols-4 grid-rows-2  bg-white gap-2 p-4 rounded-xl">
          <div class="md:col-span-1 h-48 -xl ">
-                 <div class="flex w-full h-full relative">
+                 <div class="flex   w-full h-full relative">
                      <img src="https://res.cloudinary.com/dboafhu31/image/upload/v1625318266/imagen_2021-07-03_091743_vtbkf8.png" class="w-44 h-44 m-auto" alt="">
  
                  </div>
@@ -90,14 +71,30 @@
     </div>
     </div>
     
-    <footer class="absolute  mt-12 w-full">
-        <div class="flex flex-wrap items-center justify-center bg-orange-400">
-            <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-                <div class="text-sm text-blueGray-500 font-semibold py-1">
-                    Copyright © <span id="get-current-year">2021</span><a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank"> Notus JS by
-                        <a href="https://www.creative-tim.com?ref=njs-profile" class="text-blueGray-500 hover:text-blueGray-800">Clear Mental</a>.
-                </div>
+    <footer class=" shadow w-full mt-24 dark:bg-gray-900 bg-gray-100 overflow-x-hidden  ">
+        <div class="w-full max-w-screen-xl mx-auto  p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="/images/logo.png" alt="" width="60px" height="40px">
+                    <span class="self-center text-2xl  whitespace-nowrap text-gray-500">ClearMental</span>
+                </a>
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Login</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Register</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Actuality</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Library</a>
+                    </li>
+                </ul>
             </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">ClearMental™</a>. All Rights Reserved.</span>
         </div>
     </footer>
     

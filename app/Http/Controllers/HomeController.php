@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\Commentaire;
 use App\Models\Favoris;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,12 +16,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $coachs = Coach::with('user')->paginate(3);
+        $coachs = Coach::with('user')->paginate(5);
 
         // dd($coachs);
         $favorites = Favoris::all();
+        $comments = Commentaire::latest()->limit(3)->get();
         // dd($favorites);
-        return view('index', compact('coachs', 'favorites'));
+        return view('index', compact('coachs', 'favorites','comments'));
     }
     
     public function favoris(Request $request)

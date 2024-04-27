@@ -100,14 +100,8 @@
 
                                                 <div>
 
-                                                    <button id="showCommentBtn" type="button"
-                                                        data-drawer-target="drawer-right-example"
-                                                        data-publication-id="{{ $publication->id }}"
-                                                        data-drawer-show="drawer-right-example"
-                                                        data-drawer-placement="right"
-                                                        aria-controls="drawer-right-example">
-                                                        <i
-                                                            class='bx bx-message-rounded-dots text-2xl'id="comment-icon"></i>
+                                                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button">
+                                                        <i class='bx bx-message-rounded-dots text-2xl'></i>
 
                                                     </button>
                                                 </div>
@@ -129,48 +123,63 @@
                                         @csrf
                                         <div class="flex items-center mb-4 border-b border-gray-300 pb-2">
                                             <input type="hidden" name="publication_id" value="{{ $publication->id }}">
-                                            {{-- <input type="text" name="content" placeholder="Add your comment..."
-                                                class="border-none px-4 py-2 w-full">
-                                            <button type="submit"
-                                                class="bg-orange-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Comment</button> --}}
+
 
                                         </div>
                                     </form>
-                                    {{-- @dd( $publication->comments(Auth::user())); --}}
+                                  
 
-                                    {{-- @foreach ($comments[$publication->id] as $comment)
-                                    @dd($comment->client->user->name); --}}
-                                    {{-- <div class="comment"> --}}
-
-
-                                    {{-- <p>{{ $comment->content }}</p> --}}
-                                    {{-- @dd(Auth::check() && $publication->comments(Auth::user())) --}}
-                                    {{-- <p>Commenté par : {{ $comment->client->user->name }}</p> --}}
-                                    {{-- @dd(Auth::user()->id) --}}
-
-                                    {{-- @if (Auth::check() && $comment->client->user_id == Auth::user()->id)
-                                                <button data-modal-target="update-modal" id=""
-                                                    data-modal-toggle="update-modal"
-                                                    data-comment-id="{{ $comment->id }}"
-                                                    data-comment-content="{{ $comment->content }}"
-                                                    class="update-comment block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                                    type="button">
-                                                    update
-                                                </button> --}}
-
-                                    {{-- <form
-                                                    action="{{ route('comments.destroy', ['comment' => $comment->id]) }}"
-                                                    method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        onclick="return confirm('Are you sure you want to delete this comment?')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form> --}}
-                                    {{-- @endif
-                                        {{-- </div> --}}
-                                    {{-- @endforeach --}}
+                                    <div id="crud-modal" tabindex="-1" aria-hidden="true"
+                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-black-700">
+                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                  Laisse un Avis
+                                                </h3>
+                                                <button type="button"
+                                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    data-modal-toggle="crud-modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <form method="post" action="{{ route('comments.store') }}" class="p-4 md:p-5">
+                                           
+                                                @csrf
+                                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                                    <div class="col-span-2">
+                                                        <label for="name"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Votre avis</label>
+                                                        <input type="text" name="content" id="name"
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                            placeholder="Type product name" required="">
+                                                            <input type="hidden" name="publication_id" value="{{ $publication->id }}">
+                
+                                                    </div>
+                            
+                            
+                            
+                                                </div>
+                                                <button type="submit"
+                                                    class="text-white inline-flex items-center bg-gray-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd"
+                                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                 Confirmer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 </div>
                                 <div
                                     class="block flex-shrink-0 sm:w-56 sm:ml-6 rounded-3xl overflow-hidden mb-5 sm:mb-0">
@@ -186,7 +195,6 @@
                                                 data-nc-id="PostTypeFeaturedIcon"></div>
                                         </span>
                                     </a>
-                                    <!-- Icônes de like et de dislike -->
 
                                 </div>
                             </div>
@@ -195,7 +203,6 @@
                         </div>
                     @endforeach
                     <div class="flex flex-wrap justify-center mt-4">
-                        {{-- Bouton "Previous" --}}
                         @if ($publications->previousPageUrl())
                             <a href="{{ $publications->previousPageUrl() }}"
                                 class="px-3 py-1 bg-gray-200 text-gray-700 rounded mr-1">&laquo; Previous</a>
@@ -289,51 +296,47 @@
                                     </div>
                                 </a>
                             </div>
+                            
+                            
                             @endforeach
-
                         </div>
                     </div>
 
-                    <div>
+                 
+                </div>
+            </div>
+        </div>
 
-
-
-                        <div id="drawer-right-example"
-                            class="fixed top-0 right-0 w-96 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800"
-                            tabindex="-1" aria-labelledby="drawer-right-label">
-                            <h5 id="drawer-right-label"
-                                class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-                                <svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                                </svg>Comments
-                            </h5>
-
-                            <button type="button" data-drawer-hide="drawer-right-example"
-                                aria-controls="drawer-right-example"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close menu</span>
-                            </button>
-                            <input type="text" id="commentInput" class= "border-none px-4 py-2 w-full"
-                            placeholder="Add your comment..." placeholder="Add a comment">
-                         
-                            <input type="hidden" id="publicationId">
-                            <button id="submitButton"
-                            class="bg-orange-600 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">Submit</button>
-                            <div id="commentsContainer" class="mb-6">
-
+                    {{-- <script src="./js/addcommentaire.js"></script> --}}
+                   <section>
+                    <footer class=" shadow w-full mt-5 dark:bg-gray-900 bg-gray-100 overflow-x-hidden  ">
+                        <div class="w-full max-w-screen-xl mx-auto  p-4 md:py-8">
+                            <div class="sm:flex sm:items-center sm:justify-between">
+                                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                                    <img src="/images/logo.png" alt="" width="60px" height="40px">
+                                    <span class="self-center text-2xl  whitespace-nowrap text-gray-500">ClearMental</span>
+                                </a>
+                                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                                    <li>
+                                        <a href="#" class="hover:underline me-4 md:me-6">Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="hover:underline me-4 md:me-6">Register</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="hover:underline me-4 md:me-6">Actuality</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="hover:underline">Library</a>
+                                    </li>
+                                </ul>
                             </div>
-                            
-                            <hr>
-                            
+                            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+                            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">ClearMental™</a>. All Rights Reserved.</span>
                         </div>
-                        <script src="./js/addcommentaire.js"></script>
+                    </footer>
+                   </section>
+                    
 
 </body>
 

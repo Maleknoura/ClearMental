@@ -120,15 +120,17 @@ class BookController extends Controller
     public function store(BookRequest $request)
     {
 
-      
-
+        
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->extension();
+        $image->storeAs('/public/images', $imageName);
+        // dd($request);
         Book::create([
             'title' => $request->title,
             'content' => $request->content,
             'auteur' => $request->auteur,
-            'image' => $request->image,
+            'image' => $imageName,
         ]);
-        // dd($request);
 
 
         return redirect()->back()->with('success', 'Livre ajouté avec succès');
@@ -139,9 +141,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $books = Book::paginate(7);
+        $bookData = Book::paginate(8);
         $reservations = Reservation::with('client')->where('statut', 'en attente')->get();
-        return view('side', compact('books', 'reservations'));
+        return view('side', compact('bookData', 'reservations'));
     }
 
     /**
@@ -166,15 +168,17 @@ class BookController extends Controller
     {
 
       
-// dd($request);
+        // dd($request);
         $book = Book::findOrFail($id);
-
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->extension();
+        $image->storeAs('/public/images', $imageName);
 
         $book->update([
             'title' => $request->title,
             'content' => $request->content,
             'auteur' => $request->auteur,
-            'image'=>$request->image,
+            'image'=>$imageName,
         ]);
 
 

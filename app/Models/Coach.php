@@ -15,10 +15,7 @@ protected $name=['coaches'];
 
 
 
-    public function seances()
-    {
-        return $this->hasMany(Seance::class);
-    }
+ 
     public function publications()
     {
         return $this->hasMany(Publication::class);

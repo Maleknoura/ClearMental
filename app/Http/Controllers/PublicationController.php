@@ -17,11 +17,14 @@ class PublicationController extends Controller
     public function index(Request $request)
     { {
             $tags = Tag::all();
-            $publications = Publication::with(['tags', 'coach', 'comments.client.user'])->orderBy('created_at', 'desc')->paginate(3);
-            // dd($publications);
+            $publications = Publication::with(['tags', 'coach', 'comments.client.user'])
+            ->where('statut', 'publié')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+                        // dd($publications);
             if ($request->has('tag')) {
                 $tag = Tag::findOrFail($request->tag);
-                $publications = $tag->publications()->with('coach', 'tags','comments.client.user')->orderByDesc('created_at')->paginate(3);
+                $publications = $tag->publications()->with('coach', 'tags','comments.client.user')->orderByDesc('created_at')->paginate(10);
             }
             $comments = [];
             foreach ($publications as $publication) {

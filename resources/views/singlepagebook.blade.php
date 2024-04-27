@@ -55,7 +55,7 @@
         </div>
     
     </div>
-    <div class="col-md-12 text-center text-white" style="background-color: #3e033b;">
+    <div class="col-md-12 text-center text-white" style="background-color: #ff680a;">
         <p>© 2020 All Rights Reserved. Design </p>
     </div>
 </body>

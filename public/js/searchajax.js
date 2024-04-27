@@ -68,7 +68,7 @@ function displayResults(books) {
         <h2 class="mt-2 mb-2  font-bold">${book.title}</h2>
         <i class='bx bx-show text-xl text-gray-600'></i>
             </div>
-        <p class="text-sm">${book.content.slice(0, 100)}</p>
+        <p class="text-sm">${book.content.slice(0, 80)}</p>
         <div class="mt-3 flex items-center">
             <span class="text-sm font-semibold"></span>&nbsp;<span class="font-bold text-xl">${
                 book.auteur
@@ -84,7 +84,9 @@ function displayResults(books) {
 </div>
 
 `;
-
+bookDiv.addEventListener("click", () => {
+    window.location.href = `/books/${book.id}`;
+});
         searchResults.appendChild(bookDiv);
     });
 }

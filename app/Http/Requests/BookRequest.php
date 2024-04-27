@@ -25,7 +25,7 @@ class BookRequest extends FormRequest
             'title' => 'required',
             'content' => 'required',
             'auteur' => 'required',
-            'image' => 'nullable',
+            'image' => 'image',
         ];
     }
 }

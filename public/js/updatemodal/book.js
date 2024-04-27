@@ -16,5 +16,7 @@
             document.querySelector("input[name='title']").value = bookTitle;
             document.querySelector("input[name='content']").value = bookContent;
             document.querySelector("input[name='auteur']").value = bookAuthor;
+            document.querySelector("input[name='image']").value = image; 
+
         });
     });
