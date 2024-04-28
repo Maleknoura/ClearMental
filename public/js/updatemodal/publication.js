@@ -1,4 +1,23 @@
+const updateBtn = document.querySelectorAll(".update-modal");
+console.log(updateBtn);
+updateBtn.forEach(element => {
+    element.addEventListener("click", (event) => {
 
+        const publicationid = element.getAttribute("data-publication-id");
+
+        const publicationtitle = element.getAttribute("data-publication-title");
+        const publicationcontenu = element.getAttribute("data-publication-contenu");
+        const publicationimage = element.getAttribute("data-publication-image");
+
+        const modal = document.querySelector("#update-modal form");
+        modal.action = `/publication/update/${publicationid}`;
+
+        document.querySelector("input[name='title']").value = publicationtitle;
+        document.querySelector("input[name='content']").value = publicationcontenu;
+        document.querySelector("input[name='image']").value = publicationimage; 
+
+    });
+});
 
 document.getElementById('tags').addEventListener('change', function() {
 var selectElement = document.getElementById('tags');

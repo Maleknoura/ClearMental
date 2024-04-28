@@ -40,10 +40,15 @@
                                     </button>
                                 </form>
                                 <button data-modal-target="update-modal" data-modal-toggle="update-modal" data-tag-id=""
+                                data-publication-id="{{ $publication->id }}"
+                                data-publication-title="{{ $publication->title }}"
+                                data-publication-contenu="{{ $publication->contenu }}"
+                                data-publication-image="{{ $publication->image }}"
                                     class="block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     type="button">
                                     <i class="fas fa-edit"></i>
                                 </button>
+                        
                             </div>
                             {{ $publication->title }}
                         </h3>
@@ -279,6 +284,9 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
+                
+                    
+               
                 <!-- Modal body -->
                 <form method="post" action="{{ route('publication.update', $publication->id) }}" class="p-4 md:p-5"
                     enctype="multipart/form-data">
@@ -335,12 +343,13 @@
                         </svg>
                         Update
                     </button>
+                
                 </form>
             </div>
         </div>
     </div>
 
-    {{-- <script src="./js/updatemodal/publication.js"></script> --}}
+    <script src="./js/updatemodal/publication.js"></script>
     <script>
         const setup = () => {
             return {
@@ -348,33 +357,10 @@
             }
         }
     </script>
-    <script>
-        document.getElementById('tags').addEventListener('change', function() {
-            var selectElement = document.getElementById('tags');
-            var selectedIndex = selectElement.selectedIndex;
-            var selectedValue = selectElement.options[selectedIndex].text;
-            var selectedTagsElement = document.getElementById('selected-tags');
-            var tagElement = document.createElement('span');
-            tagElement.classList.add('inline-block', 'px-2', 'py-1', 'bg-blue-200', 'text-blue-800', 'rounded',
-            'mr-2', 'mb-2', 'cursor-pointer');
-            tagElement.textContent = selectedValue;
-            selectedTagsElement.appendChild(tagElement);
-        });
-    </script>
+    
+  
 
-    <script>
-        document.getElementById('tags-update').addEventListener('change', function() {
-            var selectElement = document.getElementById('tags-update');
-            var selectedIndex = selectElement.selectedIndex;
-            var selectedValue = selectElement.options[selectedIndex].text;
-            var selectedTagsElement = document.getElementById('selected-tags-update');
-            var tagElement = document.createElement('span');
-            tagElement.classList.add('inline-block', 'px-2', 'py-1', 'bg-blue-200', 'text-blue-800', 'rounded',
-                'mr-2', 'mb-2', 'cursor-pointer');
-            tagElement.textContent = selectedValue;
-            selectedTagsElement.appendChild(tagElement);
-        });
-    </script>
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.1/alpine.js"></script>
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </body>

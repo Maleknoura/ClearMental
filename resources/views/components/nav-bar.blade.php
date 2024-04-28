@@ -33,7 +33,7 @@
 
                     <div class="w-px h-5 bg-black/20"></div>
 
-                    <a href="#" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Log in </a>
+                    <a href="#" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">  </a>
 
                           <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
