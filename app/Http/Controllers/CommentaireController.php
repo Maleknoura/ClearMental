@@ -68,7 +68,7 @@ class CommentaireController extends Controller
 
 
 
-        dd($request);
+        // dd($request);
 
         $comment->update([
             'content' => $request->content,

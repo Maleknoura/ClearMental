@@ -49,7 +49,7 @@ class RegisterController extends Controller
 
         if ($user->role === "admin") {
             $user->assignRole('admin');
-        } elseif ($request->role === 'coach') {
+        } elseif ($user->role === 'coach') {
             $user->assignRole('coach');
             Coach::create([
                 'user_id' => $user->id,
@@ -60,6 +60,11 @@ class RegisterController extends Controller
                 'user_id' => $user->id,
             ]);
         }
+    
+        if ($user->role === 'coach') {
+            return redirect('/DashboardCoach');
+        }
+
 
 
         return redirect('/login');

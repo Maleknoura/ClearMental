@@ -7,7 +7,6 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\ForgotPasswordLinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PublicationController;
@@ -81,9 +80,6 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
 
 Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout')->middleware('auth');
 // });
-
-
-
 
 Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::get('/dashboard', [dashboardController::class, 'index']);

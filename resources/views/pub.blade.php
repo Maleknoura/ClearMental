@@ -292,20 +292,20 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="publication_id" value="{{ $publication->id }}">
+                    <input type="hidden" name="publication_id" >
 
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="content"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
                             <input type="text" name="Contenu" id="content" class="form-input w-full"
-                                value="{{ $publication->Contenu }}" placeholder="Enter publication content" required>
+                                placeholder="Enter publication content" required>
                         </div>
                         <div class="col-span-2">
                             <label for="title"
                                 class="block mb-2 w-full text-sm font-medium text-gray-900 dark:text-white">Title</label>
                             <input type="text" name="title" id="title" class="form-input w-full"
-                                value="{{ $publication->title }}" placeholder="Enter publication title" required>
+                                placeholder="Enter publication title" required>
 
                             <div>
                                 <label for="tags"
@@ -325,10 +325,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
                             <input type="file" name="image" id="image" class="form-input w-74 "
                                 accept="image/*" onchange="previewImage(event)">
-                            <!-- Affichage de l'image existante -->
-                            {{-- @if ($publication->image)
-                            <img id="imagePreview" src="{{ asset('storage/images/' . $publication->image) }}" alt="Existing Image" class="mt-2 shadow-md rounded-lg" style="max-width: 100%;">
-                            @endif --}}
+                        
                         </div>
                     </div>
                     <div id="selected-tags-update" class="flex flex-wrap"></div>

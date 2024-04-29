@@ -15,64 +15,7 @@ class BookController extends Controller
      */
 
 
-    //  public function getBookData($query)
-    //  {
-    //      $url = "https://www.googleapis.com/books/v1/volumes?q=" . urlencode($query);
-
-    //      $response = Http::get($url);
-
-    //      if ($response->successful()) {
-    //          $data = $response->json();
-
-    //          if (isset($data['items'])) {
-    //              $books = $data['items'];
-
-    //              $bookData = [];
-
-    //              foreach ($books as $book) {
-    //                  $bookInfo = [];
-
-    //                  $bookInfo['title'] = $book['volumeInfo']['title'];
-
-    //                  if (isset($book['volumeInfo']['authors'])) {
-    //                      $bookInfo['authors'] = implode(", ", $book['volumeInfo']['authors']);
-    //                  } else {
-    //                      $bookInfo['authors'] = "Auteur inconnu";
-    //                  }
-
-    //                  if (isset($book['volumeInfo']['description'])) {
-    //                      $bookInfo['description'] = $book['volumeInfo']['description'];
-    //                  } else {
-    //                      $bookInfo['description'] = "Pas de description disponible";
-    //                  }
-
-    //                  if (isset($book['volumeInfo']['imageLinks']['thumbnail'])) {
-    //                      $bookInfo['thumbnail'] = $book['volumeInfo']['imageLinks']['thumbnail'];
-    //                  } else {
-    //                      $bookInfo['thumbnail'] = "Pas d'image de couverture disponible";
-    //                  }
-
-    //                  $bookData[] = $bookInfo;
-    //              }
-
-    //              foreach ($bookData as $bookInfo) {
-    //                 $truncatedContent = substr($bookInfo['description'], 0, 255); 
-    //                 Book::create([
-    //                     'title' => $bookInfo['title'],
-    //                     'auteur' => $bookInfo['authors'],
-    //                     'content' => $truncatedContent,
-    //                     'image'=>  $bookInfo['thumbnail'],
-
-    //                 ]);
-    //             }
-    //              return $bookData;
-    //          } else {
-    //              return null;
-    //          }
-    //      } else {
-    //          return null;
-    //      }
-    //  }
+   
 
     public function index()
     {
@@ -90,16 +33,7 @@ class BookController extends Controller
     {
         //
     }
-    //     public function search(Request $request)
-    // {
-    //     $query = $request->input('query');
-
-    //     $filteredBooks = Book::where('title', 'like', "%$query%")
-    //                          ->orWhere('auteur', 'like', "%$query%")
-    //                          ->get();
-
-    //     return view('library', ['bookData' => $filteredBooks]);
-    // }
+   
 
     public function search(Request $request)
     {
