@@ -116,66 +116,7 @@
 </div>
 </div>
     
-    {{-- <div class="ml-9">
-        <div class="grid lg:ml-36 w-[35rem] grid-cols-1 p-4">
-            <div class="sm:-mx-6 lg:-mx-8">
-                <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
-                    <div class="shadow-lg bg-white rounded-lg overflow-hidden">
-                        <table class="w-full">
-                            <thead class="bg-[#4a044e]">
-                                <tr class="text-white">
-                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-white uppercase">
-                                        Image
-                                    </th>
-                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                       Contenu
-                                    </th>
-                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                       Tags
-                                    </th>
-                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left uppercase">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($publications as $publication)  
-                                <tr class="bg-white text-black border-b border-dashed dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
-                                        <img src="{{ asset('storage/images/' . $publication->image) }}" alt="" width="30px" height="30px">
-                                    </td>
-                                    <td class="p-3 text-sm whitespace-nowrap">
-                                       
-                                        {{ $publication->Contenu }}
-                                    </td>
-                                    <td class="p-3 text-sm whitespace-nowrap">
-                                        <ul>
-                                            @foreach($publication->tags as $tag)
-                                                <li>{{ $tag->name }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
-                                    <td class="p-3 text-sm whitespace-nowrap">
-                                        <button data-modal-target="update-modal" data-modal-toggle="update-modal" data-tag-id="" class="block text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                                            Update
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('publication.destroy', $publication->id) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this publication?')" class="text-red-500">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                           
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+   
     
 <ul class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
     <li class="relative flex flex-col sm:flex-row xl:flex-col items-start">

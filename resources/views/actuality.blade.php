@@ -307,7 +307,6 @@
             </div>
         </div>
 
-                    {{-- <script src="./js/addcommentaire.js"></script> --}}
                    <section>
                     <footer class=" shadow w-full mt-5 dark:bg-gray-900 bg-gray-100 overflow-x-hidden  ">
                         <div class="w-full max-w-screen-xl mx-auto  p-4 md:py-8">
